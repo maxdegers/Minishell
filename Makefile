@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/06 16:12:25 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/06 16:12:37 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ_D	=	.objs/
 
 HEAD	=	includes/
 
-NAME	=	...
+NAME	=	minishell
 
 CC		=	cc
 
