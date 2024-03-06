@@ -2,3 +2,5 @@
 .vscode
 minishell
 .objs/
+libft/.objs/
+libft/libft.a
