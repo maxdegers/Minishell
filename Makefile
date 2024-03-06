@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/06 16:15:35 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/06 16:21:18 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,12 +67,12 @@ endef
 
 all		:	libft ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c includes/philo.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/philo.h
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	${OBJ_D} ${OBJS} Makefile includes/philo.h libft/libft.a
+${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@${CC} ${FLAGS} -lpthread -L./libft -lft -I${HEAD} -o ${NAME} ${OBJS}
 	@$(eval CHANGED=1)
@@ -96,10 +96,10 @@ clean	:
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
 fclean	:
-	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
+	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
 	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
-	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
+	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 	@rm -f ${NAME}

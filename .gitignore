@@ -4,3 +4,4 @@ minishell
 .objs/
 libft/.objs/
 libft/libft.a
+libft/libft.h.gch
