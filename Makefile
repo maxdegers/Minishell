@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/06 16:21:18 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/12 15:59:57 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ HEAD	=	includes/
 
 NAME	=	minishell
 
-CC		=	cc
+CC		=	gcc
 
-FLAGS	=	-Wall -Wextra -Werror #-fsanitize=address -g3
+FLAGS	=	-Wall -Wextra -Werror
 
 RED		=	\033[1;31m
 GREEN	=	\033[1;32m
@@ -67,14 +67,14 @@ endef
 
 all		:	libft ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/philo.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
-	@${CC} ${FLAGS} -lpthread -L./libft -lft -I${HEAD} -o ${NAME} ${OBJS}
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME}
 	@$(eval CHANGED=1)
 	@printf ${UP}${CUT}
 	@echo "$(WHITE)<$(GREEN)100%$(WHITE)> [$(CYAN)$(NAME)$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
