@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 18:12:10 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:07:56 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int	main(int argc, char **argv, char **env)
 		ft_putheader();
 	if (ft_init_tab(&data, env))
 		return (ft_megafree(&data), 1);
-	ft_printf("user: %s\n", data.user);
-	// ft_envprint(data.env);
-	// if (ft_main_loop(&data))
-	// 	return (ft_megafree(&data), 1);
+	if (ft_main_loop(&data))
+		return (ft_megafree(&data), 1);
 	ft_megafree(&data);
 	return (0);
 }
