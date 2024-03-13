@@ -6,11 +6,12 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/13 14:41:41 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/13 15:13:42 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main.c
+SRCS	=	main/main.c\
+			error/error.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 
