@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 16:11:08 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:22:39 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,30 @@ typedef enum e_signal
 	ERROR_M
 }				t_signal;
 
-typedef struct s_lst_env
+typedef struct s_env
 {
 	char				*name;
 	char				*value;
-	struct s_lst_env	*next;
-}	t_lst_env;
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_data
 {
-	char		**env;
-	t_lst_env	*lst_env;
+	char		**env_array;
+	t_env	*env;
 }	t_data;
 
 // main.c
-void	ft_putheader(void);
+void		ft_putheader(void);
 // error.c
-int		ft_put_error(char *str, int error);
-void	ft_free_data(t_data *data);
-void	ft_megafree(t_data *data);
+int			ft_put_error(char *str, int error);
+void		ft_free_data(t_data *data);
+void		ft_megafree(t_data *data);
 // parsing_env.c
-void	ft_parsing_env(char **env, t_data *data);
+void		ft_parsing_env(char **env, t_data *data);
+// t_env.c
+size_t		ft_envsize(t_env *env);
+t_env		*ft_envnew(char *name, char *value);
+void		ft_envadd_back(t_env **env, t_env *new);
 
 #endif
