@@ -45,6 +45,8 @@ SRCS	=	ft_atoi.c			\
 			ft_tolower.c		\
 			ft_toupper.c		\
 			ft_printf.c			\
+			ft_printf_fd.c		\
+			ft_printf_fd_utils.c\
 			ft_printf_utils.c	\
 			get_next_line.c		\
 			ft_lstadd_back.c	\
