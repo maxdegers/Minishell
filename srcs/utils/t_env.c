@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:09:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/13 17:23:54 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:25:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,40 @@ void	ft_envadd_back(t_env **env, t_env *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+}
+
+void	ft_envclear(t_env **env)
+{
+	t_env	*tmp;
+
+	if (!env || !*env)
+		return ;
+	while (*env)
+	{
+		tmp = (*env)->next;
+		free((*env)->name);
+		free((*env)->value);
+		free(*env);
+		(*env) = tmp;
+	}
+}
+
+void	ft_envprint(t_env *env)
+{
+	while (env)
+	{
+		ft_printf("%s=%s\n", env->name, env->value);
+		env = env->next;
+	}
+}
+
+t_env	*ft_envfind(t_env *env, char *name)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->name, name))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
 }
