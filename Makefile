@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/12 15:59:57 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/13 14:41:41 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ endef
 
 all		:	libft ${NAME}
 
-${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h
+${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors.h
 	@$(call print_progress,$<)
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
@@ -105,9 +105,12 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
+leak: all
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+
 re		:	fclean .internal_separate all
 
-.PHONY	:	all clean fclean re libft
+.PHONY	:	all clean fclean re libft leak
 
 .NOTPARALLEL all:
 	@if [ $(CHANGED) -eq 0 ]; then \

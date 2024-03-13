@@ -6,14 +6,25 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/12 15:50:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:50:58 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	ft_putheader(void)
+{
+	printf("\n\n"HEADER);
+	printf("___  ___ _         _       _            _  _ \n");
+	printf("|  \\/  |(_)       (_)     | |          | || |\n");
+	printf("| .  . | _  _ __   _  ___ | |__    ___ | || |\n");
+	printf("| |\\/| || || '_ \\ | |/ __|| '_ \\  / _ \\| || |\n");
+	printf("| |  | || || | | || |\\__ \\| | | ||  __/| || |\n");
+	printf("\\_|  |_/|_||_| |_||_||___/|_| |_| \\___||_||_|\n\n\n"RESET);
+}
+
 int	main(void)
 {
-	printf("Hello World\n");
+	ft_putheader();
 	return 0;
 }
