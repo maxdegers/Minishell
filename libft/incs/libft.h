@@ -95,7 +95,7 @@ int		ft_putstr_fd_int(const char *s, int fd);
 int		ft_putnbr_fd_int(int n, int fd);
 int		ft_putnbr_u_fd(unsigned int n, int fd);
 int		ft_putnbr_x_fd(unsigned int nbr, char *base, int fd);
-int		ft_putmem_fd(void *ptr);
+int		ft_putmem_fd(void *ptr, int fd);
 
 /*get_next_line*/
 char	*get_next_line(int fd);

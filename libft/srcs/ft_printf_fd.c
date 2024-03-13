@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:30:12 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/13 15:30:12 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:54:44 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_recurs(uintptr_t n, const char *base, int fd)
 	return (x + y);
 }
 
-int	ft_putmem_fd(void *ptr)
+int	ft_putmem_fd(void *ptr, int fd)
 {
 	int		x;
 	int		y;
@@ -38,7 +38,7 @@ int	ft_putmem_fd(void *ptr)
 	x = ft_putstr("0x");
 	if (x == -1)
 		return (-1);
-	y = ft_recurs(((uintptr_t) ptr), "0123456789abcdef");
+	y = ft_recurs(((uintptr_t) ptr), "0123456789abcdef", fd);
 	if (y == -1)
 		return (-1);
 	return (x + y);
@@ -51,20 +51,20 @@ static int	ft_convert(char c, va_list args, int fd)
 	if (c == '%')
 		return (ft_putchar_fd_int('%', fd));
 	if (c == 'd' || c == 'i')
-		return (ft_putnbr(va_arg(args, int)));
+		return (ft_putnbr_fd_int(va_arg(args, int), fd));
 	if (c == 'u')
-		return (ft_putnbr_u(va_arg(args, unsigned int)));
+		return (ft_putnbr_u_fd(va_arg(args, unsigned int), fd));
 	if (c == 's')
-		return (ft_putstr(va_arg(args, char *)));
+		return (ft_putstr_fd_int(va_arg(args, char *), fd));
 	if (c == 'c')
-		return (ft_putchar(va_arg(args, int)));
+		return (ft_putchar_fd_int(va_arg(args, int), fd));
 	if (c == 'x')
-		return (ft_putnbr_x(va_arg(args, int), "0123456789abcdef"));
+		return (ft_putnbr_x_fd(va_arg(args, int), "0123456789abcdef", fd));
 	if (c == 'X')
-		return (ft_putnbr_x(va_arg(args, int), "0123456789ABCDEF"));
+		return (ft_putnbr_x_fd(va_arg(args, int), "0123456789ABCDEF", fd));
 	if (c == 'p')
-		return (ft_putmem_fd(va_arg(args, void *)));
-	return (ft_putchar('%') + ft_putchar(c));
+		return (ft_putmem_fd(va_arg(args, void *), fd));
+	return (ft_putchar_fd_int('%', fd) + ft_putchar_fd_int(c, fd));
 }
 
 int	ft_printf_fd(int fd, const char *format, ...)
