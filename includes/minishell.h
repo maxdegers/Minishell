@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 15:48:38 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:11:08 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,24 @@
 # define EM_SIGNAL "\033[0;31mError:\n\t\033[0msignal failed\n"
 # define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
 
-# define EV_CNF 127
-# define EV_OK 0
-
 extern size_t	g_error;
+
+typedef enum e_signal
+{
+	ERROR_M
+}				t_signal;
+
+typedef struct s_lst_env
+{
+	char				*name;
+	char				*value;
+	struct s_lst_env	*next;
+}	t_lst_env;
 
 typedef struct s_data
 {
-	int	id;
+	char		**env;
+	t_lst_env	*lst_env;
 }	t_data;
 
 // main.c
