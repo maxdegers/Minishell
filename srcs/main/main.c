@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 14:50:58 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:12:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	ft_putheader(void)
 	printf("\\_|  |_/|_||_| |_||_||___/|_| |_| \\___||_||_|\n\n\n"RESET);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
+	if (argc > 1)
+		return (ft_put_error("minishell: too many arguments"), 1);
 	ft_putheader();
-	return 0;
+	return (0);
 }
