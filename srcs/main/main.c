@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 15:12:25 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:38:58 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,16 @@ void	ft_putheader(void)
 
 int	main(int argc, char **argv, char **env)
 {
+	t_data	data;
+
+	(void)argv;
 	if (argc > 1)
-		return (ft_put_error("minishell: too many arguments"), 1);
-	ft_putheader();
+		return (ft_put_error(EM_ARGS, 1), 1);
+	if (isatty(STDOUT_FILENO))
+		ft_putheader();
+	ft_parsing_env(env, &data);
+	// if (ft_main_loop(&data))
+	// 	return (ft_megafree(&data), 1);
+	ft_free_data(&data);
 	return (0);
 }
