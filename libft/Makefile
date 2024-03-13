@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 14:24:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/02 15:49:19 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/13 18:01:09 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ SRCS	=	ft_atoi.c			\
 			ft_lstlast.c		\
 			ft_lstmap.c			\
 			ft_lstnew.c			\
-			ft_lstsize.c
+			ft_lstsize.c		\
+			ft_strcmp.c
 
 OBJS	=	${SRCS:%.c=${OBJ_D}%.o}
 

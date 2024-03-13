@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:36:25 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:12:10 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	main(int argc, char **argv, char **env)
 		return (ft_put_error(EM_ARGS, 1), 1);
 	if (isatty(STDOUT_FILENO))
 		ft_putheader();
-	if (ft_init_tab(&data))
+	if (ft_init_tab(&data, env))
 		return (ft_megafree(&data), 1);
+	ft_printf("user: %s\n", data.user);
+	// ft_envprint(data.env);
 	// if (ft_main_loop(&data))
 	// 	return (ft_megafree(&data), 1);
 	ft_megafree(&data);

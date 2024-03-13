@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:31:16 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:10:33 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ int	ft_parsing_env(char **env, t_data *data)
 	return (0);
 }
 
-int	ft_set_tab(t_data data)
+int	ft_set_tab(t_data *data)
 {
-	
+	t_env	*tmp;
+
+	tmp = ft_envfind(data->env, "USER");
+	data->user = tmp->value;
+	return (0);
 }
 
-int	init_tab(t_data *data)
+int	ft_init_tab(t_data *data, char **env)
 {
-	if (ft_parsing_env(data->env, data))
+	if (ft_parsing_env(env, data))
 		return (1);
 	if (ft_set_tab(data))
 		return (1);

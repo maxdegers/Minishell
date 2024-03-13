@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:09:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/13 17:25:09 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 18:10:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	ft_envadd_back(t_env **env, t_env *new)
 {
 	t_env	*tmp;
 
+	if (!(*env))
+	{
+		(*env) = new;
+		return ;
+	}
 	tmp = (*env);
 	while (tmp->next)
 		tmp = tmp->next;

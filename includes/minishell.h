@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:32:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:59:06 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_env
 
 typedef struct s_data
 {
+	char		*user;
 	t_env		*env;
 }	t_data;
 
@@ -57,12 +58,15 @@ int			ft_put_error(char *str, int error);
 void		ft_free_data(t_data *data);
 void		ft_megafree(t_data *data);
 // parsing_env.c
-void		ft_parsing_env(char **env, t_data *data);
-int			ft_set_tab(t_data data);
-int			ft_init_tab(t_data *data);
+int			ft_parsing_env(char **env, t_data *data);
+int			ft_set_tab(t_data *data);
+int			ft_init_tab(t_data *data, char **env);
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
+void		ft_envclear(t_env **env);
+t_env		*ft_envfind(t_env *env, char *name);
+void		ft_envprint(t_env *env);
 
 #endif
