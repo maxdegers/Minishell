@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 16:09:29 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:36:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int	main(int argc, char **argv, char **env)
 		return (ft_put_error(EM_ARGS, 1), 1);
 	if (isatty(STDOUT_FILENO))
 		ft_putheader();
-	ft_parsing_env(env, &data);
+	if (ft_init_tab(&data))
+		return (ft_megafree(&data), 1);
 	// if (ft_main_loop(&data))
 	// 	return (ft_megafree(&data), 1);
-	ft_free_data(&data);
+	ft_megafree(&data);
 	return (0);
 }

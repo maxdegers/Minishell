@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:22:39 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:32:24 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ typedef struct s_env
 {
 	char				*name;
 	char				*value;
-	struct s_env	*next;
+	struct s_env		*next;
 }	t_env;
 
 typedef struct s_data
 {
-	char		**env_array;
-	t_env	*env;
+	t_env		*env;
 }	t_data;
 
 // main.c
@@ -59,6 +58,8 @@ void		ft_free_data(t_data *data);
 void		ft_megafree(t_data *data);
 // parsing_env.c
 void		ft_parsing_env(char **env, t_data *data);
+int			ft_set_tab(t_data data);
+int			ft_init_tab(t_data *data);
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
