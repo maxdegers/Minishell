@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:59:06 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:22:28 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	char		*user;
+	int			exit;
 	t_env		*env;
 }	t_data;
 
