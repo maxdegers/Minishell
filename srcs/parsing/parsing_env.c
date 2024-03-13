@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parsing_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 15:49:19 by mbrousse         ###   ########.fr       */
+/*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
+/*   Updated: 2024/03/13 15:44:41 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_put_error(char *str, int error)
+void	ft_parsing_env(char **env, t_data *data)
 {
-	(void)error;
-	ft_putstr_fd(str, 2); // TODO: replace ft_putendl_fd by ftd_printf()
-	return (1);
-}
-void	ft_free_data(t_data *data)
-{
-	(void)data;
-}
+	int	i;
 
-void	ft_megafree(t_data *data)
-{
-	(void)data;
+	i = 0;
+	data->id = 0;
+	while (env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 }

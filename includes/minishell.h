@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 15:19:19 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/13 15:48:38 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,20 @@
 # define EV_CNF 127
 # define EV_OK 0
 
+extern size_t	g_error;
 
-int		g_error = 0;
+typedef struct s_data
+{
+	int	id;
+}	t_data;
 
 // main.c
 void	ft_putheader(void);
+// error.c
+int		ft_put_error(char *str, int error);
+void	ft_free_data(t_data *data);
+void	ft_megafree(t_data *data);
+// parsing_env.c
+void	ft_parsing_env(char **env, t_data *data);
 
 #endif
