@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/14 23:18:39 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/14 23:21:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	ft_main_loop(t_data *data)
 	char	*line;
 
 	data->exit = 0;
+	data->prompt = ft_get_prompt(data);
 	while (!data->exit)
 	{
 		ft_set_signal();
-		data->prompt = ft_get_prompt(data);
 		line = readline(data->prompt);
 		if (line == NULL)
 			return (ft_putstr_fd("exit\n", 1), 0);
