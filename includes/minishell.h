@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/14 11:10:43 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:30:16 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ int			ft_main_loop(t_data *data);
 void		ft_handle_sig(int sig);
 void		ft_set_signal(void);
 // utils
-void		ft_putstr_no_r(char *str);
 
 #endif
