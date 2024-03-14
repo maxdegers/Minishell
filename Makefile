@@ -6,14 +6,17 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/13 17:53:12 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/14 11:05:52 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	main/main.c\
+			main/main_loop.c\
+			main/signals.c\
 			error/error.c\
 			parsing/parsing_env.c\
-			utils/t_env.c
+			utils/t_env.c\
+			utils/utils.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 
@@ -25,7 +28,7 @@ HEAD	=	includes/
 
 NAME	=	minishell
 
-CC		=	gcc
+CC		=	cc
 
 FLAGS	=	-Wall -Wextra -Werror
 

@@ -6,26 +6,40 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 20:23:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:05:03 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_signal(void)
+int	g_error = 0;
+
+static char	*ft_get_prompt(t_data *data)
 {
-    signal(SIGINT, ft_signal);
-    signal(SIGQUIT, ft_signal);
+	static char	*user = NULL;
+	char		*tmp;
+
+	user = ft_strjoin(user, B_GREEN);
+	tmp = ft_envfind(data->env, "USER");
+	if (tmp)
+		user = ft_strjoin(user, tmp);
+	user = ft_strjoin(user, "@"RESET": "\
+HEADER"minishell$ "RESET);
+	return (user);
 }
 
 int	ft_main_loop(t_data *data)
 {
-    char    *line;
-    
-    while (!data->exit)
-    {
-        set_signal();
-    }
-    
-    return (0);
+	char	*line;
+
+	data->exit = 0;
+	while (data->exit)
+	{
+		ft_set_signal();
+		data->prompt = ft_get_prompt(data);
+		line = readline(data->prompt);
+		if (line == NULL)
+			return (ft_putstr_no_r("exit\n"), 0);
+	}
+	return (0);
 }

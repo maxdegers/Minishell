@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 20:22:28 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:10:43 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,16 @@
 # include "../libft/incs/libft.h"
 # include "colors.h"
 
-# include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
+# include <dirent.h>
+# include <limits.h>
+# include <errno.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
 # define EM_FORK "\033[0;31mError:\n\t\033[0mfork failed\n"
@@ -31,7 +38,7 @@
 # define EM_SIGNAL "\033[0;31mError:\n\t\033[0msignal failed\n"
 # define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
 
-extern size_t	g_error;
+extern int	g_error;	
 
 typedef enum e_signal
 {
@@ -48,6 +55,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	int			exit;
+	char		*prompt;
 	t_env		*env;
 }	t_data;
 
@@ -66,7 +74,14 @@ size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
-t_env		*ft_envfind(t_env *env, char *name);
+char		*ft_envfind(t_env *env, char *name);
 void		ft_envprint(t_env *env);
+// main_loop.c
+int			ft_main_loop(t_data *data);
+// signal.c
+void		ft_handle_sig(int sig);
+void		ft_set_signal(void);
+// utils
+void		ft_putstr_no_r(char *str);
 
 #endif
