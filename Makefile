@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/14 11:05:52 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/14 16:02:15 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,12 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-Wall -Wextra -Werror
+ifeq ($(shell uname), Darwin)
+READLINE_DIR	=	$(shell brew --prefix readline)
+endif
+READLINE_LIB	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
+
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror
 
 RED		=	\033[1;31m
 GREEN	=	\033[1;32m
@@ -80,7 +85,7 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
-	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME}
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB}
 	@$(eval CHANGED=1)
 	@printf ${UP}${CUT}
 	@echo "$(WHITE)<$(GREEN)100%$(WHITE)> [$(CYAN)$(NAME)$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
