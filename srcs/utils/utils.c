@@ -6,13 +6,9 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 10:43:54 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/14 11:03:48 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:30:09 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_putstr_no_r(char *str)
-{
-	write(1, &str, ft_strlen(str));
-}
