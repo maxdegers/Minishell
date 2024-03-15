@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/15 12:14:34 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:33:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,51 @@
 
 int	g_error = 0;
 
-static char	*ft_get_prompt(t_data *data)
+static char	*ft_set_prompt(t_data *data)
 {
 	static char	*user = NULL;
 	t_env		*node;
 	char		*tmp;
 
-	if (!user)
+	user = ft_strjoin(user, B_GREEN);
+	node = ft_envfind(data->env, "USER");
+	if (node)
 	{
-		user = ft_strjoin(user, B_GREEN);
-		node = ft_envfind(data->env, "USER");
-		if (node)
+		tmp = ft_strdup(node->value);
+		user = ft_strjoin(user, tmp);
+		free(tmp);
+	}
+	user = ft_strjoin(user, "@"RESET": "\
+	HEADER"minishell$ "RESET);
+	return (user);
+}
+
+static void	ft_get_prompt(t_data *data)
+{
+	char	*color;
+	size_t	i;
+	size_t	size;
+
+	i = 0;
+	size = 7;
+	if (g_error == 0)
+	{
+		color = B_GREEN;
+		while (color[i] != '\0' && i < size - 1)
 		{
-			tmp = ft_strdup(node->value);
-			user = ft_strjoin(user, tmp);
-			free(tmp);
+			data->prompt[i] = color[i];
+			i++;
 		}
-		user = ft_strjoin(user, "@"RESET": "\
-		HEADER"minishell$ "RESET);
 	}
 	else
 	{
-		if (g_error == 0)
-			ft_strlcpy(user, B_GREEN, 7);
-		else
-			ft_strlcpy(user, B_RED, 7);
+		color = B_RED;
+		while (color[i] != '\0' && i < size - 1)
+		{
+			data->prompt[i] = color[i];
+			i++;
+		}
 	}
-	return (user);
 }
 
 int	ft_main_loop(t_data *data)
@@ -48,10 +66,11 @@ int	ft_main_loop(t_data *data)
 	char	*line;
 
 	data->exit = 0;
-	data->prompt = ft_get_prompt(data);
+	data->prompt = ft_set_prompt(data);
 	while (!data->exit)
 	{
 		ft_set_signal();
+		ft_get_prompt(data);
 		line = readline(data->prompt);
 		if (line == NULL)
 			return (ft_putstr_fd("exit\n", 1), 0);
