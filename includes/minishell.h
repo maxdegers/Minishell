@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/14 13:30:16 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/15 01:17:56 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
-char		*ft_envfind(t_env *env, char *name);
+t_env		*ft_envfind(t_env *env, char *name);
 void		ft_envprint(t_env *env);
 // main_loop.c
 int			ft_main_loop(t_data *data);
