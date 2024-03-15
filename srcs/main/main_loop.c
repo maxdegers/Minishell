@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/15 01:43:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:14:34 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static char	*ft_get_prompt(t_data *data)
 	}
 	else
 	{
-		write(1, "------------\n", 12);
 		if (g_error == 0)
 			ft_strlcpy(user, B_GREEN, 7);
 		else
