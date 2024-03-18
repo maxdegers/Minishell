@@ -15,6 +15,7 @@
 
 # include "../libft/incs/libft.h"
 # include "colors.h"
+# include <signal.h>
 
 # include <stdlib.h>
 # include <unistd.h>

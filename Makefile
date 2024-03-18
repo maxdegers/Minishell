@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/13 17:53:12 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/18 13:54:31 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main/main.c\
-			error/error.c\
-			parsing/parsing_env.c\
+SRCS	=	main/main.c				\
+			main/signals.c			\
+			main/main_loop.c		\
+			error/error.c			\
+			parsing/parsing_env.c	\
 			utils/t_env.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
