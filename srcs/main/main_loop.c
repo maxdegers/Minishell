@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/15 12:33:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:35:46 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ int	ft_main_loop(t_data *data)
 		if (*line == '\0')
 			continue ;
 		add_history(line);
-		ft_printf("%i\n", g_error);
-		free(line);
+		if (ft_parsing_line(data, line) == 1)
+			ft_put_error("\033[0;31mError:\n\t\033[0mInvalide arguments!\n", 127);
+		// ft_execute(data);
+		ft_destroy(data);
 	}
 	return (0);
 }

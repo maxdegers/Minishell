@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/14 10:43:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:37:16 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	ft_megafree(t_data *data)
 {
 	if (data->env)
 		ft_envclear(&data->env);
+	if (data->line)
+		free(data->line);
 	
+}
+
+void	ft_destroy(t_data *data)
+{
+	if (!data->line)
+		free(data->line);
 	
 }
