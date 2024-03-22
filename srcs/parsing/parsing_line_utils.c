@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 14:11:31 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:39:08 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,13 @@ t_type	get_type(char c)
 		return (REDIR_R);
 	else if (c == '<')
 		return (REDIR_L);
+	else if (c == ';')
+		return (POINT_VIRGULE);
 	else
 		return (CMD);
 }
 
-int	putcote(char *line, size_t *i, t_data *data)
-{
-	char	*tmp;
-	t_type	type;
-
-	tmp = ft_substr(line, *i, 1);
-	if (!tmp)
-	{
-		g_error = ERROR_GERROR;
-		return (1);
-	}
-	(*i)++;
-	type = get_type(tmp[0]);
-	lt_addback(&data->token, lt_new(tmp, type));
-	free(tmp);
-	return (0);
-}
-
-int	putpipe(char *line, size_t *i, t_data *data)
-{
-	char	*tmp;
-
-	tmp = ft_substr(line, *i, 1);
-	if (!tmp)
-	{
-		g_error = ERROR_GERROR;
-		return (1);
-	}
-	(*i)++;
-	lt_addback(&data->token, lt_new(tmp, PIPE));
-	free(tmp);
-	return (0);
-}
-
-int	putredirection(char *line, size_t *i, t_data *data)
+int	puttype(char *line, size_t *i, t_data *data)
 {
 	char	*tmp;
 	t_type	type;
@@ -104,16 +72,15 @@ int	putword(char *line, size_t *i, t_data *data)
 	t_type	type;
 
 	j = *i;
-	if (get_type(line[j - 1]) == DOUBLE_COTE || get_type(line[j - 1]) == SIMPLE_COTE)
-	{
-		putword_move(line, &j, 0);
+	if (get_type(line[j - 1]) == DOUBLE_COTE
+		|| get_type(line[j - 1]) == SIMPLE_COTE)
 		type = STRING;
-	}
 	else
-	{
+		type = CMD;
+	if (type == CMD)
 		putword_move(line, &j, 1);
-		type = CMD; 
-	}
+	else
+		putword_move(line, &j, 0);
 	tmp = ft_substr(line, *i, j - *i);
 	if (!tmp)
 	{

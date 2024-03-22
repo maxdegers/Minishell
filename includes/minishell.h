@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:14:27 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:38:52 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef enum e_type
 	REDIR_R,
 	REDIR_L,
 	REDIR_RR,
+	POINT_VIRGULE,
 	PIPE,
 	FILE_NAME,
 	SIMPLE_COTE,
@@ -66,6 +67,7 @@ typedef struct s_token
 	char				*value;
 	t_type				type;
 	int					pos;
+	int					exec;
 	struct s_token		*next;
 }	t_token;
 
@@ -119,11 +121,7 @@ void		ft_set_signal(void);
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
 // parsing_line_utils.c
-int			putpipe(char *line, size_t *i, t_data *data);
-int			putredirection(char *line, size_t *i, t_data *data);
+int			puttype(char *line, size_t *i, t_data *data);
 int			putword(char *line, size_t *i, t_data *data);
-int			putcote(char *line, size_t *i, t_data *data);
-
-
 
 #endif

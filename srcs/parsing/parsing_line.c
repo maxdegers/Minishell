@@ -6,11 +6,35 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:26:51 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:38:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	setpos(t_token *token)
+{
+	t_token	*tmp;
+	size_t	pos;
+	int		exec;
+
+	tmp = token;
+	pos = 0;
+	exec = 0;
+	while (tmp)
+	{
+		tmp->pos = pos;
+		pos++;
+		if (tmp->type == POINT_VIRGULE || tmp->type == PIPE)
+		{
+			exec++;
+			tmp->exec = -1;
+		}
+		else
+			tmp->exec = exec;
+		tmp = tmp->next;
+	}
+}
 
 static int	setup(char *line, t_data *data)
 {
@@ -22,12 +46,9 @@ static int	setup(char *line, t_data *data)
 	{
 		if (line[i] != ' ')
 		{
-			if (line[i] == '\'' || line[i] == '\"')
-				error = putcote(line, &i, data);
-			else if (line[i] == '|')
-				error = putpipe(line, &i, data);
-			else if (line[i] == '>' || line[i] == '<')
-				error = putredirection(line, &i, data);
+			if (line[i] == '\'' || line[i] == '\"' || line[i] == '|'
+				|| line[i] == '>' || line[i] == '<' || line[i] == ';')
+				error = puttype(line, &i, data);
 			else
 				error = putword(line, &i, data);
 			if (error == 1)
@@ -36,6 +57,7 @@ static int	setup(char *line, t_data *data)
 		else
 			i++;
 	}
+	setpos(data->token);
 	return (0);
 }
 
