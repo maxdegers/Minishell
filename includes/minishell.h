@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/18 09:50:46 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:27:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,33 @@
 
 extern int	g_error;	
 
-typedef enum e_signal
+typedef enum e_ERROR
 {
-	ERROR_M
-}				t_signal;
+	ERROR_GERROR = 1,
+	ERROR_EXEC = 126,
+	ERROR_COM = 127,
+	ERROR_COTE = 128
+}				t_ERROR;
+
+typedef enum e_type
+{
+	CMD,
+	STRING,
+	REDIR_R,
+	REDIR_L,
+	PIPE,
+	FILE_NAME,
+	SIMPLE_COTE,
+	DOUBLE_COTE
+}	t_type;
+
+typedef struct s_token
+{
+	char				*value;
+	t_type				type;
+	int					pos;
+	struct s_token		*next;
+}	t_token;
 
 typedef struct s_env
 {
@@ -57,15 +80,17 @@ typedef struct s_data
 	int			exit;
 	char		*line;
 	char		*prompt;
+	t_token		*token;
+	char		*error_cmd;
 	t_env		*env;
 }	t_data;
 
 // main.c
 void		ft_putheader(void);
 // error.c
-int			ft_put_error(char *str, int error);
+void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
-void		ft_destroy(t_data *data);
+void		destroy(t_data *data);
 // parsing_env.c
 int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
@@ -77,6 +102,13 @@ void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
 t_env		*ft_envfind(t_env *env, char *name);
 void		ft_envprint(t_env *env);
+// t_token.c
+size_t		lt_size(t_token *token);
+size_t		lt_size_type(t_token *token, t_type type);
+t_token		*lt_new(char *value, t_type type);
+void		lt_addback(t_token **token, t_token *new);
+void		lt_clear(t_token **token);
+void		lt_print(t_token *token);
 // main_loop.c
 int			ft_main_loop(t_data *data);
 // signal.c
@@ -84,5 +116,12 @@ void		ft_handle_sig(int sig);
 void		ft_set_signal(void);
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
+// parsing_line_utils.c
+int			putpipe(char *line, size_t *i, t_data *data);
+int			putredirection(char *line, size_t *i, t_data *data);
+int			putword(char *line, size_t *i, t_data *data);
+int			putcote(char *line, size_t *i, t_data *data);
+
+
 
 #endif

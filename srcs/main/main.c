@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 20:55:51 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:27:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	g_error = 0;
 	if (argc > 1)
-		return (ft_put_error(EM_ARGS, 1), 1);
+		return (ft_put_error(1, EM_ARGS), 1);
 	if (isatty(STDOUT_FILENO))
 		ft_putheader();
 	if (ft_init_tab(&data, env))
