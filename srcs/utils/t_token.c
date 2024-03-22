@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 13:52:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:57:22 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	lt_print(t_token *token)
 {
 	while (token)
 	{
-		ft_printf("%s\n", token->value);
+		ft_printf("%s\t %d\n", token->value, token->type);
 		token = token->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 13:27:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:14:27 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef enum e_type
 	STRING,
 	REDIR_R,
 	REDIR_L,
+	REDIR_RR,
 	PIPE,
 	FILE_NAME,
 	SIMPLE_COTE,
@@ -80,6 +81,7 @@ typedef struct s_data
 	int			exit;
 	char		*line;
 	char		*prompt;
+	char		**path;
 	t_token		*token;
 	char		*error_cmd;
 	t_env		*env;
