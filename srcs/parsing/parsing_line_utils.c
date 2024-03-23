@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 17:39:08 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:31:38 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ int	puttype(char *line, size_t *i, t_data *data)
 {
 	char	*tmp;
 	t_type	type;
+	t_token	*token;
 
 	tmp = ft_substr(line, *i, 1);
 	if (!tmp)
-	{
-		g_error = ERROR_GERROR;
 		return (1);
-	}
 	(*i)++;
 	type = get_type(tmp[0]);
-	lt_addback(&data->token, lt_new(tmp, type));
+	token = lt_new(tmp, type);
+	if (!token)
+		return (free(tmp), 1);
+	lt_addback(&data->token, token);
 	free(tmp);
 	return (0);
 }
@@ -83,10 +84,7 @@ int	putword(char *line, size_t *i, t_data *data)
 		putword_move(line, &j, 0);
 	tmp = ft_substr(line, *i, j - *i);
 	if (!tmp)
-	{
-		g_error = ERROR_GERROR;
-		return (1);
-	}
+		return (free(tmp), 1);
 	lt_addback(&data->token, lt_new(tmp, type));
 	free(tmp);
 	*i = j;

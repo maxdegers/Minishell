@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:23:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:55:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_set_tab(t_data *data)
 	data->exit = 1;
 	tmp = ft_envfind(data->env, "PATH");
 	data->path = ft_split(tmp->value, ':');
+	if (!data->path)
+		return (ft_put_error(1, EM_MALLOC), 1);
 	return (0);
 }
 

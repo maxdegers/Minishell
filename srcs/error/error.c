@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:08:57 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:21:53 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	ft_put_error(t_ERROR error, char *MSG)
 	char	*str;
 
 	g_error = error;
-	if (MSG == NULL)
-	{
-		if (g_error == ERROR_COTE)
-			str = "minishell: invalid pattern\n";
-	}
-	else
-		str = MSG;
+	str = MSG;
 	ft_printf_fd(2, str);
+}
+
+void	exit_error(t_ERROR error, char *MSG, t_data *data)
+{
+	destroy(data);
+	ft_megafree(data);
+	ft_put_error(error, MSG);
+	exit(g_error);
 }
 
 void	ft_megafree(t_data *data)

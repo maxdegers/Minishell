@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 17:38:52 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:17:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ extern int	g_error;
 
 typedef enum e_ERROR
 {
+	ERROR_MALLOC = 0,
 	ERROR_GERROR = 1,
 	ERROR_EXEC = 126,
 	ERROR_COM = 127,
@@ -95,6 +96,7 @@ void		ft_putheader(void);
 void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
 void		destroy(t_data *data);
+void		exit_error(t_ERROR error, char *MSG, t_data *data);
 // parsing_env.c
 int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
