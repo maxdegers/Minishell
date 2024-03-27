@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:11:03 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:50:23 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	setpos(t_token *token)
 		{
 			exec++;
 			tmp->exec = -1;
+			tmp->pos = -1;
+			pos = 0;
 		}
 		else
 			tmp->exec = exec;

@@ -6,12 +6,21 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:11:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:51:33 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// int set_cmd_type(t_data data)
-// {
-//     }
+int	set_cmd_type(t_data data)
+{
+	t_token	*tmp;
+
+	tmp = data.token;
+	while (tmp)
+	{
+		if (tmp->type == WORD &&)
+		tmp = tmp->next;
+	}
+	return (0);
+}
