@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 13:17:13 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:58:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <signal.h>
 
 # include <stdio.h>
+# include <stdbool.h>
 # include <dirent.h>
 # include <limits.h>
 # include <errno.h>
@@ -52,7 +53,7 @@ typedef enum e_ERROR
 
 typedef enum e_type
 {
-	CMD,
+	WORD,
 	STRING,
 	REDIR_R,
 	REDIR_L,
