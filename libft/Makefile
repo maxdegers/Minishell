@@ -142,5 +142,5 @@ re		:	fclean all
 
 .NOTPARALLEL all:
 	@if [ $(CHANGED) -eq 0 ]; then \
-		echo "$(YELLOW)Nothing to be done for $(WHITE)[$(BLUE)$(NAME)$(WHITE)].$(DEFAULT)"; \
+		echo "$(YELLOW)Nothing to be done for $(WHITE)[$(CYAN)$(NAME)$(WHITE)].$(DEFAULT)"; \
 	fi

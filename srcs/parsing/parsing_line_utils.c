@@ -21,7 +21,7 @@ t_type	get_type(char c)
 	else if (c == '|')
 		return (PIPE);
 	else if (c == '>')
-		return (OUPUT);
+		return (OUTPUT);
 	else if (c == '<')
 		return (INPUT);
 	else if (c == ';')

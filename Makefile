@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/27 16:56:20 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/27 17:27:36 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ CUT		=	"\033[K"
 
 CHANGED	=	0
 
-NUM_SRCS := $(words $(SRCS) + 1)
+NUM_SRCS := $(words $(SRCS))
 COMPILED_SRCS := 0
 
 define separator
@@ -88,12 +88,12 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
+${NAME}	:	.internal_announce ${OBJ_D} ${OBJS} libft/libft.a
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB}
 	@$(eval CHANGED=1)
 	@printf ${UP}${CUT}
-	@echo "$(WHITE)<$(GREEN)100%$(WHITE)> [$(CYAN)$(NAME)$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
+	@echo "$(WHITE)[$(CYAN)$(NAME)$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
 
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
@@ -101,9 +101,10 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}error
 	@mkdir -p ${OBJ_D}parsing
 	@mkdir -p ${OBJ_D}utils
+	@mkdir -p ${OBJ_D}execution
 
 libft	:
-	@echo "Compiling $(WHITE)[$(CYAN)libft$(WHITE)]...$(DEFAULT)"
+	@echo "$(YELLOW)Compiling $(WHITE)[$(CYAN)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft
 	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
 
@@ -136,6 +137,9 @@ re		:	fclean .internal_separate all
 	@if [ $(CHANGED) -eq 0 ]; then \
 		echo "$(YELLOW)Nothing to be done for $(WHITE)[$(CYAN)$(NAME)$(WHITE)].$(DEFAULT)"; \
 	fi
+
+.internal_announce	:
+	@echo "$(YELLOW)Compiling $(WHITE)[$(CYAN)minishell$(WHITE)]...$(DEFAULT)"
 
 .internal_separate	:
 	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"

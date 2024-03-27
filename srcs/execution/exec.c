@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:24:11 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 16:57:44 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/27 17:18:48 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_exec(t_data *data)
 	tmp = data->token;
 	while (tmp)
 	{
-		if (tmp->type == CMD)
-			ft_exec_cmd(tmp, data);
+		if (tmp->cmd_t == CMD)
+			//ft_exec_cmd(tmp, data);
+			return ;
 	}
 }
