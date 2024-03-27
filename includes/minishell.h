@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 16:46:55 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:08:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef enum e_type
 	STRING,
 	HEREDOC,
 	INPUT,
-	OUPUT,
+	OUTPUT,
 	POINT_VIRGULE,
 	PIPE,
 	SIMPLE_COTE,
@@ -69,10 +69,9 @@ typedef enum e_cmd_type
 {
 	CMD,
 	ARGS,
-	INDEX,
-	INPUT,
-	OUPUT,
-	HEREDOC_NAM,
+	OUTPUT_NAME,
+	INPUT_NAME,
+	HEREDOC_NAME,
 	TAB_ARGS
 }	t_cmd_type;
 

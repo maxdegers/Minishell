@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 13:38:47 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:10:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,11 @@ void	lt_clear(t_token **token)
 		*token = tmp;
 	}
 }
+
+// void	lt_remouve(t_token **token, t_token *to_remouve)
+// {
+	
+// }
 
 void	lt_print(t_token *token)
 {
