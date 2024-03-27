@@ -19,6 +19,7 @@ SRCS	=	main/main.c\
 			parsing/parsing_line_utils.c\
 			utils/t_env.c\
 			utils/t_token.c\
+			execution/exec.c\
 			# utils/utils.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
