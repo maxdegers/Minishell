@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 13:51:19 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:59:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		exit_error(t_ERROR error, char *MSG, t_data *data);
 int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
 int			ft_init_tab(t_data *data, char **env);
+char		**get_path(t_data *data);
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
