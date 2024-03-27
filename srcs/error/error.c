@@ -6,23 +6,43 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 17:51:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:21:53 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_put_error(char *str, int error)
+void	ft_put_error(t_ERROR error, char *MSG)
 {
-	(void)error;
+	char	*str;
+
+	g_error = error;
+	str = MSG;
 	ft_printf_fd(2, str);
-	return (1);
+}
+
+void	exit_error(t_ERROR error, char *MSG, t_data *data)
+{
+	destroy(data);
+	ft_megafree(data);
+	ft_put_error(error, MSG);
+	exit(g_error);
 }
 
 void	ft_megafree(t_data *data)
 {
 	if (data->env)
 		ft_envclear(&data->env);
-	
-	
+	if (data->prompt)
+		free(data->prompt);
+	if (data->path)
+		ft_free_tab(data->path);
+}
+
+void	destroy(t_data *data)
+{
+	if (data->line)
+		free(data->line);
+	if (data->token)
+		lt_clear(&data->token);
 }
