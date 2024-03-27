@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/27 11:59:11 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/27 16:56:20 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS	=	main/main.c\
 			parsing/parsing_env.c\
 			parsing/parsing_line.c\
 			parsing/parsing_line_utils.c\
+			parsing/set_type.c\
 			utils/t_env.c\
 			utils/t_token.c\
 			# utils/utils.c
