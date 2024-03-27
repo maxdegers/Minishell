@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 17:31:38 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:05:30 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_type	get_type(char c)
 	else if (c == ';')
 		return (POINT_VIRGULE);
 	else
-		return (CMD);
+		return (WORD);
 }
 
 int	puttype(char *line, size_t *i, t_data *data)
@@ -73,12 +73,17 @@ int	putword(char *line, size_t *i, t_data *data)
 	t_type	type;
 
 	j = *i;
-	if (get_type(line[j - 1]) == DOUBLE_COTE
-		|| get_type(line[j - 1]) == SIMPLE_COTE)
-		type = STRING;
+	if (j == 0)
+		type = WORD;
 	else
-		type = CMD;
-	if (type == CMD)
+	{
+		if (get_type(line[j - 1]) == DOUBLE_COTE
+			|| get_type(line[j - 1]) == SIMPLE_COTE)
+			type = STRING;
+		else
+			type = WORD;
+	}
+	if (type == WORD)
 		putword_move(line, &j, 1);
 	else
 		putword_move(line, &j, 0);
@@ -86,7 +91,6 @@ int	putword(char *line, size_t *i, t_data *data)
 	if (!tmp)
 		return (free(tmp), 1);
 	lt_addback(&data->token, lt_new(tmp, type));
-	free(tmp);
 	*i = j;
-	return (0);
+	return (free(tmp), 0);
 }

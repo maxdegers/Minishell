@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 13:21:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:13:07 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	setup(char *line, t_data *data)
 	int		error;
 
 	i = 0;
+	data->token = NULL;
+	data->line = line;
 	while (line[i])
 	{
 		if (line[i] != ' ')
@@ -61,20 +63,28 @@ static int	setup(char *line, t_data *data)
 	return (0);
 }
 
-static int	checkerreur(t_data *data)
+static int	checkerreur(char *line)
 {
-	size_t	count;
-	t_token	*tmp;
+	size_t	i;
+	bool	s_quote;
+	bool	d_quote;
 
-	count = 0;
-	tmp = data->token;
-	while (tmp)
+	i = 0;
+	s_quote = false;
+	d_quote = false;
+	while (line[i])
 	{
-		if (tmp->type == SIMPLE_COTE || tmp->type == DOUBLE_COTE)
-			count++;
-		tmp = tmp->next;
+		if (line[i] == '\'' && d_quote == false)
+			s_quote = !s_quote;
+		if (line[i] == '\"' && s_quote == false)
+			d_quote = !d_quote;
+		if (line[i] == ';' && s_quote == false && d_quote == false)
+			return (1);
+		if (line[i] == '|' && s_quote == false && d_quote == false)
+			return (1);
+		i++;
 	}
-	if (count % 2 != 0)
+	if (s_quote == true || d_quote == true)
 		return (1);
 	return (0);
 }
@@ -83,7 +93,7 @@ int	ft_parsing_line(t_data *data, char *line)
 {
 	if (setup(line, data) == 1)
 		return (exit_error(ERROR_MALLOC, EM_MALLOC, data), 1);
-	if (checkerreur(data) == 1)
+	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	data->line = line;
 	g_error = 0;

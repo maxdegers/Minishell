@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/22 13:33:15 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/03/27 11:59:11 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ READLINE_DIR	=	$(shell brew --prefix readline)
 endif
 READLINE_LIB	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g
 
 RED		=	\033[1;31m
 GREEN	=	\033[1;32m
