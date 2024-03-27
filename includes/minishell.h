@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 13:59:13 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:46:55 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ typedef enum e_type
 	DOUBLE_COTE
 }	t_type;
 
-typedef enum s_cmd_type
+typedef enum e_cmd_type
 {
 	CMD,
 	ARGS,
-	REDIRS,
 	INDEX,
+	INPUT,
+	OUPUT,
 	HEREDOC_NAM,
 	TAB_ARGS
 }	t_cmd_type;
