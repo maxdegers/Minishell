@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:51:33 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:57:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	set_cmd_type(t_data data)
 	tmp = data.token;
 	while (tmp)
 	{
-		if (tmp->type == WORD &&)
+//		if (tmp->type == WORD &&)
 		tmp = tmp->next;
 	}
 	return (0);

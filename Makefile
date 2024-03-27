@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/27 17:27:36 by mpitot           ###   ########.fr        #
+#    Updated: 2024/03/27 18:01:26 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,7 @@ SRCS	=	main/main.c\
 			parsing/set_type.c\
 			utils/t_env.c\
 			utils/t_token.c\
-			execution/exec.c\
-			# utils/utils.c
+			execution/exec.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 
@@ -88,7 +87,7 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors
 	@${CC} ${FLAGS} -I${HEAD} -c $< -o $@
 	@$(call update_progress,$<)
 
-${NAME}	:	.internal_announce ${OBJ_D} ${OBJS} libft/libft.a
+${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
 	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB}
 	@$(eval CHANGED=1)
@@ -104,7 +103,6 @@ ${OBJ_D}:
 	@mkdir -p ${OBJ_D}execution
 
 libft	:
-	@echo "$(YELLOW)Compiling $(WHITE)[$(CYAN)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft
 	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
 
