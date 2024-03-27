@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 11:58:26 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:51:19 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,32 @@ typedef enum e_ERROR
 typedef enum e_type
 {
 	WORD,
+	APPEND,
 	STRING,
-	REDIR_R,
-	REDIR_L,
-	REDIR_RR,
+	HEREDOC,
+	INPUT,
+	OUPUT,
 	POINT_VIRGULE,
 	PIPE,
-	FILE_NAME,
 	SIMPLE_COTE,
 	DOUBLE_COTE
 }	t_type;
+
+typedef enum s_cmd_type
+{
+	CMD,
+	ARGS,
+	REDIRS,
+	INDEX,
+	HEREDOC_NAM,
+	TAB_ARGS
+}	t_cmd_type;
 
 typedef struct s_token
 {
 	char				*value;
 	t_type				type;
+	t_cmd_type			cmd_t;
 	int					pos;
 	int					exec;
 	struct s_token		*next;
@@ -85,8 +96,7 @@ typedef struct s_data
 {
 	int			exit;
 	char		*line;
-	char		*prompt;
-	char		**path;
+	char		*prompt;	
 	t_token		*token;
 	char		*error_cmd;
 	t_env		*env;

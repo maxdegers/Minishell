@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 13:55:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:57:07 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,23 @@ int	ft_parsing_env(char **env, t_data *data)
 	return (0);
 }
 
-int	ft_set_tab(t_data *data)
+char	**get_path(t_data *data)
 {
 	t_env	*tmp;
+	char	**path;
 
-	data->exit = 1;
 	tmp = ft_envfind(data->env, "PATH");
-	data->path = ft_split(tmp->value, ':');
-	if (!data->path)
-		return (ft_put_error(1, EM_MALLOC), 1);
+	if (!tmp)
+		return (NULL);
+	path = ft_split(tmp->value, ':');
+	if (!path)
+		return (NULL);
+	return (path);
+}
+
+int	ft_set_tab(t_data *data)
+{
+	data->exit = 1;
 	return (0);
 }
 

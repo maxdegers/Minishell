@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 12:05:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:46:53 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,34 @@ t_type	get_type(char c)
 	else if (c == '|')
 		return (PIPE);
 	else if (c == '>')
-		return (REDIR_R);
+		return (OUPUT);
 	else if (c == '<')
-		return (REDIR_L);
+		return (INPUT);
 	else if (c == ';')
 		return (POINT_VIRGULE);
 	else
 		return (WORD);
+}
+
+int	puttype_s(char *line, t_type *type, size_t *i, char **tmp)
+{
+	if ((line[*i] == '>' && line[*i + 1] == '>')
+		|| (line[*i] == '<' && line[*i + 1] == '<'))
+	{
+		*tmp = ft_substr(line, *i, 2);
+		if (line[*i] == '>')
+			*type = APPEND;
+		else
+			*type = HEREDOC;
+	}
+	else
+	{
+		*tmp = ft_substr(line, *i, 1);
+		*type = get_type(tmp[0][0]);
+	}
+	if (!tmp)
+		return (1);
+	return (0);
 }
 
 int	puttype(char *line, size_t *i, t_data *data)
@@ -36,17 +57,14 @@ int	puttype(char *line, size_t *i, t_data *data)
 	t_type	type;
 	t_token	*token;
 
-	tmp = ft_substr(line, *i, 1);
-	if (!tmp)
+	if (puttype_s(line, &type, i, &tmp) == 1)
 		return (1);
-	(*i)++;
-	type = get_type(tmp[0]);
+	*i += ft_strlen(tmp);
 	token = lt_new(tmp, type);
 	if (!token)
 		return (free(tmp), 1);
 	lt_addback(&data->token, token);
-	free(tmp);
-	return (0);
+	return (free(tmp), 0);
 }
 
 void	putword_move(char *line, size_t *i, int t)

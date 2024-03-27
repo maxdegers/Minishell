@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 12:13:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:16:54 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ static int	checkerreur(char *line)
 			s_quote = !s_quote;
 		if (line[i] == '\"' && s_quote == false)
 			d_quote = !d_quote;
-		if (line[i] == ';' && s_quote == false && d_quote == false)
+		if (line[i] == ';' && (s_quote == true || d_quote == true))
 			return (1);
-		if (line[i] == '|' && s_quote == false && d_quote == false)
+		if (line[i] == '|' && (s_quote == true || d_quote == true))
 			return (1);
 		i++;
 	}
