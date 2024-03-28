@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:24:11 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:14:41 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/28 18:39:58 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_echo(t_token *token)
 	}
 	while (tmp && tmp->exec == 0)
 	{
-		ft_printf("%s", tmp->value);
+		if (tmp->cmd_t == ARGS)
+			ft_printf("%s", tmp->value);
 		tmp = tmp->next;
 		if (tmp)
 			ft_printf(" ");
@@ -103,7 +104,7 @@ int	ft_export(t_token *token, t_data *data)
 	tmp = token;
 	while (tmp)
 	{
-		new = ft_envnew(tmp->value, NULL);
+		new = ft_envnew(tmp->value, tmp->next->value);
 		if (!new)
 			return (1);
 		ft_envadd_back(&data->env, new);
@@ -162,12 +163,10 @@ int	ft_exec(t_data *data)
 			ft_unset(tmp->next, data);
 		else if (!ft_strcmp(tmp->value, "env"))
 			ft_envprint(data->env);
-		/*else if (!ft_strcmp(tmp->value, "exit"))
-			ft_exit(tmp->next, data);
-		else
+		else if (!ft_strcmp(tmp->value, "exit"))
+			return (2);
+		/*else
 			ft_execve(tmp, data);*/
-		else
-			return (0);
 	}
 	return (0);
 }

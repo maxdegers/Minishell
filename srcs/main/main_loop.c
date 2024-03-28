@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:16:14 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:38:11 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ int	ft_main_loop(t_data *data)
 			destroy(data);
 			continue ;
 		}
-		lt_print(data->token);
-		ft_exec(data);
+//		lt_print(data->token);
+		if (ft_exec(data) == 2)
+			return (ft_putstr_fd("exit\n", 1), 0);
 		destroy(data);
 	}
 	return (0);

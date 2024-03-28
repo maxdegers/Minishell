@@ -67,13 +67,9 @@ typedef enum e_type
 
 typedef enum e_cmd_type
 {
-	ELSE,
-	CMD,
 	ARGS,
-	OUTPUT_NAME,
-	INPUT_NAME,
+	CMD,
 	HEREDOC_NAME,
-	TAB_ARGS
 }	t_cmd_type;
 
 typedef struct s_token
