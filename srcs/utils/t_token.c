@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:39:09 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:16:22 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	lt_print(t_token *token)
 	ft_printf("value\t type\t pos\t exec\n--------------------------------\n");
 	while (token)
 	{
-		ft_printf("%s\t %d\t %d\t %d\n", token->value, token->type, token->pos, token->exec);
+		ft_printf("%s\t %d\t %d\t %d\n", token->value, token->cmd_t, token->pos, token->exec);
 		token = token->next;
 	}
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_type.c                                         :+:      :+:    :+:   */
+/*   ft_free_pac.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:22:44 by mbrousse         ###   ########.fr       */
+/*   Created: 2024/03/28 15:24:28 by mbrousse          #+#    #+#             */
+/*   Updated: 2024/03/28 15:27:58 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	set_cmd_type(t_data *data)
+void	ft_free_pac(size_t count, ...)
 {
-	t_token	*tmp;
+	va_list	args;
+	size_t	i;
 
-	tmp = data->token;
-	while (tmp)
+	va_start(args, count);
+	i = 0;
+	while (i < count)
 	{
-		if (tmp->pos == 0 && tmp->type == WORD)
-			tmp->cmd_t = CMD;
-		else if (tmp->type == WORD || tmp->type == STRING || tmp->type == HEREDOC)
-			tmp->cmd_t = ARGS;
-		tmp = tmp->next;
+		free(va_arg(args, void *));
+		i++;
 	}
-	return (0);
+	va_end(args);
 }

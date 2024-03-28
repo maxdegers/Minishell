@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:27:53 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/22 13:38:05 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:28:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ int		ft_putmem_fd(void *ptr, int fd);
 
 /*get_next_line*/
 char	*get_next_line(int fd);
+
+/*ft_free_pac*/
+void	ft_free_pac(size_t count, ...);
 
 #endif

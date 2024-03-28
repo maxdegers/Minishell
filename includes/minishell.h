@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:08:13 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:21:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef enum e_type
 
 typedef enum e_cmd_type
 {
+	ELSE,
 	CMD,
 	ARGS,
 	OUTPUT_NAME,
@@ -105,7 +106,7 @@ typedef struct s_data
 // main.c
 void		ft_putheader(void);
 // exec.c
-void	ft_exec(t_data *data);
+void		ft_exec(t_data *data);
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
@@ -116,6 +117,8 @@ int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
 int			ft_init_tab(t_data *data, char **env);
 char		**get_path(t_data *data);
+// set_type.c
+int			set_cmd_type(t_data *data);
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
