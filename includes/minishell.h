@@ -104,6 +104,8 @@ typedef struct s_data
 
 // main.c
 void		ft_putheader(void);
+// exec.c
+void	ft_exec(t_data *data);
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
