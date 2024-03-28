@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:24:11 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 12:45:51 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:14:41 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,55 @@ void	ft_cd(t_token *token, t_data *data)
 	}
 }
 
-void	ft_exec(t_data *data)
+int	ft_export(t_token *token, t_data *data)
+{
+	t_token	*tmp;
+	t_env	*new;
+
+	tmp = token;
+	while (tmp)
+	{
+		new = ft_envnew(tmp->value, NULL);
+		if (!new)
+			return (1);
+		ft_envadd_back(&data->env, new);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	ft_unset(t_token *token, t_data *data)
+{
+	t_token	*tmp;
+	t_env	*env;
+	t_env	*prev;
+
+	tmp = token;
+	while (tmp)
+	{
+		env = data->env;
+		prev = NULL;
+		while (env)
+		{
+			if (!ft_strcmp(env->name, tmp->value))
+			{
+				if (prev)
+					prev->next = env->next;
+				else
+					data->env = env->next;
+				free(env->name);
+				free(env->value);
+				free(env);
+				break ;
+			}
+			prev = env;
+			env = env->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
+int	ft_exec(t_data *data)
 {
 	t_token	*tmp;
 
@@ -108,10 +156,10 @@ void	ft_exec(t_data *data)
 			ft_cd(tmp->next, data);
 		else if (!ft_strcmp(tmp->value, "pwd"))
 			ft_pwd();
-		/*else if (!ft_strcmp(tmp->value, "export"))
-			ft_export(tmp->next, data);
+		else if (!ft_strcmp(tmp->value, "export"))
+			return (ft_export(tmp->next, data));
 		else if (!ft_strcmp(tmp->value, "unset"))
-			ft_unset(tmp->next, data);*/
+			ft_unset(tmp->next, data);
 		else if (!ft_strcmp(tmp->value, "env"))
 			ft_envprint(data->env);
 		/*else if (!ft_strcmp(tmp->value, "exit"))
@@ -119,6 +167,7 @@ void	ft_exec(t_data *data)
 		else
 			ft_execve(tmp, data);*/
 		else
-			return ;
+			return (0);
 	}
+	return (0);
 }
