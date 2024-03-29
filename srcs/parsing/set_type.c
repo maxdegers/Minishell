@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:22:44 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:08:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,20 @@ int	set_cmd_type(t_data *data)
 	{
 		if (tmp->pos == 0 && tmp->type == WORD)
 			tmp->cmd_t = CMD;
-		else if (tmp->type == WORD || tmp->type == STRING || tmp->type == HEREDOC)
+		else if (tmp->type == WORD)
 			tmp->cmd_t = ARGS;
+		else if (tmp->type == SIMPLE_COTE || tmp->type == DOUBLE_COTE)
+		{
+			if (tmp->next && tmp->next->type == STRING)
+			{
+				tmp->next->cmd_t = ARGS;
+				tmp->next->type = tmp->type;
+				tmp->type = RM;
+				tmp = tmp->next;
+			}
+			else
+				tmp->type = RM;
+		}
 		tmp = tmp->next;
 	}
 	return (0);

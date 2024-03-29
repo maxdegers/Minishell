@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:21:26 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:03:10 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef enum e_type
 	POINT_VIRGULE,
 	PIPE,
 	SIMPLE_COTE,
-	DOUBLE_COTE
+	DOUBLE_COTE,
+	RM
 }	t_type;
 
 typedef enum e_cmd_type
