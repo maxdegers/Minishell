@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:24:11 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 18:39:58 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/29 11:22:59 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,25 @@ void	ft_unset(t_token *token, t_data *data)
 	}
 }
 
+void	ft_exit(t_token *token, t_data *data)
+{
+	t_token	*tmp;
+	int		i;
+
+	tmp = token;
+	i = 0;
+	if (tmp)
+	{
+		i = ft_atoi(tmp->value);
+		if (tmp->next)
+			ft_put_error(1, "miniShell: exit: too many arguments");
+	}
+	destroy(data);
+	ft_megafree(data);
+	ft_printf("exit\n");
+	exit(i);
+}
+
 int	ft_exec(t_data *data)
 {
 	t_token	*tmp;
@@ -164,7 +183,7 @@ int	ft_exec(t_data *data)
 		else if (!ft_strcmp(tmp->value, "env"))
 			ft_envprint(data->env);
 		else if (!ft_strcmp(tmp->value, "exit"))
-			return (2);
+			ft_exit(tmp->next, data);
 		/*else
 			ft_execve(tmp, data);*/
 	}

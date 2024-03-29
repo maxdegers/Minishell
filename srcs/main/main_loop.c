@@ -88,8 +88,7 @@ int	ft_main_loop(t_data *data)
 			continue ;
 		}
 		lt_print(data->token);
-		if (ft_exec(data) == 2)
-			return (ft_putstr_fd("exit\n", 1), 0);
+		ft_exec(data);
 		destroy(data);
 	}
 	return (0);
