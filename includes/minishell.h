@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:03:10 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:31:22 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int			ft_init_tab(t_data *data, char **env);
 char		**get_path(t_data *data);
 // set_type.c
 int			set_cmd_type(t_data *data);
+int			rm_type(t_data *data);
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
@@ -123,6 +124,8 @@ void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
 t_env		*ft_envfind(t_env *env, char *name);
 void		ft_envprint(t_env *env);
+void		lt_remove(t_data *data, t_token *to_remouve);
+
 // t_token.c
 size_t		lt_size(t_token *token);
 size_t		lt_size_type(t_token *token, t_type type);

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:08:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:46:39 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@ static char	*ft_set_prompt(t_data *data)
 	static char	*user = NULL;
 	t_env		*node;
 	char		*tmp;
+	char		*user_tmp;
 
 	user = ft_strjoin(user, B_GREEN);
 	node = ft_envfind(data->env, "USER");
 	if (node)
 	{
 		tmp = ft_strdup(node->value);
-		user = ft_strjoin(user, tmp);
+		user_tmp = ft_strjoin(user, tmp);
+		free(user);
+		user = user_tmp;
 		free(tmp);
 	}
-	user = ft_strjoin(user, "@"RESET": "\
+	user_tmp = ft_strjoin(user, "@"RESET": "\
 	HEADER"minishell$ "RESET);
+	free(user);
+	user = user_tmp;
 	return (user);
 }
 

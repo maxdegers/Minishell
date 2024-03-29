@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:08:25 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:31:36 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ int	set_cmd_type(t_data *data)
 			}
 			else
 				tmp->type = RM;
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int	rm_type(t_data *data)
+{
+	t_token	*tmp;
+
+	tmp = data->token;
+	while (tmp)
+	{
+		if (tmp->type == RM)
+		{
+			lt_remove(data, tmp);
 		}
 		tmp = tmp->next;
 	}

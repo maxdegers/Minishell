@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:17:01 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:18:05 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	ft_parsing_line(t_data *data, char *line)
 	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	if (set_cmd_type(data) == 1)
+		return (1);
+	if (rm_type(data) == 1)
 		return (1);
 	g_error = 0;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:10:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 10:31:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,21 @@ void	lt_clear(t_token **token)
 	}
 }
 
-void	lt_remouve(t_token **token, t_token *to_remouve)
+void	lt_remove(t_data *data, t_token *to_remouve)
 {
 	t_token	*tmp;
 
-	if (!token || !*token)
+	if (!data->token || !to_remouve)
 		return ;
-	if (*token == to_remouve)
+	if (data->token == to_remouve)
 	{
-		tmp = (*token)->next;
-		free((*token)->value);
-		free(*token);
-		*token = tmp;
+		tmp = data->token->next;
+		free(data->token->value);
+		free(data->token);
+		data->token = tmp;
 		return ;
 	}
-	tmp = *token;
+	tmp = data->token;
 	while (tmp->next)
 	{
 		if (tmp->next == to_remouve)
