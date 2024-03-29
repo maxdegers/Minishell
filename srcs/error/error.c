@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:53:34 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:02:55 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_put_error(t_ERROR error, char *MSG)
 	g_error = error;
 	str = MSG;
 	if (str == NULL)
+	{
+		perror("minishell:");
 		return ;
+	}
 	ft_printf_fd(2, str);
 }
 
