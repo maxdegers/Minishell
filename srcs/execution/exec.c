@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 17:24:11 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 11:22:59 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/03/29 11:36:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,18 @@ int	ft_export(t_token *token, t_data *data)
 {
 	t_token	*tmp;
 	t_env	*new;
+	char	**cell;
 
 	tmp = token;
 	while (tmp)
 	{
-		new = ft_envnew(tmp->value, tmp->next->value);
+		if (!ft_strchr(tmp->value, '='))
+			return (0);
+		cell = ft_split(tmp->value, '=');
+		if (!cell)
+			return (1);
+		new = ft_envnew(cell[0], cell[1]);
+		ft_free_tab(cell);
 		if (!new)
 			return (1);
 		ft_envadd_back(&data->env, new);
@@ -132,9 +139,7 @@ void	ft_unset(t_token *token, t_data *data)
 					prev->next = env->next;
 				else
 					data->env = env->next;
-				free(env->name);
-				free(env->value);
-				free(env);
+				ft_free_pac(3, env->name, env->value, env);
 				break ;
 			}
 			prev = env;
@@ -162,6 +167,8 @@ void	ft_exit(t_token *token, t_data *data)
 	ft_printf("exit\n");
 	exit(i);
 }
+
+
 
 int	ft_exec(t_data *data)
 {

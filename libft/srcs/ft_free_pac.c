@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../incs/libft.h"
 
 void	ft_free_pac(size_t count, ...)
 {

@@ -87,7 +87,7 @@ int	ft_main_loop(t_data *data)
 			destroy(data);
 			continue ;
 		}
-		lt_print(data->token);
+//		lt_print(data->token);
 		ft_exec(data);
 		destroy(data);
 	}
