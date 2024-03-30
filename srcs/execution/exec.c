@@ -168,7 +168,31 @@ void	ft_exit(t_token *token, t_data *data)
 	exit(i);
 }
 
+void	ft_execve(t_token *token, t_data *data)
+{
+	t_token	*tmp;
+	char	**path;
+	char	*cmd;
+	int		i;
 
+	tmp = token;
+	path = get_path(data);
+	while (path)
+	{
+		cmd = ft_strjoin(path[0], tmp->value);
+		char **args = { NULL };		//TODO REMOVE THIS LINE
+		i = execve(cmd, args, NULL);
+		free(cmd);
+		if (i != -1)
+			break ;
+		path++;
+	}
+	if (!path)
+	{
+		ft_printf("minishell: %s: command not found\n", tmp->value);
+		g_error = 127;
+	}
+}
 
 int	ft_exec(t_data *data)
 {
@@ -191,8 +215,8 @@ int	ft_exec(t_data *data)
 			ft_envprint(data->env);
 		else if (!ft_strcmp(tmp->value, "exit"))
 			ft_exit(tmp->next, data);
-		/*else
-			ft_execve(tmp, data);*/
+		else
+			ft_execve(tmp, data);
 	}
 	return (0);
 }
