@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:55:13 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 13:55:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 14:35:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,43 @@ char	**lt_to_tab(t_token *token)
 	}
 	tab[i] = NULL;
 	return (tab);
+}
+
+void	lt_remove(t_data *data, t_token *to_remouve)
+{
+	t_token	*tmp;
+
+	if (!data->token || !to_remouve)
+		return ;
+	if (data->token == to_remouve)
+	{
+		tmp = data->token->next;
+		free(data->token->value);
+		free(data->token);
+		data->token = tmp;
+		return ;
+	}
+	tmp = data->token;
+	while (tmp->next)
+	{
+		if (tmp->next == to_remouve)
+		{
+			tmp->next = to_remouve->next;
+			free(to_remouve->value);
+			free(to_remouve);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	lt_print(t_token *token)
+{
+	ft_printf("value\t type\t CMPtype\t pos\t exec\n-----------------\n");
+	while (token)
+	{
+		ft_printf("%s\t %d\t%d\t %d\t %d\n"\
+			, token->value, token->type, token->cmd_t, token->pos, token->exec);
+		token = token->next;
+	}
 }
