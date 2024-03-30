@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 10:31:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 13:58:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,11 @@ void		ft_envclear(t_env **env);
 t_env		*ft_envfind(t_env *env, char *name);
 void		ft_envprint(t_env *env);
 void		lt_remove(t_data *data, t_token *to_remouve);
-
+// t_env_utils.c
+int			ft_change_env(t_env *env, char *name, char *value);
+char		**ft_env_to_tab(t_env *env);
+// t_token_utils.c
+char		**lt_to_tab(t_token *token);
 // t_token.c
 size_t		lt_size(t_token *token);
 size_t		lt_size_type(t_token *token, t_type type);
