@@ -6,13 +6,13 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:55:13 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 14:35:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:50:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**lt_to_tab(t_token *token)
+char	**ft_tokento_tab(t_token *token)
 {
 	char	**tab;
 	size_t	i;
@@ -23,7 +23,7 @@ char	**lt_to_tab(t_token *token)
 		return (NULL);
 	while (token)
 	{
-		tab[i] = ft_strdup(token->value);
+		tab[i] = ft_strdup(token->data);
 		if (!tab[i])
 			return (ft_free_tab(tab), NULL);
 		token = token->next;
@@ -33,7 +33,7 @@ char	**lt_to_tab(t_token *token)
 	return (tab);
 }
 
-void	lt_remove(t_data *data, t_token *to_remouve)
+void	ft_token_remouve(t_data *data, t_token *to_remouve)
 {
 	t_token	*tmp;
 
@@ -42,7 +42,7 @@ void	lt_remove(t_data *data, t_token *to_remouve)
 	if (data->token == to_remouve)
 	{
 		tmp = data->token->next;
-		free(data->token->value);
+		free(data->token->data);
 		free(data->token);
 		data->token = tmp;
 		return ;
@@ -53,21 +53,10 @@ void	lt_remove(t_data *data, t_token *to_remouve)
 		if (tmp->next == to_remouve)
 		{
 			tmp->next = to_remouve->next;
-			free(to_remouve->value);
+			free(to_remouve->data);
 			free(to_remouve);
 			return ;
 		}
 		tmp = tmp->next;
-	}
-}
-
-void	lt_print(t_token *token)
-{
-	ft_printf("value\t type\t CMPtype\t pos\t exec\n-----------------\n");
-	while (token)
-	{
-		ft_printf("%s\t %d\t%d\t %d\t %d\n"\
-			, token->value, token->type, token->cmd_t, token->pos, token->exec);
-		token = token->next;
 	}
 }
