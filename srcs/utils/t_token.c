@@ -6,55 +6,30 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 14:33:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:42:38 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	lt_size(t_token *token)
-{
-	size_t	i;
-
-	i = 0;
-	while (token)
-	{
-		token = token->next;
-		i++;
-	}
-	return (i);
-}
-
-size_t	lt_size_type(t_token *token, t_type type)
-{
-	size_t	i;
-
-	i = 0;
-	while (token)
-	{
-		if (token->type == type)
-			i++;
-		token = token->next;
-	}
-	return (i);
-}
-
-t_token	*lt_new(char *value, t_type type)
+t_token	*ft_tokennew(char *line, int start, int end, int type)
 {
 	t_token	*new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->value = ft_strdup(value);
-	if (!new->value)
+	new->data = malloc(sizeof(char) * (end - start + 1));
+	if (!new->data)
 		return (free(new), NULL);
+	ft_strlcpy(new->data, line + start, end - start + 1);
 	new->type = type;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
-void	lt_addback(t_token **token, t_token *new)
+void	ft_tokenadd_back(t_token **token, t_token *new)
 {
 	t_token	*tmp;
 
@@ -67,9 +42,10 @@ void	lt_addback(t_token **token, t_token *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
-void	lt_clear(t_token **token)
+void	ft_token_clear(t_token **token)
 {
 	t_token	*tmp;
 
@@ -78,8 +54,18 @@ void	lt_clear(t_token **token)
 	while (*token)
 	{
 		tmp = (*token)->next;
-		free((*token)->value);
+		free((*token)->data);
 		free(*token);
 		*token = tmp;
+	}
+}
+
+void	ft_tokenprint(t_token *token)
+{
+	while (token)
+	{
+		printf("data: %s\t\t\t", token->data);
+		printf("type: %d\n", token->type);
+		token = token->next;
 	}
 }

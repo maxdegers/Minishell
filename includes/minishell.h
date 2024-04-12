@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 13:41:37 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:41:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_token
 	char			*data;
 	int				type;
 	char			is_inquote;
+	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
 
@@ -142,12 +143,9 @@ char		**ft_env_to_tab(t_env *env);
 // t_token_utils.c
 char		**lt_to_tab(t_token *token);
 // t_token.c
-size_t		lt_size(t_token *token);
-size_t		lt_size_type(t_token *token, t_type type);
-t_token		*lt_new(char *value, t_type type);
-void		lt_addback(t_token **token, t_token *new);
-void		lt_clear(t_token **token);
-void		lt_print(t_token *token);
+t_token		*ft_tokennew(char *line, int start, int end, int type);
+void		ft_tokenadd_back(t_token **token, t_token *new);
+void		ft_token_clear(t_token **token);
 // main_loop.c
 int			ft_main_loop(t_data *data);
 // signal.c
