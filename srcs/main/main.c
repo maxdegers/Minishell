@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int	g_error = 0;
+
 void	ft_putheader(void)
 {
 	ft_printf("\n\n"HEADER);
