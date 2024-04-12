@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 16:41:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:54:28 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_data
 	char		*line;
 	char		*prompt;	
 	t_token		*token;
+	t_block		*block;
 	char		*error_cmd;
 	t_env		*env;
 }	t_data;
@@ -141,7 +142,8 @@ void		lt_remove(t_data *data, t_token *to_remouve);
 int			ft_change_env(t_env *env, char *name, char *value);
 char		**ft_env_to_tab(t_env *env);
 // t_token_utils.c
-char		**lt_to_tab(t_token *token);
+char		**ft_tokento_tab(t_token *token);
+void		ft_token_remouve(t_data *data, t_token *to_remouve);
 // t_token.c
 t_token		*ft_tokennew(char *line, int start, int end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
