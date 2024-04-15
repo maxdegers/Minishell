@@ -6,18 +6,45 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 12:25:42 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:46:22 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
+{
+	char	quote;
+
+	if (data->line[*i] == '\'' || data->line[*i] == '\"')
+	{
+		quote = data->line[*i];
+		*i += 1;
+		while (data->line[*i] && data->line[*i] != quote)
+			*i += 1;
+	}
+	if (data->line[*i] == '<' || data->line[*i] == '>')
+	{
+		if (*i != 0 && data->line[*i - 1] != ' ' )
+		{
+			*end = *i;
+			ft_token_new_add(data, *start, *end, WORD);
+			*start = *i;
+		}
+		if (data->line[*i + 1] != '\0' && data->line[*i + 1] == data->line[*i])
+			*i += 1;
+		*i += 1;
+		return (1);
+	}
+	*i += 1;
+	return (0);
+}
 
 void	ft_token_set(char *line, t_data *data)
 {
 	size_t	i;
 	size_t	end;
 	size_t	start;
-	char	quote;
 
 	i = 0;
 	while (line[i])
@@ -27,24 +54,8 @@ void	ft_token_set(char *line, t_data *data)
 			start = i;
 			while (line[i] && line[i] != ESPACE)
 			{
-				if (line[i] == '\'' || line[i] == '\"')
-				{
-					quote = line[i];
-					i++;
-					while (line[i] && line[i] != quote)
-						i++;
-				}
-				if (line[i] == '<' || line[i] == '>')
-				{
-					end = i;
-					ft_token_new_add(data, start, end, WORD);
-					start = i;
-					if (line[i + 1] != '\0' && line[i + 1] == line[i])
-						i++;
-					i++;
+				if (parsing_line(data, &i, &start, &end) == 1)
 					break ;
-				}
-				i++;
 			}
 			end = i;
 			ft_token_new_add(data, start, end, WORD);
@@ -82,6 +93,7 @@ int	ft_parsing_line(t_data *data, char *line)
 	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	ft_token_set(line, data);
+	
 	g_error = 0;
 	return (0);
 }

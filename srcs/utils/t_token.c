@@ -6,13 +6,13 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 12:12:23 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:35:16 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_token_new_add(t_data *data, int start, int end, int type)
+void	ft_token_new_add(t_data *data, size_t start, size_t end, int type)
 {
 	t_token	*new;
 
@@ -22,7 +22,7 @@ void	ft_token_new_add(t_data *data, int start, int end, int type)
 	ft_tokenadd_back(&data->token, new);
 }
 
-t_token	*ft_tokennew(char *line, int start, int end, int type)
+t_token	*ft_tokennew(char *line, size_t start, size_t end, int type)
 {
 	t_token	*new;
 

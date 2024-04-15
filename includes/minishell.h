@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 11:57:09 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:35:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ char		**ft_env_to_tab(t_env *env);
 char		**ft_tokento_tab(t_token *token);
 void		ft_token_remouve(t_data *data, t_token *to_remouve);
 // t_token.c
-t_token		*ft_tokennew(char *line, int start, int end, int type);
-void		ft_token_new_add(t_data *data, int start, int end, int type);
+t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
+void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
 void		ft_tokenprint(t_token *token);
