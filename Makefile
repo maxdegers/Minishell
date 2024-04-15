@@ -3,26 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/30 13:57:45 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/15 12:40:29 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main/main.c\
-			main/main_loop.c\
-			main/signals.c\
-			error/error.c\
-			parsing/parsing_env.c\
-			parsing/parsing_line.c\
+SRCS	=	main/main.c					\
+			main/main_loop.c			\
+			main/signals.c				\
+			error/error.c				\
+			parsing/parsing_env.c		\
+			parsing/parsing_line.c		\
 			parsing/parsing_line_utils.c\
-			parsing/set_type.c\
-			utils/t_env.c\
-			utils/t_env_utils.c\
-			utils/t_token_utils.c\
-			utils/t_token.c\
-			execution/exec.c
+			parsing/set_type.c			\
+			utils/t_env.c				\
+			utils/t_env_utils.c			\
+			utils/t_token_utils.c		\
+			utils/t_token.c				\
+			execution/exec.c			\
+			execution/ft_cd.c			\
+			execution/ft_echo.c			\
+			execution/ft_execve.c		\
+			execution/ft_exit.c			\
+			execution/ft_export.c		\
+			execution/ft_putenv.c		\
+			execution/ft_pwd.c			\
+			execution/redir.c
+
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 

@@ -19,6 +19,8 @@ void	ft_exec_line(t_data *data)
 	block = data->block;
 	while (block)
 	{
+		if (block->next)
+			
 		/*if (ft_strcmp(block->cmd, "echo") == 0)
 			ft_echo(block->token);
 		else if (ft_strcmp(block->cmd, "pwd") == 0)
