@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-int	g_error = 0;
-
 static char	*ft_set_prompt(t_data *data)
 {
 	static char	*user = NULL;
