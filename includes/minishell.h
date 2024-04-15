@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 12:35:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:36:48 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ typedef struct s_trash
 
 typedef struct s_redir
 {
-	int		fd;
-	int		type;
-	char	*file;
+	int				fd;
+	int				type;
+	char			*file;
+	struct s_redir	*next;
 }	t_redir;
 
 typedef struct s_block
@@ -137,6 +138,7 @@ t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
 t_env		*ft_envfind(t_env *env, char *name);
+char		*ft_envfind_data(t_env *env, char *name);
 void		ft_envprint(t_env *env);
 void		lt_remove(t_data *data, t_token *to_remouve);
 // t_env_utils.c

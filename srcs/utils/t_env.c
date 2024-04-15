@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:09:18 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/30 13:42:45 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:28:41 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ t_env	*ft_envfind(t_env *env, char *name)
 	{
 		if (!ft_strcmp(env->name, name))
 			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+char	*ft_envfind_data(t_env *env, char *name)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->name, name))
+			return (env->value);
 		env = env->next;
 	}
 	return (NULL);
