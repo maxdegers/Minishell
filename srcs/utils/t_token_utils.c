@@ -6,11 +6,24 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:55:13 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 17:50:13 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:51:03 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t	ft_token_size(t_token *token)
+{
+	size_t	i;
+
+	i = 0;
+	while (token)
+	{
+		i++;
+		token = token->next;
+	}
+	return (i);
+}
 
 char	**ft_tokento_tab(t_token *token)
 {
@@ -18,7 +31,7 @@ char	**ft_tokento_tab(t_token *token)
 	size_t	i;
 
 	i = 0;
-	tab = malloc(sizeof(char *) * (lt_size(token) + 1));
+	tab = malloc(sizeof(char *) * (ft_token_size(token) + 1));
 	if (!tab)
 		return (NULL);
 	while (token)

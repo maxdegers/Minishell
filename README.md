@@ -13,3 +13,8 @@ to do for max
 -Quote Removal
 
 //
+
+ si pwd est null pas exec
+
+jai fait un test dan get prond pour regler le probleme de couleur
+

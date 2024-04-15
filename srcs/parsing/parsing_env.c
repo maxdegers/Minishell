@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 13:57:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/13 13:05:29 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ char	**get_path(t_data *data)
 int	ft_set_tab(t_data *data)
 {
 	data->exit = 1;
+	data->prompt = NULL;
+	data->line = NULL;
+	data->block = NULL;
+	data->token = NULL;
+	data->error_cmd = NULL;
 	return (0);
 }
 

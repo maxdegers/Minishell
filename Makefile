@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/03/30 13:57:45 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/15 11:55:58 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS	=	main/main.c\
 			utils/t_env_utils.c\
 			utils/t_token_utils.c\
 			utils/t_token.c\
-			execution/exec.c
+			execution/exec.c\
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 

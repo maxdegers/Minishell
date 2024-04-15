@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 13:29:50 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:57:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,6 @@ static char	*ft_set_prompt(t_data *data)
 	return (user);
 }
 
-static void	ft_get_prompt(t_data *data)
-{
-	char	*color;
-	size_t	i;
-	size_t	size;
-
-	i = 0;
-	size = 7;
-	if (g_error == 0)
-	{
-		color = B_GREEN;
-		while (color[i] != '\0' && i < size - 1)
-		{
-			data->prompt[i] = color[i];
-			i++;
-		}
-	}
-	else
-	{
-		color = B_RED;
-		while (color[i] != '\0' && i < size - 1)
-		{
-			data->prompt[i] = color[i];
-			i++;
-		}
-	}
-}
-
 int	ft_main_loop(t_data *data)
 {
 	char	*line;
@@ -75,7 +47,6 @@ int	ft_main_loop(t_data *data)
 	while (!data->exit)
 	{
 		ft_set_signal();
-		ft_get_prompt(data);
 		line = readline(data->prompt);
 		if (line == NULL)
 			return (ft_putstr_fd("exit\n", 1), 0);
@@ -87,6 +58,7 @@ int	ft_main_loop(t_data *data)
 			destroy(data);
 			continue ;
 		}
+		ft_tokenprint(data->token);
 		// ft_exec(data);
 		destroy(data);
 	}

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 17:54:28 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:57:09 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
 # define NONE '\0'
+# define ESPACE ' '
 ///
 
 # define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
@@ -146,10 +147,13 @@ char		**ft_tokento_tab(t_token *token);
 void		ft_token_remouve(t_data *data, t_token *to_remouve);
 // t_token.c
 t_token		*ft_tokennew(char *line, int start, int end, int type);
+void		ft_token_new_add(t_data *data, int start, int end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
+void		ft_tokenprint(t_token *token);
 // main_loop.c
 int			ft_main_loop(t_data *data);
+char		*ft_get_prompt(t_data *dat);
 // signal.c
 void		ft_handle_sig(int sig);
 void		ft_set_signal(void);
@@ -158,5 +162,6 @@ int			ft_parsing_line(t_data *data, char *line);
 // parsing_line_utils.c
 int			puttype(char *line, size_t *i, t_data *data);
 int			putword(char *line, size_t *i, t_data *data);
+
 
 #endif
