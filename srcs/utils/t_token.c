@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 12:35:16 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:26:06 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	ft_tokenprint(t_token *token)
 {
 	while (token)
 	{
-		printf("data: %s\t\t\t", token->data);
-		printf("type: %d\n", token->type);
+		ft_printf("data: %s\t\t\t", token->data);
+		ft_printf("type: %d\n", token->type);
 		token = token->next;
 	}
 }

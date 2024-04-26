@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 14:36:48 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/26 12:11:20 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_token
 {
 	char			*data;
 	int				type;
+	char			*new;
 	char			is_inquote;
 	struct s_token	*prev;
 	struct s_token	*next;
@@ -162,8 +163,12 @@ void		ft_set_signal(void);
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
 // parsing_line_utils.c
-int			puttype(char *line, size_t *i, t_data *data);
-int			putword(char *line, size_t *i, t_data *data);
+void		ft_add_to_str(char *str, size_t *i, char *add);
+void		expansion2(t_token *token, size_t *i, size_t *j, t_data *data);
+void		ft_param_expansion2(t_token *token, size_t size, t_data *data);
+void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
+void		ft_param_expansion(t_data *data);
+
 
 
 #endif
