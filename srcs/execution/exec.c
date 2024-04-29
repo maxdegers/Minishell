@@ -15,13 +15,14 @@
 void	ft_exec_line(t_data *data)
 {
 	t_block	*block;
+	int		fd[2];
 
 	block = data->block;
 	while (block)
 	{
 		if (block->next)
-			
-		/*if (ft_strcmp(block->cmd, "echo") == 0)
+			pipe(fd);
+		if (ft_strcmp(block->cmd, "echo") == 0)
 			ft_echo(block->token);
 		else if (ft_strcmp(block->cmd, "pwd") == 0)
 			ft_pwd();
@@ -35,7 +36,7 @@ void	ft_exec_line(t_data *data)
 			ft_env(data->env);
 		else if (ft_strcmp(block->cmd, "exit") == 0)
 			ft_exit(block->token, data);
-		else
+		/*else
 			ft_execve(block, data);*/
 		block = block->next;
 	}

@@ -12,14 +12,10 @@
 
 #include "minishell.h"
 
-void	ft_echo(t_data *data, t_block *block)
+void	ft_echo(t_data *data, t_block *block, int fd)
 {
-	int		fd;
 	int		nl;
 
-	fd = 1;
-	if (block->redir)
-		fd = block->redir->fd;
 	nl = 1;
 	if (block->args[0] && ft_strcmp(block->args[0], "-n") == 0)
 		nl = 0;

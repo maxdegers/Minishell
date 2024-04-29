@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+int		ft_isnumber(char *s)
+{
+	size_t	i;
+
+	i = -1;
+	while (s[++i])
+	{
+		if (!ft_isdigit(s[i]))
+			return (0);
+	}
+	return (1);
+}
+
 void	ft_exit(t_data *data, t_block *block)
 {
 	if (block->args[0])
@@ -23,7 +36,7 @@ void	ft_exit(t_data *data, t_block *block)
 			return ;
 		}
 		if (ft_isnumber(block->args[1]))
-			g_error = ft_atoi(block->args[1]);
+			g_error = ft_atoi(block->args[1]) % 256;
 		else
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
@@ -34,6 +47,6 @@ void	ft_exit(t_data *data, t_block *block)
 		}
 	}
 	ft_putstr_fd("exit\n", 2);
-	//ft_free_data();	TODO
+	ft_megafree(data);
 	exit(g_error);
 }
