@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 12:11:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:59:17 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,10 @@ int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
 int			ft_init_tab(t_data *data, char **env);
 char		**get_path(t_data *data);
-// set_type.c
-int			set_cmd_type(t_data *data);
-int			rm_type(t_data *data);
+// utils.c
+int			ft_isblank(char c);
+int			ft_iscontrol_operator(char c);
+
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
@@ -165,10 +166,9 @@ int			ft_parsing_line(t_data *data, char *line);
 // parsing_line_utils.c
 void		ft_add_to_str(char *str, size_t *i, char *add);
 void		expansion2(t_token *token, size_t *i, size_t *j, t_data *data);
-void		ft_param_expansion2(t_token *token, size_t size, t_data *data);
+void		ft_param_expansion2(t_token *token, size_t size, t_data *data,
+				char *new);
 void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);
-
-
 
 #endif

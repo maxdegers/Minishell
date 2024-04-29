@@ -6,25 +6,11 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 12:09:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/26 16:59:30 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_add_to_str(char *str, size_t *i, char *add)
-{
-	size_t	j;
-
-	j = 0;
-	while (add[j])
-	{
-		str[*i] = add[j];
-		*i += 1;
-		j++;
-	}
-	free(add);
-}
 
 void	expansion2(t_token *token, size_t *i, size_t *j, t_data *data)
 {
@@ -43,41 +29,55 @@ void	expansion2(t_token *token, size_t *i, size_t *j, t_data *data)
 	else
 	{
 		start = *i + 1;
-		while (token->data[*i]
-			&& token->data[*i] != ' ' && token->data[*i] != '$')
+		while (token->data[*i] && token->data[*i] != ' '
+			&& token->data[*i] != '$' && token->data[*i] != '"')
 			*i += 1;
 		c = token->data[*i];
 		token->data[*i] = '\0';
 		tmp = ft_strdup(ft_envfind_data(data->env, &token->data[start]));
 		token->data[*i] = c;
 		ft_add_to_str(token->new, j, tmp);
+		*i -= 1;
 	}
 }
 
-void	ft_param_expansion2(t_token *token, size_t size, t_data *data)
+void	ft_param_expansion2(t_token *token, size_t size,
+		t_data *data, char *new)
 {
-	char	*new;
 	size_t	i;
 	size_t	j;
+	int		quote;
 
-	new = malloc(sizeof(char) * (size + 1));
-	if (!new)
-		exit_error(ERROR_MALLOC, "malloc error\n", data);
 	i = 0;
 	j = 0;
-	token->new = new;
+	quote = -1;
 	while (token->data[i] != '\0' && j < size)
 	{
-		if (token->data[i] == '$' && token->data[i + 1] != '\0')
+		if (token->data[i] == '\'')
+			quote *= -1;
+		if (token->data[i] == '$' && token->data[i + 1] != '\0' && quote != 1)
 			expansion2(token, &i, &j, data);
 		else
+		{
 			new[j] = token->data[i];
+			j++;
+		}
 		i++;
-		j++;
 	}
 	new[j] = '\0';
 	free(token->data);
 	token->data = new;
+}
+
+void	ft_set_param_expansion2(t_token *token, size_t size, t_data *data)
+{
+	char	*new;
+
+	new = ft_calloc(sizeof(char), (size + 1));
+	if (!new)
+		exit_error(ERROR_MALLOC, "malloc error\n", data);
+	token->new = new;
+	ft_param_expansion2(token, size, data, new);
 }
 
 void	expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i)
@@ -95,12 +95,15 @@ void	expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i)
 	{
 		start = *i + 1;
 		*i += 1;
-		while (tmp->data[*i] && tmp->data[*i] != ' ' && tmp->data[*i] != '$')
+		while (tmp->data[*i] && !ft_isblank(tmp->data[*i])
+			&& !ft_iscontrol_operator(tmp->data[*i])
+			&& tmp->data[*i] != '$' && tmp->data[*i] != '"')
 			*i += 1;
 		c = tmp->data[*i];
 		tmp->data[*i] = '\0';
 		*size += ft_strlen(ft_envfind_data(data->env, &tmp->data[start]));
 		tmp->data[*i] = c;
+		*i -= 1;
 	}
 }
 
@@ -109,22 +112,26 @@ void	ft_param_expansion(t_data *data)
 	t_token	*tmp;
 	size_t	i;
 	size_t	size;
+	int		quote;
 
 	tmp = data->token;
 	while (tmp)
 	{
 		i = 0;
 		size = 0;
-		while (tmp->data[i])
+		quote = -1;
+		while (tmp->data[i] != '\0')
 		{
-			if (tmp->data[i] == '$' && tmp->data[i + 1] != '\0')
+			if (tmp->data[i] == '\'')
+				quote *= -1;
+			if (tmp->data[i] == '$' && tmp->data[i + 1] != '\0' && quote != 1)
 				expansion1(tmp, &size, data, &i);
 			else
 				size++;
 			i++;
 		}
 		printf("size = %zu\n", size);
-		ft_param_expansion2(tmp, size, data);
+		ft_set_param_expansion2(tmp, size, data);
 		tmp = tmp->next;
 	}
 }

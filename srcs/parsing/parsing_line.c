@@ -6,11 +6,25 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 12:05:48 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 10:46:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_add_to_str(char *str, size_t *i, char *add)
+{
+	size_t	j;
+
+	j = 0;
+	while (add && add[j])
+	{
+		str[*i] = add[j];
+		*i += 1;
+		j++;
+	}
+	free(add);
+}
 
 static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 {
@@ -23,7 +37,7 @@ static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 		while (data->line[*i] && data->line[*i] != quote)
 			*i += 1;
 	}
-	if (data->line[*i] == '<' || data->line[*i] == '>')
+	if (ft_iscontrol_operator(data->line[*i]) == 1)
 	{
 		if (*i != 0 && data->line[*i - 1] != ' ' )
 		{
@@ -49,10 +63,11 @@ void	ft_token_set(char *line, t_data *data)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ESPACE)
+		if (ft_isblank(line[i]) == 0)
 		{
 			start = i;
-			while (line[i] && line[i] != ESPACE)
+			while (line[i] && !ft_isblank(line[i])
+				&& !ft_iscontrol_operator(line[i]))
 			{
 				if (parsing_line(data, &i, &start, &end) == 1)
 					break ;
