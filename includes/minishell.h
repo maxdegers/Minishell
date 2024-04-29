@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 15:49:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:02:53 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define REDIR_OUT 3
 # define REDIR_APPEND 4
 # define REDIR_HEREDOC 5
+# define OPERAT 6
 ///
 # define S_QUOTE '\''
 # define D_QUOTE '\"'

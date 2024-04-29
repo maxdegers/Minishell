@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 16:59:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:52:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ void	expansion2(t_token *token, size_t *i, size_t *j, t_data *data)
 	}
 	else
 	{
+		// calcule la taille du mot "$USER"
+		// start end
+		// envfind_data(env, data->line, start, end) => mbrousse
 		start = *i + 1;
 		while (token->data[*i] && token->data[*i] != ' '
 			&& token->data[*i] != '$' && token->data[*i] != '"')
 			*i += 1;
+		*i -= 1;
 		c = token->data[*i];
 		token->data[*i] = '\0';
 		tmp = ft_strdup(ft_envfind_data(data->env, &token->data[start]));
