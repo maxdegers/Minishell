@@ -17,12 +17,20 @@ SRCS	=	main/main.c					\
 			parsing/parsing_env.c		\
 			parsing/parsing_line.c		\
 			parsing/parsing_line_utils.c\
-			parsing/utils.c\
-			utils/t_env.c\
-			utils/t_env_utils.c\
-			utils/t_token_utils.c\
-			utils/t_token.c\
-			execution/exec.c
+			parsing/utils.c				\
+			utils/t_env.c				\
+			utils/t_env_utils.c			\
+			utils/t_token_utils.c		\
+			utils/t_token.c				\
+			execution/exec.c			\
+			execution/ft_cd.c			\
+			execution/ft_echo.c			\
+			execution/ft_execve.c		\
+			execution/ft_exit.c			\
+			execution/ft_export.c		\
+			execution/ft_putenv.c		\
+			execution/ft_pwd.c			\
+			execution/redir.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 
