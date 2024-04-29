@@ -43,7 +43,7 @@
 
 # define B_RED		"\033[1;31m"
 # define B_GREEN	"\001\033[1;32m\002"
-# define B_YELLOW	"\033[1;33m"
+# define B_YELLOW	"\001\033[1;33m\002"
 # define B_ORANGE	"\001\x1b[1;38;5;202m\002"
 # define B_BLUE		"\033[1;34m"
 # define B_PINK		"\033[1;35m"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 13:27:49 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:50:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,31 @@
 int	g_error = 0;
 
 void	ft_putheader(void)
+{
+	printf("\n                      %s#################\n", B_RED);
+	printf("                #############################\n");
+	printf("             ##########%s******%s###%s******%s##########\n", B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("          ########%s**%s##%s*******%s###%s*******%s##%s**%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("        #######%s******%s##%s*******%s#%s*******%s###%s*****%s#######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("      ########%s*******%s##%s*******%s#%s*******%s##%s*******%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("     ######%s**%s##%s*******%s##%s******%s#%s******%s##%s*******%s##%s**%s######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("    #####%s*****%s##%s*******%s#%s******%s#%s******%s#%s*******%s##%s*****%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("   #####%s********%s##%s*****%s##%s*****%s#%s*****%s##%s*****%s##%s********%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  ########%s*******%s##%s*****%s#%s*****%s#%s*****%s#%s*****%s##%s*******%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s***%s##%s*******%s#%s*****%s#%s****%s#%s****%s#%s*****%s#%s*******%s##%s***%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s*****%s##%s******%s#%s****%s#%s****%s#%s****%s#%s****%s#%s******%s##%s*****%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s*******%s##%s*****%s#%s****%s#%s***%s#%s***%s#%s****%s#%s*****%s##%s*******%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #######%s********%s#%s****%s#%s***%s#%s***%s#%s***%s#%s***%s#%s****%s#%s********%s#######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("    #########%s*****%s#%s***********************%s#%s*****%s#########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("        ########%s*****************************%s########\n", B_YELLOW, B_RED);
+	printf("           #####%s*****************************%s#####\n", B_YELLOW, B_RED);
+	printf("            #####%s****************************%s#####\n", B_YELLOW, B_RED);
+	printf("            #####%s***************************%s#####\n", B_YELLOW, B_RED);
+	printf("            #####################################\n");
+	printf("            #####################################%s\n\n", RESET);
+}
+
+/*void	ft_putheader(void)
 {
 	ft_printf("\n\n"HEADER);
 	ft_printf("________     _____              _________ ___ ______");
@@ -29,7 +54,7 @@ void	ft_putheader(void)
 	ft_printf("_______  /|_______ \\_______ \\\n");
 	ft_printf("       \\/         \\/                  \\/       \\");
 	ft_printf("/        \\/         \\/       \\/\n\n\n"RESET);
-}
+}*/
 
 int	main(int argc, char **argv, char **env)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 11:36:51 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:01:05 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ static char	*ft_set_prompt(void)
 	char	*prompt;
 
 	prompt = NULL;
-	prompt = ft_strjoin_free(prompt, HEADER, 1);
+	prompt = ft_strjoin_free(prompt, B_YELLOW, 1);
 	prompt = ft_strjoin_free(prompt, "minishell", 1);
-	prompt = ft_strjoin_free(prompt, B_ORANGE, 1);
-	prompt = ft_strjoin_free(prompt, " $ ", 1);
+//	prompt = ft_strjoin_free(prompt, B_ORANGE, 1);
+//	prompt = ft_strjoin_free(prompt, " $ ", 1);
 	prompt = ft_strjoin_free(prompt, RESET, 1);
+	prompt = ft_strjoin_free(prompt, "🐚 ", 1);
 	if (!prompt)
 	{
 		perror("malloc");

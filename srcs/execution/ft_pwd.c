@@ -6,11 +6,12 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:40:09 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/26 12:10:39 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/29 11:45:34 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
 
 int	clear_fd_redir(t_redir *redir)
 {
@@ -23,8 +24,9 @@ int	clear_fd_redir(t_redir *redir)
 			return (-1);
 	}
 }
+*/
 
-void	ft_pwd(t_block *block, t_data *data, int fd)
+void	ft_pwd(int fd)
 {
 	char	*pwd;
 

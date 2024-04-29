@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_echo(t_data *data, t_block *block, int fd)
+void	ft_echo(t_block *block, int fd)
 {
 	int		nl;
 
