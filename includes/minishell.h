@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 11:34:19 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:49:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define EM_WAIT "\033[0;31mError:\n\t\033[0mwait failed\n"
 # define EM_SIGNAL "\033[0;31mError:\n\t\033[0msignal failed\n"
 # define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
+# define EM_ENV "\033[0;31mError:\n\t\033[0menv not found\n"
 
 extern int	g_error;
 
