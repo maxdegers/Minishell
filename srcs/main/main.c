@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 14:36:39 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/29 15:00:19 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	ft_putheader(void)
 		B_YELLOW, B_RED);
 	printf("            #####%s***************************%s#####\n",
 		B_YELLOW, B_RED);
-	printf("            #####################################\n");
-	printf("            #####################################%s\n\n", RESET);
+	printf("            ######################### by mbrousse\n");
+	printf("            ############################ & mpitot%s\n\n", RESET);
 }
 
 int	main(int argc, char **argv, char **env)
