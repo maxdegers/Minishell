@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 13:50:45 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/29 14:36:39 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,79 @@
 
 int	g_error = 0;
 
-void	ft_putheader(void)
+void	ft_puth1(void)
 {
 	printf("\n                      %s#################\n", B_RED);
 	printf("                #############################\n");
-	printf("             ##########%s******%s###%s******%s##########\n", B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("          ########%s**%s##%s*******%s###%s*******%s##%s**%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("        #######%s******%s##%s*******%s#%s*******%s###%s*****%s#######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("      ########%s*******%s##%s*******%s#%s*******%s##%s*******%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("     ######%s**%s##%s*******%s##%s******%s#%s******%s##%s*******%s##%s**%s######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("    #####%s*****%s##%s*******%s#%s******%s#%s******%s#%s*******%s##%s*****%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("   #####%s********%s##%s*****%s##%s*****%s#%s*****%s##%s*****%s##%s********%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("  ########%s*******%s##%s*****%s#%s*****%s#%s*****%s#%s*****%s##%s*******%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("  #####%s***%s##%s*******%s#%s*****%s#%s****%s#%s****%s#%s*****%s#%s*******%s##%s***%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("  #####%s*****%s##%s******%s#%s****%s#%s****%s#%s****%s#%s****%s#%s******%s##%s*****%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("  #####%s*******%s##%s*****%s#%s****%s#%s***%s#%s***%s#%s****%s#%s*****%s##%s*******%s#####\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("  #######%s********%s#%s****%s#%s***%s#%s***%s#%s***%s#%s***%s#%s****%s#%s********%s#######\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("    #########%s*****%s#%s***********************%s#%s*****%s#########\n", B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
-	printf("        ########%s*****************************%s########\n", B_YELLOW, B_RED);
-	printf("           #####%s*****************************%s#####\n", B_YELLOW, B_RED);
-	printf("            #####%s****************************%s#####\n", B_YELLOW, B_RED);
-	printf("            #####%s***************************%s#####\n", B_YELLOW, B_RED);
+	printf("             ##########%s******%s###%s******%s##########\n",
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("          ########%s**%s##%s*******%s###", B_YELLOW, B_RED,
+		B_YELLOW, B_RED);
+	printf("%s*******%s##%s**%s########\n", B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("        #######%s******%s##%s*******%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED);
+	printf("%s*******%s###%s*****%s#######\n", B_YELLOW, B_RED,
+		B_YELLOW, B_RED);
+	printf("      ########%s*******%s##%s*******%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED);
+	printf("%s*******%s##%s*******%s########\n", B_YELLOW, B_RED,
+		B_YELLOW, B_RED);
+	printf("     ######%s**%s##%s*******%s##%s******%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s******%s##%s*******%s##%s**%s######\n", B_YELLOW, B_RED, B_YELLOW,
+		B_RED, B_YELLOW, B_RED);
+	printf("    #####%s*****%s##%s*******%s#%s******%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s******%s#%s*******%s##%s*****%s#####\n", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("   #####%s********%s##%s*****%s##%s*****%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+}
+
+void	ft_puth2(void)
+{
+	printf("%s*****%s##%s*****%s##%s********%s#####\n", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  ########%s*******%s##%s*****%s#%s*****%s#", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s*****%s#%s*****%s##%s*******%s########\n", B_YELLOW, B_RED,
+		B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s***%s##%s*******%s#%s*****%s#%s****%s#", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s****%s#%s*****%s#%s*******%s##%s***%s#####\n", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s*****%s##%s******%s#%s****%s#%s****%s#", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s****%s#%s****%s#%s******%s##%s*****%s#####\n", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #####%s*******%s##%s*****%s#%s****%s#%s***%s#", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s***%s#%s****%s#%s*****%s##%s*******%s#####\n", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("  #######%s********%s#%s****%s#%s***%s#%s***%s#", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("%s***%s#%s***%s#%s****%s#%s********%s#######\n", B_YELLOW,
+		B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED, B_YELLOW, B_RED);
+	printf("    #########%s*****%s#%s*************", B_YELLOW, B_RED,
+		B_YELLOW);
+	printf("**********%s#%s*****%s#########\n", B_RED, B_YELLOW, B_RED);
+}
+
+void	ft_putheader(void)
+{
+	ft_puth1();
+	ft_puth2();
+	printf("        ########%s*****************************%s########\n",
+		B_YELLOW, B_RED);
+	printf("           #####%s*****************************%s#####\n",
+		B_YELLOW, B_RED);
+	printf("            #####%s****************************%s#####\n",
+		B_YELLOW, B_RED);
+	printf("            #####%s***************************%s#####\n",
+		B_YELLOW, B_RED);
 	printf("            #####################################\n");
 	printf("            #####################################%s\n\n", RESET);
 }
-
-/*void	ft_putheader(void)
-{
-	ft_printf("\n\n"HEADER);
-	ft_printf("________     _____              _________ ___ ______");
-	ft_printf("________.____    .____\n");
-	ft_printf("\\_____  \\   /     \\            /   _____//   |   ");
-	ft_printf("\\_   _____/|    |   |    |\n");
-	ft_printf("  _(__  <  /  \\ /  \\   ______  \\_____  \\/    ~    ");
-	ft_printf("\\    __)_ |    |   |    |\n");
-	ft_printf(" /       \\/    Y    \\ /_____/  /        \\    Y    /");
-	ft_printf("        \\|    |___|    |___\n");
-	ft_printf("/______  /\\____|__  /         /_______  /\\___|_  /");
-	ft_printf("_______  /|_______ \\_______ \\\n");
-	ft_printf("       \\/         \\/                  \\/       \\");
-	ft_printf("/        \\/         \\/       \\/\n\n\n"RESET);
-}*/
 
 int	main(int argc, char **argv, char **env)
 {
