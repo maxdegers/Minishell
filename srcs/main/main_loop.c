@@ -6,34 +6,28 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/15 11:57:26 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:36:51 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_set_prompt(t_data *data)
+static char	*ft_set_prompt(void)
 {
-	static char	*user = NULL;
-	t_env		*node;
-	char		*tmp;
-	char		*user_tmp;
+	char	*prompt;
 
-	user = ft_strjoin(user, B_GREEN);
-	node = ft_envfind(data->env, "USER");
-	if (node)
+	prompt = NULL;
+	prompt = ft_strjoin_free(prompt, HEADER, 1);
+	prompt = ft_strjoin_free(prompt, "minishell", 1);
+	prompt = ft_strjoin_free(prompt, B_ORANGE, 1);
+	prompt = ft_strjoin_free(prompt, " $ ", 1);
+	prompt = ft_strjoin_free(prompt, RESET, 1);
+	if (!prompt)
 	{
-		tmp = ft_strdup(node->value);
-		user_tmp = ft_strjoin(user, tmp);
-		free(user);
-		user = user_tmp;
-		free(tmp);
+		perror("malloc");
+		exit(EXIT_FAILURE);
 	}
-	user_tmp = ft_strjoin(user, "@"RESET": "\
-	HEADER"minishell$ "RESET);
-	free(user);
-	user = user_tmp;
-	return (user);
+	return (prompt);
 }
 
 int	ft_main_loop(t_data *data)
@@ -41,7 +35,7 @@ int	ft_main_loop(t_data *data)
 	char	*line;
 
 	data->exit = 0;
-	data->prompt = ft_set_prompt(data);
+	data->prompt = ft_set_prompt();
 	while (!data->exit)
 	{
 		ft_set_signal();

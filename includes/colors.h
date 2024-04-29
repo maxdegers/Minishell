@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 14:36:46 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/13 15:04:29 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:34:48 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 // Header
 
-# define HEADER		"\x1b[1;38;5;216m"
+# define HEADER		"\001\033[1;36m\002"
 
 // Reset
 
-# define RESET		"\033[0m"
+# define RESET		"\001\033[0m\002"
 
 // Preset
 
@@ -42,9 +42,9 @@
 // Bold
 
 # define B_RED		"\033[1;31m"
-# define B_GREEN	"\033[1;32m"
+# define B_GREEN	"\001\033[1;32m\002"
 # define B_YELLOW	"\033[1;33m"
-# define B_ORANGE	"\x1b[1;38;5;202m"
+# define B_ORANGE	"\001\x1b[1;38;5;202m\002"
 # define B_BLUE		"\033[1;34m"
 # define B_PINK		"\033[1;35m"
 # define B_CYAN		"\033[1;36m"

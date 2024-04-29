@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 16:59:17 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:34:19 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ void		ft_token_clear(t_token **token);
 void		ft_tokenprint(t_token *token);
 // main_loop.c
 int			ft_main_loop(t_data *data);
-char		*ft_get_prompt(t_data *dat);
 // signal.c
 void		ft_handle_sig(int sig);
 void		ft_set_signal(void);
