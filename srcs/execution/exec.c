@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/29 11:05:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:10:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exec_line(t_data *data)
+int	ft_exec_line(t_data *data)
 {
 	t_block	*block;
 	int		fd[2];
@@ -20,8 +20,8 @@ void	ft_exec_line(t_data *data)
 	block = data->block;
 	while (block)
 	{
-		if (block->next)
-			pipe(fd);
+		if (pipe(fd) == -1)
+			return (1);
 		// if (ft_strcmp(block->cmd, "echo") == 0)
 		// 	ft_echo(block->token);
 		// else if (ft_strcmp(block->cmd, "pwd") == 0)
@@ -40,4 +40,5 @@ void	ft_exec_line(t_data *data)
 		// 	ft_execve(block, data);*/
 		block = block->next;
 	}
+	return (0);
 }

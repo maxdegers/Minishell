@@ -13,6 +13,7 @@
 SRCS	=	main/main.c					\
 			main/main_loop.c			\
 			main/signals.c				\
+			main/satanast.c				\
 			error/error.c				\
 			parsing/parsing_env.c		\
 			parsing/parsing_line.c		\
