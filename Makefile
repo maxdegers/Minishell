@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 14:20:52 by mpitot           ###   ########.fr        #
+#    Updated: 2024/04/30 15:05:37 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	=	main/main.c					\
 			parsing/parsing_line_utils.c\
 			parsing/utils.c				\
 			parsing/set_block.c			\
+			parsing/parsing_redir.c     \
 			utils/t_env.c				\
 			utils/t_env_utils.c			\
 			utils/t_token_utils.c		\
