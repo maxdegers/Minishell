@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 13:55:32 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:08:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,25 @@ void	ft_block_print(t_block *block)
 		ft_printf("\n");
 		tmp = tmp->next;
 	}
+}
+
+void	ft_block_clear(t_block **block)
+{
+	t_block	*tmp;
+	t_block	*next;
+
+	tmp = *block;
+	while (tmp)
+	{
+		next = tmp->next;
+		if (tmp->cmd)
+			free(tmp->cmd);
+		if (tmp->args)
+			ft_free_tab(tmp->args);
+		// if (tmp->redir)
+		// 	ft_redir_clear(&tmp->redir);
+		free(tmp);
+		tmp = next;
+	}
+	*block = NULL;
 }

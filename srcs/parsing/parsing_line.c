@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:39:30 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:04:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ int	ft_parsing_line(t_data *data, char *line)
 	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	ft_token_set(line, data);
-	// ft_redir_expansion(data);
+	ft_redir_expansion(data);
 	// cal_token(data);
 	// ft_param_expansion(data);
 	ft_tokenprint(data->token);
 	ft_set_block(data);
-	ft_block_print(data->block);
+	// ft_block_print(data->block);
 	g_error = 0;
 	return (0);
 }

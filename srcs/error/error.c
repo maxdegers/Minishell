@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 11:39:00 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:08:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	destroy(t_data *data)
 		free(data->line);
 	if (data->token)
 		ft_token_clear(&data->token);
+	if (data->block)
+		ft_block_clear(&data->block);
 }
