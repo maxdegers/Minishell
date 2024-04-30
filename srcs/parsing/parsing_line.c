@@ -6,25 +6,13 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 15:38:52 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:57:47 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_add_to_str(char *str, size_t *i, char *add)
-{
-	size_t	j;
 
-	j = 0;
-	while (add && add[j])
-	{
-		str[*i] = add[j];
-		*i += 1;
-		j++;
-	}
-	free(add);
-}
 
 static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 {

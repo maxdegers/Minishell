@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 15:54:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:18:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define REDIR_APPEND 4
 # define REDIR_HEREDOC 5
 # define OPERAT 6
+# define INT_MAX 2147483647
 ///
 # define S_QUOTE '\''
 # define D_QUOTE '\"'

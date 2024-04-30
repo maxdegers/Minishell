@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 16:16:41 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 17:23:06 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS	=	main/main.c					\
 			error/error.c				\
 			parsing/parsing_env.c		\
 			parsing/parsing_line.c		\
-			parsing/parsing_expand.c\
+			parsing/parsing_expand.c	\
 			parsing/utils.c				\
 			parsing/set_block.c			\
 			parsing/parsing_redir.c     \
