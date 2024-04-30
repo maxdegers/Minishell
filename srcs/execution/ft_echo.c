@@ -17,7 +17,7 @@ int	ft_echo(t_block *block, int fd)
 	int		nl;
 
 	nl = 1;
-	if (block->args[0] && ft_strcmp(block->args[0], "-n") == 0)
+	if (block->args[1] && ft_strcmp(block->args[1], "-n") == 0)
 		nl = 0;
 	while (*block->args)
 	{

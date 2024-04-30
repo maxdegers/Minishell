@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 14:12:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:36:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ int	ft_run_cmd(t_data *data, t_block *block, int *fd)
 int	ft_exec_line(t_data *data)
 {
 	t_block	*block;
-	int		fd[2];
+	int		fd[2] = {1, 1};
 
 	block = data->block;
 	while (block)
 	{
-		if (pipe(fd) == -1)
-			return (1);
+		/*if (pipe(fd) == -1)
+			return (1);*/
+		dprintf(2, "%s\n", block->cmd);
 		ft_run_cmd(data, block, fd);
 //		ft_redir(block, data);
 		block = block->next;

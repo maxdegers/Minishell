@@ -51,7 +51,7 @@ int	ft_main_loop(t_data *data)
 			destroy(data);
 			continue ;
 		}
-		// ft_exec(data);
+		ft_exec_line(data);
 		destroy(data);
 	}
 	return (0);
