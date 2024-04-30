@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 13:43:43 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 14:20:52 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,12 @@ SRCS	=	main/main.c					\
 			parsing/parsing_line.c		\
 			parsing/parsing_line_utils.c\
 			parsing/utils.c				\
+			parsing/set_block.c			\
 			utils/t_env.c				\
 			utils/t_env_utils.c			\
 			utils/t_token_utils.c		\
 			utils/t_token.c				\
+			utils/t_block.c				\
 			execution/exec.c			\
 			execution/ft_cd.c			\
 			execution/ft_echo.c			\

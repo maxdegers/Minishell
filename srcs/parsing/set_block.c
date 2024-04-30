@@ -34,7 +34,7 @@ void	ft_set_block(t_data *data)
 			size++;
 			tmp = tmp->next;
 		}
-		printf("size: %zu\n", size);
+//		printf("size: %zu\n", size);
 		args = ft_calloc(sizeof(char *), (size + 1));
 		args[size] = NULL;
 		
