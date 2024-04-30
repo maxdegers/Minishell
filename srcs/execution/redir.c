@@ -6,9 +6,15 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:18:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/13 12:18:27 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 11:39:33 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	ft_redir(t_block *block, t_data *data)
+{
+	(void) block;
+	(void) data;
+	return ;
+}

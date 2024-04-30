@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:40:09 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/29 11:45:34 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 13:14:31 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ int	clear_fd_redir(t_redir *redir)
 }
 */
 
-void	ft_pwd(int fd)
+int	ft_pwd(int fd)
 {
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (1);
 	ft_printf_fd(fd, "%s\n", pwd);
 	free(pwd);
+	return (0);
 }

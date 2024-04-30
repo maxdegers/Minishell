@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/29 17:26:30 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 13:19:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ char	*ft_get_path(t_data *data, char *cmd)
 	char	*res;
 	size_t	i;
 
-	path = ft_split(ft_envfind(data->env, "PATH")->value, ':');
-	if (!path)
+	if (cmd[0] == '/')
 	{
-		perror("malloc");
-		ft_megafree(data);
-		exit(1);
+		if (access(cmd, F_OK | X_OK) == 1)
+			return (cmd);
+		return (NULL);
 	}
+	path = get_path(data);
+	if (!path)
+		exit_error(ERROR_MALLOC, NULL, data);
 	i = -1;
 	res = NULL;
 	while (path[++i])
@@ -37,7 +39,7 @@ char	*ft_get_path(t_data *data, char *cmd)
 	return (NULL);
 }
 
-int	ft_execve(t_data *data, t_block *block, int fd)
+int	ft_execve(t_data *data, t_block *block, int *fd)
 {
 	char	**envp;
 	int		pid;
@@ -45,20 +47,19 @@ int	ft_execve(t_data *data, t_block *block, int fd)
 
 	envp = ft_env_to_tab(data->env);
 	if (!envp)
-	{
-		perror("malloc");
-		ft_megafree(data);
-		exit(1);
-	}
+		exit_error(ERROR_MALLOC, NULL, data);
 	path = ft_get_path(data, block->cmd);
 	if (!path)
-		return (ft_putstr_fd("command not found", 1), 0);
+	{
+		ft_printf_fd(1, "%s: command not found", block->cmd);
+		return (0);
+	}
 	pid = fork();
 	if (pid == -1)
 		return (1);
 	if (pid == 0)
 	{	//CHILD
-		dup2(fd, 1);
+		dup2(fd[1], STDOUT_FILENO);
 		execve(path, block->args, envp);
 	}
 	else

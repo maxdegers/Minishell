@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/29 11:04:22 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 11:14:51 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,12 +115,12 @@ ${OBJ_D}:
 
 libft	:
 	@make --no-print-directory -C ./libft
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft clean
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
@@ -128,7 +128,7 @@ clean	:
 fclean	:
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"

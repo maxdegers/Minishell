@@ -25,7 +25,7 @@ int		ft_isnumber(char *s)
 	return (1);
 }
 
-void	ft_exit(t_data *data, t_block *block)
+int	ft_exit(t_data *data, t_block *block)
 {
 	if (block->args[0])
 	{
@@ -33,7 +33,7 @@ void	ft_exit(t_data *data, t_block *block)
 		{
 			ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 			g_error = 1;
-			return ;
+			return (0);
 		}
 		if (ft_isnumber(block->args[1]))
 			g_error = ft_atoi(block->args[1]) % 256;
@@ -43,7 +43,7 @@ void	ft_exit(t_data *data, t_block *block)
 			ft_putstr_fd(block->args[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			g_error = 2;
-			return ;
+			return (0);
 		}
 	}
 	ft_putstr_fd("exit\n", 2);

@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:52 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/26 16:26:48 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:13:30 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_setenv(t_data *data, char *var, char *val)
 		ft_envadd_back(&data->env, ft_envnew(ft_strdup(var), ft_strdup(val)));
 }
 
-void	ft_export(t_data *data, t_block *block)
+int	ft_export(t_data *data, t_block *block)
 {
 	size_t	i;
 	size_t	j;
@@ -48,4 +48,5 @@ void	ft_export(t_data *data, t_block *block)
 			free(val);
 		}
 	}
+	return (0);
 }

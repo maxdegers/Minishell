@@ -37,7 +37,7 @@ static void	update_env(t_data *data, const char *path)
 	free(pwd);
 }
 
-void	ft_cd(t_block *block, t_data *data)
+int	ft_cd(t_block *block, t_data *data)
 {
 	t_block	*tmp;
 	char	*path;
@@ -50,7 +50,7 @@ void	ft_cd(t_block *block, t_data *data)
 		{
 			ft_printf("minishell: cd: HOME not set\n");
 			g_error = 1;
-			return ;
+			return (0);
 		}
 	}
 	else
@@ -61,4 +61,5 @@ void	ft_cd(t_block *block, t_data *data)
 		g_error = 1;
 	}
 	update_env(data, path);
+	return (0);
 }

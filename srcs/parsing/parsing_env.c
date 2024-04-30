@@ -46,7 +46,13 @@ char	**get_path(t_data *data)
 
 	tmp = ft_envfind(data->env, "PATH");
 	if (!tmp)
-		return (NULL);
+	{
+		path = malloc(sizeof(char *));
+		if (!path)
+			return (NULL);
+		path[0] = NULL;
+		return (path);
+	}
 	path = ft_split(tmp->value, ':');
 	if (!path)
 		return (NULL);
