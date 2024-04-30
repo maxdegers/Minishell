@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 10:46:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:34:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 	}
 	if (ft_iscontrol_operator(data->line[*i]) == 1)
 	{
-		if (*i != 0 && data->line[*i - 1] != ' ' )
+		if (*i != 0 && data->line[*i - 1] != ' ' && *start != *i)
 		{
 			*end = *i;
 			ft_token_new_add(data, *start, *end, WORD);
@@ -66,8 +66,7 @@ void	ft_token_set(char *line, t_data *data)
 		if (ft_isblank(line[i]) == 0)
 		{
 			start = i;
-			while (line[i] && !ft_isblank(line[i])
-				&& !ft_iscontrol_operator(line[i]))
+			while (line[i] && !ft_isblank(line[i]))
 			{
 				if (parsing_line(data, &i, &start, &end) == 1)
 					break ;
@@ -109,6 +108,7 @@ int	ft_parsing_line(t_data *data, char *line)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	ft_token_set(line, data);
 	ft_param_expansion(data);
+	ft_tokenprint(data->token);
 	g_error = 0;
 	return (0);
 }
