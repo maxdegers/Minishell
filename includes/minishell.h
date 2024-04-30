@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:45:44 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:16:54 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,21 @@ typedef struct s_token
 
 typedef struct s_env
 {
-	char				*name;
-	char				*value;
-	struct s_env		*next;
+	bool			show;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_data
 {
-	int			exit;
-	char		*line;
-	char		*prompt;	
-	t_token		*token;
-	t_block		*block;
-	char		*error_cmd;
-	t_env		*env;
+	int				exit;
+	char			*line;
+	char			*prompt;
+	t_token			*token;
+	t_block			*block;
+	char			*error_cmd;
+	t_env			*env;
 }	t_data;
 
 // main.c
@@ -194,9 +195,12 @@ void		ft_add_to_str(char *str, size_t *i, char *add);
 void		expansion2(t_token *token, size_t *i, size_t *j, t_data *data);
 void		ft_param_expansion2(t_token *token, size_t size, t_data *data,
 				char *new);
+
 void		ft_block_print(t_block *block);
 void		ft_set_block(t_data *data);
 t_block		*ft_block_new(t_data *data);
+void	ft_block_clear(t_block **block);
+
 
 void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);

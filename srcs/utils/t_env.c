@@ -20,7 +20,8 @@ size_t	ft_envsize(t_env *env)
 	while (env)
 	{
 		env = env->next;
-		i++;
+		if (env->show)
+			i++;
 	}
 	return (i);
 }
@@ -35,6 +36,10 @@ t_env	*ft_envnew(char *name, char *value)
 	new->name = ft_strdup(name);
 	if (!new->name)
 		return (free(new), NULL);
+	if (!value)
+		new->show = false;
+	else
+		new->show = true;
 	new->value = ft_strdup(value);
 	if (!new->value)
 		return (free(new->name), free(new), NULL);
@@ -77,7 +82,7 @@ t_env	*ft_envfind(t_env *env, char *name)
 {
 	while (env)
 	{
-		if (!ft_strcmp(env->name, name))
+		if (!ft_strcmp(env->name, name) && env->show)
 			return (env);
 		env = env->next;
 	}
@@ -88,7 +93,7 @@ char	*ft_envfind_data(t_env *env, char *name)
 {
 	while (env)
 	{
-		if (!ft_strcmp(env->name, name))
+		if (!ft_strcmp(env->name, name) && env->show)
 			return (env->value);
 		env = env->next;
 	}
@@ -99,7 +104,7 @@ char	*ft_envfind_data_size(t_env *env, char *name, size_t size)
 {
 	while (env)
 	{
-		if (!ft_strncmp(env->name, name, size))
+		if (!ft_strncmp(env->name, name, size) && env->show)
 			return (env->value);
 		env = env->next;
 	}

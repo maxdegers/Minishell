@@ -43,7 +43,7 @@ int	ft_exec_line(t_data *data)
 	{
 		/*if (pipe(fd) == -1)
 			return (1);*/
-		dprintf(2, "%s\n", block->cmd);
+//		dprintf(2, "%s\n", block->cmd);
 		ft_run_cmd(data, block, fd);
 //		ft_redir(block, data);
 		block = block->next;

@@ -110,7 +110,7 @@ int	ft_parsing_line(t_data *data, char *line)
 	ft_redir_expansion(data);
 	// cal_token(data);
 	// ft_param_expansion(data);
-	ft_tokenprint(data->token);
+//	ft_tokenprint(data->token);
 	ft_set_block(data);
 	// ft_block_print(data->block);
 	g_error = 0;
