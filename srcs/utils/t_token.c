@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/26 12:26:06 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:55:56 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ void	ft_tokenadd_back(t_token **token, t_token *new)
 		tmp = tmp->next;
 	tmp->next = new;
 	new->prev = tmp;
+}
+
+void	ft_tokenadd_next(t_token *token, t_token *new)
+{
+	t_token	*tmp;
+
+	if (!token || !new)
+		return ;
+	tmp = token->next;
+	token->next = new;
+	new->prev = token;
+	new->next = tmp;
+	if (tmp)
+		tmp->prev = new;
 }
 
 void	ft_token_clear(t_token **token)

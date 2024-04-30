@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:27:53 by mpitot            #+#    #+#             */
-/*   Updated: 2024/03/30 13:52:04 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:08:36 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
+char	*ft_strdup_size(const char *s, size_t size);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strjoin_free(char *s1, const char *s2, int f);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));

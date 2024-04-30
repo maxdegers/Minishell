@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 16:02:53 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:44:27 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int			ft_isblank(char c);
 int			ft_iscontrol_operator(char c);
 
 // t_env.c
+char		*ft_envfind_data_size(t_env *env, char *name, size_t size);
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
@@ -156,6 +157,7 @@ t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
+void		ft_tokenadd_next(t_token *token, t_token *new);
 void		ft_tokenprint(t_token *token);
 // main_loop.c
 int			ft_main_loop(t_data *data);
@@ -171,5 +173,12 @@ void		ft_param_expansion2(t_token *token, size_t size, t_data *data,
 				char *new);
 void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);
+// parsing_redir.c
+void		ft_parsing_redir(t_data *data);
+// t_block.c
+t_block		*ft_block_new(t_data *data);
+void		ft_block_print(t_block *block);
+// set_block.c
+void		ft_set_block(t_data *data);
 
 #endif
