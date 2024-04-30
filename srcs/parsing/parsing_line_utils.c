@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 16:52:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:45:43 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_param_expansion2(t_token *token, size_t size,
 		i++;
 	}
 	new[j] = '\0';
+	printf("new = %s\n", new);
 	free(token->data);
 	token->data = new;
 }

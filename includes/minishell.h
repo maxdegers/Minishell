@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 12:03:40 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 13:44:27 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,29 +120,18 @@ typedef struct s_data
 
 // main.c
 void		ft_putheader(void);
-
 // exec.c
 int			ft_exec(t_data *data);
-
-//built-ins
-int			ft_cd(t_block *block, t_data *data);
-int			ft_pwd(int fd);
-int			ft_export(t_data *data, t_block *block);
-int			ft_exit(t_data *data, t_block *block);
-int			ft_env(t_data *data, int fd);
-
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
 void		destroy(t_data *data);
 void		exit_error(t_ERROR error, char *MSG, t_data *data);
-
 // parsing_env.c
 int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
 int			ft_init_tab(t_data *data, char **env);
 char		**get_path(t_data *data);
-
 // utils.c
 int			ft_isblank(char c);
 int			ft_iscontrol_operator(char c);
@@ -156,32 +145,25 @@ t_env		*ft_envfind(t_env *env, char *name);
 char		*ft_envfind_data(t_env *env, char *name);
 void		ft_envprint(t_env *env);
 void		lt_remove(t_data *data, t_token *to_remouve);
-
 // t_env_utils.c
 int			ft_change_env(t_env *env, char *name, char *value);
 char		**ft_env_to_tab(t_env *env);
-
 // t_token_utils.c
 char		**ft_tokento_tab(t_token *token);
 void		ft_token_remouve(t_data *data, t_token *to_remouve);
-
 // t_token.c
 t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
 void		ft_tokenprint(t_token *token);
-
 // main_loop.c
 int			ft_main_loop(t_data *data);
-
 // signal.c
 void		ft_handle_sig(int sig);
 void		ft_set_signal(void);
-
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
-
 // parsing_line_utils.c
 void		ft_add_to_str(char *str, size_t *i, char *add);
 void		expansion2(t_token *token, size_t *i, size_t *j, t_data *data);

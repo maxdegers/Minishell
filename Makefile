@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 11:14:51 by mpitot           ###   ########.fr        #
+#    Updated: 2024/04/30 13:43:43 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,12 +115,12 @@ ${OBJ_D}:
 
 libft	:
 	@make --no-print-directory -C ./libft
-	@$(call separator)
+	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft clean
-	@$(call separator)
+	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
 	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
@@ -128,7 +128,7 @@ clean	:
 fclean	:
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
-	@$(call separator)
+	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
