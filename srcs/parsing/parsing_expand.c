@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 12:40:49 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 16:57:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,54 @@ void	ft_add_to_str(char *str, size_t *i, char *add)
 	free(add);
 }
 
+char	*ft_do_count(t_data *data, char *s, int type, char *tmp2)
+{
+	char	*tmp;
+
+	if (s == NULL && type == 0)
+		exit_error(ERROR_MALLOC, NULL, data);
+	if (type == 0)
+		return (s);
+	else
+	{
+		free(tmp2);
+		if (s == NULL)
+			exit_error(ERROR_MALLOC, NULL, data);
+		tmp = ft_strdup(s);
+		if (tmp == NULL)
+			exit_error(ERROR_MALLOC, NULL, data);
+		return (tmp);
+	}
+}
+
+void	do_expan_size(t_token *token, t_data *data,
+	size_t *i, size_t *j)
+{
+	size_t	start;
+	size_t	end;
+	char	*tmp;
+
+	if (token->data[*i + 1] == '?')
+	{
+		tmp = ft_do_count(data, ft_itoa(g_error), 0, NULL);
+		ft_add_to_str(token->new, j, tmp);
+		*i += 1;
+	}
+	else if (ft_iscaracter_env(token->data[*i + 1]) == 1
+		|| token->data[*i + 1] != '\0')
+	{
+		*i += 1;
+		start = *i;
+		while (token->data[*i] && ft_iscaracter_env(token->data[*i]) == 1)
+			*i += 1;
+		end = *i;
+		tmp = ft_strdup_size(&token->data[start], end - start);
+		tmp = ft_do_count(data, ft_envfind_data(data->env, tmp), 1, tmp);
+		ft_add_to_str(token->new, j, tmp);
+		*i -= 1;
+	}
+}
+
 void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 {
 	size_t	i;
@@ -35,44 +83,23 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 
 	i = 0;
 	j = 0;
-	ft_printf("size = %u\n", size);
-	(void)quote;
-	(void)data;
-	(void)token;
-	(void)i;
-	(void)j;
-	(void)new;
-	// new = ft_calloc(size + 1, sizeof(char));
-	// if (new == NULL)
-	// 	exit_error(ERROR_MALLOC, NULL, data);
-	// while (token->data[i] != '\0' && j < size)
-	// {
-	// 	if (token->data[i] == S_QUOTE)
-	// 		quote *= -1;
-	// 	if (token->data[i] == '$' && quote != 1)
-	// 	{
-	// 		if (token->data[i + 1] == '?')
-	// 			ft_add_to_str(new, &j, ft_itoa(g_error));
-	// 		else if (token->data[i + 1] == D_QUOTE
-	// 			|| token->data[i + 1] == S_QUOTE)
-	// 			i++;
-	// 		else if (token->data[i + 1] != '$' && token->data[i + 1] != '\0')
-	// 		{
-	// 			while (token->data[i] && token->data[i] != ESPACE
-	// 				&& token->data[i] != '$' && token->data[i] != D_QUOTE)
-	// 				i++;
-	// 			i--;
-	// 			ft_add_to_str(new, &j, ft_envfind_data(data->env,
-	// 					&token->data[i + 1]));
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		new[j] = token->data[i];
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	new = calloc(sizeof(char), (size + 1));
+	if (!new)
+		exit_error(ERROR_MALLOC, NULL, data);
+	token->new = new;
+	while (token->data[i] != '\0')
+	{
+		if (token->data[i] == S_QUOTE)
+			quote *= -1;
+		if (token->data[i] == '$' && quote != 1)
+			do_expan_size(token, data, &i, &j);
+		else
+			new[j++] = token->data[i];
+		i++;
+	}
+	new[j] = '\0';
+	free(token->data);
+	token->data = new;
 }
 
 size_t	ft_count(t_data *data, char *s, int type)
@@ -92,21 +119,24 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 	size_t	start;
 	size_t	end;
 	char	*tmp;
-	
+
 	if (token->data[*i + 1] == '?')
 	{
 		*size += ft_count(data, ft_itoa(g_error), 0);
 		*i += 1;
 	}
-	else
+	else if (ft_iscaracter_env(token->data[*i + 1]) == 1
+		|| token->data[*i + 1] != '\0')
 	{
-		start = *i + 1;
-		while (token->data[*i] && ft_iscaracter_env(token->data[*i]) != 0)
+		*i += 1;
+		start = *i;
+		while (token->data[*i] && ft_iscaracter_env(token->data[*i]) == 1)
 			*i += 1;
 		end = *i;
 		tmp = ft_strdup_size(&token->data[start], end - start);
 		*size += ft_count(data, ft_envfind_data(data->env, tmp), 1);
 		free(tmp);
+		*i -= 1;
 	}
 }
 
@@ -120,8 +150,6 @@ size_t	calc_expan(t_token	*token, t_data *data, int quote)
 	size = 0;
 	while (token->data[i] != '\0')
 	{
-		printf("i = %lu\n", i);
-		printf("token->data[i] = %c\n", token->data[i]);
 		if (token->data[i] == S_QUOTE)
 			quote *= -1;
 		if (token->data[i] == '$' && quote != 1)
@@ -130,8 +158,6 @@ size_t	calc_expan(t_token	*token, t_data *data, int quote)
 		}
 		else
 			size++;
-		printf("size = %lu\n", size);
-		
 		i++;
 	}
 	return (size);

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:45:44 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 17:03:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void		ft_block_print(t_block *block);
 void		ft_set_block(t_data *data);
 t_block		*ft_block_new(t_data *data);
 void	ft_block_clear(t_block **block);
+void	ft_parsing_cote(t_data *data);
 
 
 void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
