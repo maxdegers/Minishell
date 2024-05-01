@@ -21,7 +21,7 @@ int	ft_run_cmd(t_data *data, t_block *block, int *fd)
 	else if (ft_strcmp(block->cmd, "cd") == 0)
 		return (ft_cd(block, data));
 	else if (ft_strcmp(block->cmd, "export") == 0)
-		return (ft_export(data, block));
+		return (ft_export(data, block, fd[1]));
 	/*else if (ft_strcmp(block->cmd, "unset") == 0)
 		return (ft_unset(block, data));*/
 	else if (ft_strcmp(block->cmd, "env") == 0)
