@@ -6,11 +6,25 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:22:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 11:45:43 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:02:08 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_add_to_str(char *str, size_t *i, char *add)
+{
+	size_t	j;
+
+	j = 0;
+	while (add && add[j])
+	{
+		str[*i] = add[j];
+		*i += 1;
+		j++;
+	}
+	free(add);
+}
 
 void	expansion2(t_token *token, size_t *i, size_t *j, t_data *data)
 {

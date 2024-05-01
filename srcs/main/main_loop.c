@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 15:56:47 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:54:27 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static char	*ft_set_prompt(void)
 	prompt = NULL;
 	prompt = ft_strjoin_free(prompt, B_YELLOW, 1);
 	prompt = ft_strjoin_free(prompt, "minishell", 1);
-//	prompt = ft_strjoin_free(prompt, B_ORANGE, 1);
-//	prompt = ft_strjoin_free(prompt, " $ ", 1);
 	prompt = ft_strjoin_free(prompt, RESET, 1);
 	prompt = ft_strjoin_free(prompt, "🐚 ", 1);
 	if (!prompt)
@@ -49,6 +47,7 @@ int	ft_main_loop(t_data *data)
 		if (ft_parsing_line(data, line) == 1)
 		{
 			destroy(data);
+			g_error = ERROR_SYNTAX;
 			continue ;
 		}
 		ft_exec_line(data);
