@@ -40,11 +40,11 @@ ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors
 	@$(call update_progress,$<)
 
 ${NAME}	:	${OBJ_D} ${OBJS} libft/libft.a
-	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$(NAME)$(WHITE)]...$(DEFAULT)"
+	@$(call print_progress,$(NAME))
 	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB}
 	@$(eval CHANGED=1)
-	@printf ${UP}${CUT}
-	@echo "$(WHITE)[$(CYAN)$(NAME)$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
+	@$(call erase)
+	@$(call done_and_dusted,$(NAME))
 
 ${OBJ_D}:
 	@mkdir -p ${OBJ_D}
@@ -56,12 +56,12 @@ ${OBJ_D}:
 
 libft	:
 	@make --no-print-directory -C ./libft
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft clean
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 	@echo "Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
@@ -69,7 +69,7 @@ clean	:
 fclean	:
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
 	@make --no-print-directory -C ./libft fclean
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
+	@$(call separator)
 	@echo "F***ing-Cleaning $(WHITE)[$(RED)$(NAME)$(WHITE)]...$(DEFAULT)"
 	@rm -rf ${OBJ_D}
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
