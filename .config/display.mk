@@ -47,3 +47,11 @@ define update_progress
 		fi \
 	fi
 endef
+
+define erase
+	@printf ${UP}${CUT}
+endef
+
+define done_and_dusted
+	@echo "$(WHITE)[$(CYAN)$1$(WHITE)] $(GREEN)compiled.$(DEFAULT)"
+endef
