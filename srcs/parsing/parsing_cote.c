@@ -6,34 +6,82 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:00:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 17:06:00 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 18:03:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parsing_cote(t_data *data)
+void	do_cote_remove(t_token *token, char quote, char *new)
 {
-	t_token	*token;
 	size_t	i;
-	char	quote;
+	size_t	j;
 
 	i = 0;
-	token = data->token;
-	quote = 0;
-	while (token)
+	j = 0;
+	while (token->data[i] != '\0')
 	{
-		while (token->data[i])
+		if (token->data[i] == S_QUOTE || token->data[i] == D_QUOTE)
 		{
-			if (token->data[i] == '\'' || token->data[i] == '\"')
+			quote = token->data[i];
+			i += 1;
+			while (token->data[i] && token->data[i] != quote)
 			{
-				quote = token->data[i];
-				i += 1;
-				while (token->data[i] && token->data[i] != quote)
-					i += 1;
+				if (token->data[i++] == quote)
+					break ;
+				new[j++] = token->data[i - 1];
 			}
 			i += 1;
 		}
+		else
+			new[j++] = token->data[i++];
+	}
+	free(token->data);
+	token->data = new;
+}
+
+size_t	calc_cote(t_token *token, char quote, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (token->data[i] != '\0')
+	{
+		if (token->data[i] == S_QUOTE || token->data[i] == D_QUOTE)
+		{
+			quote = token->data[i];
+			i += 1;
+			while (token->data[i] && token->data[i] != quote)
+			{
+				if (token->data[i++] == quote)
+					break ;
+				size += 1;
+			}
+			i += 1;
+		}
+		else
+		{
+			size += 1;
+			i += 1;
+		}
+	}
+	return (size);
+}
+
+void	ft_parsing_cote(t_data *data)
+{
+	t_token	*token;
+	size_t	size;
+	char	*new;
+
+	token = data->token;
+	while (token)
+	{
+		size = calc_cote(token, 0, 0);
+		new = ft_calloc(sizeof(char), size + 1);
+		if (!new)
+			exit_error(ERROR_MALLOC, NULL, data);
+		do_cote_remove(token, 0, new);
 		token = token->next;
 	}
 }
