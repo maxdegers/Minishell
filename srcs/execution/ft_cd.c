@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:30 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/15 14:01:25 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:50:26 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_cd(t_block *block, t_data *data)
 	char	*path;
 
 	tmp = block;
-	if (!tmp)
+	if (!tmp->args[1])
 	{
 		path = ft_envfind(data->env, "HOME")->value;
 		if (!path)
@@ -54,7 +54,7 @@ int	ft_cd(t_block *block, t_data *data)
 		}
 	}
 	else
-		path = tmp->args[0];
+		path = tmp->args[1];
 	if (chdir(path) == -1)
 	{
 		ft_printf("minishell: cd: %s: No such file or directory\n", path);

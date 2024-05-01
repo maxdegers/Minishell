@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:25:17 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/15 12:34:56 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:42:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		ft_isnumber(char *s)
 
 int	ft_exit(t_data *data, t_block *block)
 {
-	if (block->args[0])
+	if (block->args[1])
 	{
-		if (block->args[1])
+		if (block->args[2])
 		{
 			ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
 			g_error = 1;
