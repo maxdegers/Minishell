@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 17:18:45 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:01:30 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define REDIR_APPEND 4
 # define REDIR_HEREDOC 5
 # define OPERAT 6
-# define INT_MAX 2147483647
 ///
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
@@ -204,5 +203,7 @@ t_block		*ft_block_new(t_data *data);
 void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);
 //parsing redir.c
-int		ft_redir_expansion(t_data *data);
+int			ft_redir_expansion(t_data *data);
+int			ft_iscaracter_env(char c);
+
 #endif
