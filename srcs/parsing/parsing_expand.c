@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 12:30:19 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:40:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 	// }
 }
 
-size_t	ft_count(t_data *data, char *s)
+size_t	ft_count(t_data *data, char *s, int type)
 {
 	size_t	i;
 
-	if (s == NULL)
+	if (s == NULL && type == 0)
 		exit_error(ERROR_MALLOC, NULL, data);
 	i = 0;
 	while (s[i])
@@ -95,7 +95,7 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 	
 	if (token->data[*i + 1] == '?')
 	{
-		*size += ft_count(data, ft_itoa(g_error));
+		*size += ft_count(data, ft_itoa(g_error), 0);
 		*i += 1;
 	}
 	else
@@ -105,9 +105,8 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 			*i += 1;
 		end = *i;
 		tmp = ft_strdup_size(&token->data[start], end - start);
-		*size += ft_count(data, ft_envfind_data(data->env, tmp));
+		*size += ft_count(data, ft_envfind_data(data->env, tmp), 1);
 		free(tmp);
-		// *i -= 1;
 	}
 }
 
@@ -121,6 +120,7 @@ size_t	calc_expan(t_token	*token, t_data *data, int quote)
 	size = 0;
 	while (token->data[i] != '\0')
 	{
+		printf("i = %lu\n", i);
 		printf("token->data[i] = %c\n", token->data[i]);
 		if (token->data[i] == S_QUOTE)
 			quote *= -1;
