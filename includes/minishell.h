@@ -132,6 +132,7 @@ int			ft_exit(t_data *data, t_block *block);
 int			ft_export(t_data *data, t_block *block, int fd);
 int			ft_env(t_data *data, int fd);
 int			ft_pwd(int fd);
+int			ft_unset(t_block *block, t_data *data);
 
 //execve
 int			ft_execve(t_data *data, t_block *block, int *fd);

@@ -34,6 +34,7 @@ SRCS	=	main/main.c					\
 			execution/ft_export.c		\
 			execution/ft_putenv.c		\
 			execution/ft_pwd.c			\
+			execution/ft_unset.c		\
 			execution/redir.c
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)

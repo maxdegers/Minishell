@@ -1,37 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 22:33:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/12 22:45:26 by mpitot           ###   ########.fr       */
+/*   Created: 2024/05/01 10:05:08 by mpitot            #+#    #+#             */
+/*   Updated: 2024/05/01 10:09:31 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_block *block, int fd)
+void	ft_remove_env(t_env *env, char *name)
 {
-	int		nl;
-	size_t	i;
+	t_env	*tmp;
+	t_env	*prev;
 
-	nl = 1;
-	i = 1;
-	if (block->args[1] && ft_strcmp(block->args[1], "-n") == 0)
+	tmp = env;
+	prev = NULL;
+	while (tmp)
 	{
-		nl = 0;
-		i++;
+		if (ft_strcmp(tmp->name, name) == 0)
+		{
+			free(tmp->name);
+			free(tmp->value);
+			if (prev)
+				prev->next = tmp->next;
+			else
+				env = tmp->next;
+			free(tmp);
+			return ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
 	}
+}
+
+int	ft_unset(t_block *block, t_data *data)
+{
+	int	i;
+
+	i = 1;
 	while (block->args[i])
 	{
-		ft_putstr_fd(block->args[i], fd);
+		ft_remove_env(data->env, block->args[i]);
 		i++;
-		if (block->args[i])
-			ft_putstr_fd(" ", fd);
 	}
-	if (nl)
-		ft_putstr_fd("\n", fd);
 	return (0);
 }
