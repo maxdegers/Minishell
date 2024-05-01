@@ -20,7 +20,8 @@ SRCS	=	main/main.c					\
 			parsing/parsing_line_utils.c\
 			parsing/utils.c				\
 			parsing/set_block.c			\
-			parsing/parsing_redir.c     \
+			parsing/parsing_redir.c		\
+			parsing/parsing_expand.c	\
 			utils/t_env.c				\
 			utils/t_env_utils.c			\
 			utils/t_token_utils.c		\
