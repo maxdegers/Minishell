@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:21:50 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 11:12:00 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:10:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ char	*ft_strdup_size(const char *s, size_t size)
 	while (s[++i] && i < size)
 		new[i] = s[i];
 	new[i] = '\0';
+	ft_printf("new = %s\n", new);
 	return (new);
 }
