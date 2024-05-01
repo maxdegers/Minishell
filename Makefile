@@ -6,36 +6,12 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/01 11:59:38 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/04/30 15:05:37 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	main/main.c					\
-			main/main_loop.c			\
-			main/signals.c				\
-			main/satanast.c				\
-			error/error.c				\
-			parsing/parsing_env.c		\
-			parsing/parsing_line.c		\
-			parsing/parsing_line_utils.c\
-			parsing/parsing_expand.c	\
-			parsing/utils.c				\
-			parsing/set_block.c			\
-			parsing/parsing_redir.c     \
-			utils/t_env.c				\
-			utils/t_env_utils.c			\
-			utils/t_token_utils.c		\
-			utils/t_token.c				\
-			utils/t_block.c				\
-			execution/exec.c			\
-			execution/ft_cd.c			\
-			execution/ft_echo.c			\
-			execution/ft_execve.c		\
-			execution/ft_exit.c			\
-			execution/ft_export.c		\
-			execution/ft_putenv.c		\
-			execution/ft_pwd.c			\
-			execution/redir.c
+include .config/srcs.mk
+include .config/display.mk
 
 OBJS	=	$(SRCS:%.c=${OBJ_D}%.o)
 
@@ -49,51 +25,12 @@ NAME	=	minishell
 
 CC		=	cc
 
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g
+
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)
 endif
 READLINE_LIB	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
-
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g
-
-RED		=	\033[1;31m
-GREEN	=	\033[1;32m
-YELLOW	=	\033[1;33m
-BLUE	=	\033[1;34m
-MAGENTA	=	\033[1;35m
-CYAN	=	\033[1;36m
-WHITE	=	\033[1;37m
-DEFAULT	=	\033[0m
-UP		=	"\033[A"
-CUT		=	"\033[K"
-
-CHANGED	=	0
-
-NUM_SRCS := $(words $(SRCS))
-COMPILED_SRCS := 0
-
-define separator
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
-endef
-
-define print_progress
-	@echo "$(YELLOW)Compiling $(WHITE)[$(BLUE)$1$(WHITE)]...$(DEFAULT)\r"
-endef
-
-define update_progress
-	$(eval COMPILED_SRCS := $(shell echo $$(($(COMPILED_SRCS) + 1))))
-	$(eval PROGRESS := $(shell echo $$((($(COMPILED_SRCS) * 100) / $(NUM_SRCS)))))
-	@printf ${UP}${CUT}
-	@if [ $(PROGRESS) -eq 100 ]; then \
-		echo "$(WHITE)<$(GREEN)$(PROGRESS)%$(WHITE)> $(WHITE)[$(BLUE)$1$(WHITE)] $(YELLOW)compiled.$(DEFAULT)\r"; \
-	else \
-		if [ $(PROGRESS) -lt 10 ]; then \
-			echo "$(WHITE)<  $(GREEN)$(PROGRESS)%$(WHITE)> $(WHITE)[$(BLUE)$1$(WHITE)] $(YELLOW)compiled.$(DEFAULT)\r"; \
-		else \
-			echo "$(WHITE)< $(GREEN)$(PROGRESS)%$(WHITE)> $(WHITE)[$(BLUE)$1$(WHITE)] $(YELLOW)compiled.$(DEFAULT)\r"; \
-		fi \
-	fi
-endef
 
 all		:	libft ${NAME}
 

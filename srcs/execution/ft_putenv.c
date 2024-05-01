@@ -19,7 +19,8 @@ int	ft_env(t_data *data, int fd)
 	env = data->env;
 	while (env)
 	{
-		ft_printf_fd(fd, "%s=%s\n", env->name, env->value);
+		if (env->show)
+			ft_printf_fd(fd, "%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
 	return (0);
