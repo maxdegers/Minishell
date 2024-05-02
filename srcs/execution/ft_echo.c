@@ -6,13 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 22:33:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/12 22:45:26 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:23:08 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(t_block *block, int fd)
+void	ft_echo(t_block *block, int fd)
 {
 	int		nl;
 	size_t	i;
@@ -33,5 +33,5 @@ int	ft_echo(t_block *block, int fd)
 	}
 	if (nl)
 		ft_putstr_fd("\n", fd);
-	return (0);
+	return ;
 }

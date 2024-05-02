@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
 /*   Updated: 2024/05/02 15:43:30 by mbrousse         ###   ########.fr       */
@@ -15,13 +15,14 @@
 
 # include "../libft/incs/libft.h"
 # include "colors.h"
-# include <signal.h>
 
+# include <signal.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <dirent.h>
 # include <limits.h>
 # include <errno.h>
+# include <fcntl.h>
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -129,18 +130,18 @@ int			ft_exec_line(t_data *data);
 
 //built-ins
 int			ft_cd(t_block *block, t_data *data);
-int			ft_echo(t_block *block, int fd);
+void		ft_echo(t_block *block, int fd);
 int			ft_exit(t_data *data, t_block *block);
 int			ft_export(t_data *data, t_block *block, int fd);
 int			ft_env(t_data *data, int fd);
-int			ft_pwd(int fd);
+void		ft_pwd(int fd);
 int			ft_unset(t_block *block, t_data *data);
 
 //execve
 int			ft_execve(t_data *data, t_block *block, int *fd);
 
 //redirections
-void		ft_redir(t_block *block, t_data *data);
+int			ft_redir(t_block *block, int *fd);
 
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);

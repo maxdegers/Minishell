@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:41:54 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 13:45:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:41:36 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**ft_env_to_tab(t_env *env)
 	size_t	i;
 
 	i = 0;
-	tab = malloc(sizeof(char *) * (ft_envsize(env) + 1));
+	tab = malloc((sizeof(char *)) * (ft_envsize(env) + 1));
 	if (!tab)
 		return (NULL);
 	while (env)

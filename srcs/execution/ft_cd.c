@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:30 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 14:50:26 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/02 15:00:42 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_cd(t_block *block, t_data *data)
 	tmp = block;
 	if (!tmp->args[1])
 	{
-		path = ft_envfind(data->env, "HOME")->value;
+		path = ft_envfind_data(data->env, "HOME");
 		if (!path)
 		{
 			ft_printf("minishell: cd: HOME not set\n");

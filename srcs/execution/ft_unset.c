@@ -6,11 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:05:08 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/01 10:09:31 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/02 15:03:39 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_remove_env(t_env *env, char *name)
 {
@@ -30,7 +30,7 @@ void	ft_remove_env(t_env *env, char *name)
 			else
 				env = tmp->next;
 			free(tmp);
-			return ;
+			break ;
 		}
 		prev = tmp;
 		tmp = tmp->next;

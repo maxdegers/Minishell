@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 17:09:18 by mpitot            #+#    #+#             */
 /*   Updated: 2024/05/01 16:51:15 by mbrousse         ###   ########.fr       */
@@ -19,9 +19,9 @@ size_t	ft_envsize(t_env *env)
 	i = 0;
 	while (env)
 	{
-		env = env->next;
 		if (env->show)
 			i++;
+		env = env->next;
 	}
 	return (i);
 }

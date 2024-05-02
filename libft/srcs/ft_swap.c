@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 12:40:09 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 14:23:08 by mpitot           ###   ########.fr       */
+/*   Created: 2024/05/02 15:30:28 by mpitot            #+#    #+#             */
+/*   Updated: 2024/05/02 15:30:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-/*
-
-int	clear_fd_redir(t_redir *redir)
+void	ft_swap(int *a, int *b)
 {
-	t_redir	*tmp;
+	int		c;
 
-	while (tmp)
-	{
-		tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_TRUNC);
-		if (tmp->fd == -1)
-			return (-1);
-	}
-}
-*/
-
-void	ft_pwd(int fd)
-{
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		exit(1);
-	ft_printf_fd(fd, "%s\n", pwd);
-	free(pwd);
-	return ;
+	c = *a;
+	*a = *b;
+	*b = c;
 }
