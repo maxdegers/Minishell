@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 11:31:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:26:05 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,14 @@ int	ft_parsing_line(t_data *data, char *line)
 	if (ft_redir_expansion(data) == 1)
 		return (1);
 	ft_param_expansion(data);
-	//
+	word_split(data);
+	ft_tokenprint(data->token);
+	printf("----\n");
 	ft_parsing_quote(data);
-	// ft_tokenprint(data->token);
+	ft_tokenprint(data->token);
+	printf("----\n");
 	ft_set_block(data);
-	// ft_block_print(data->block);
+	ft_block_print(data->block);
 	g_error = 0;
 	return (0);
 }
