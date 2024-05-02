@@ -58,6 +58,7 @@ void	ft_putendl_fd(const char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char const *s, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+void	ft_swap(int *a, int *b);
 void	ft_free_tab(char **tab);
 
 char	*ft_itoa(int n);

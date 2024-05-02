@@ -91,7 +91,7 @@ void	ft_put_env_exp(t_data *data, int fd)
 	ft_envclear(&dup);
 }
 
-int	ft_export(t_data *data, t_block *block, int fd)
+int	ft_export(t_data *data, t_block *block, int fd)			//TODO voir les export sans contenu (ex: export a)
 {
 	size_t	i;
 	size_t	j;
