@@ -19,9 +19,9 @@ size_t	ft_envsize(t_env *env)
 	i = 0;
 	while (env)
 	{
-		env = env->next;
 		if (env->show)
 			i++;
+		env = env->next;
 	}
 	return (i);
 }

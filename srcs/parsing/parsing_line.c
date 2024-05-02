@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 10:29:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/01 13:31:20 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	ft_parsing_line(t_data *data, char *line)
 	ft_token_set(line, data);
 	if (ft_redir_expansion(data) == 1)
 		return (1);
-	ft_tokenprint(data->token);
-	printf("\n\n");
+//	ft_tokenprint(data->token);
+//	printf("\n\n");
 	ft_param_expansion(data);
-	ft_tokenprint(data->token);
+//	ft_tokenprint(data->token);
 	ft_set_block(data);
 	// ft_block_print(data->block);
 	g_error = 0;

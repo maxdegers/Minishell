@@ -83,7 +83,7 @@ void	ft_param_expansion2(t_token *token, size_t size,
 		i++;
 	}
 	new[j] = '\0';
-	printf("new = %s\n", new);
+//	printf("new = %s\n", new);
 	free(token->data);
 	token->data = new;
 }
@@ -149,7 +149,7 @@ void	ft_param_expansion(t_data *data)
 				size++;
 			i++;
 		}
-		printf("size = %zu\n", size);
+//		printf("size = %zu\n", size);
 		ft_set_param_expansion2(tmp, size, data);
 		tmp = tmp->next;
 	}

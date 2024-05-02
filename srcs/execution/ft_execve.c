@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 13:19:45 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/01 16:07:16 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ char	*ft_get_path(t_data *data, char *cmd)
 	res = NULL;
 	while (path[++i])
 	{
-		res = ft_strjoin(path[i], cmd);
-		if (access(res, F_OK | X_OK) == 1)
+		res = ft_strjoin(path[i], "/");
+		res = ft_strjoin_free(res, cmd, 1);
+		if (access(res, F_OK | X_OK) == 0)
 			return (res);
 		free(res);
 	}
@@ -49,9 +50,10 @@ int	ft_execve(t_data *data, t_block *block, int *fd)
 	if (!envp)
 		exit_error(ERROR_MALLOC, NULL, data);
 	path = ft_get_path(data, block->cmd);
+//	path = ft_strdup("/bin/ls");
 	if (!path)
 	{
-		ft_printf_fd(1, "%s: command not found", block->cmd);
+		ft_printf_fd(1, "%s: command not found\n", block->cmd);
 		return (0);
 	}
 	pid = fork();
@@ -60,12 +62,15 @@ int	ft_execve(t_data *data, t_block *block, int *fd)
 	if (pid == 0)
 	{	//CHILD
 		dup2(fd[1], STDOUT_FILENO);
-		execve(path, block->args, envp);
+		if (execve(path, block->args, envp) == -1)
+			exit(0);
 	}
 	else
 	{	//PARENT
 		wait(NULL);
 		return (0);
 	}
+	ft_free_tab(envp);
+	free(path);
 	return (0);
 }
