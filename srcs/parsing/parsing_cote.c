@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:00:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 18:03:26 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:31:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ size_t	calc_cote(t_token *token, char quote, size_t size)
 	return (size);
 }
 
-void	ft_parsing_cote(t_data *data)
+void	ft_parsing_quote(t_data *data)
 {
 	t_token	*token;
 	size_t	size;
