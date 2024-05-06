@@ -6,11 +6,26 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/29 15:48:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:26:17 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	inc_shlvl(t_env	*tmp)
+{
+	char	*shlvl;
+	int		nb;
+
+	if (!ft_strcmp(tmp->name, "SHLVL"))
+	{
+		shlvl = tmp->value;
+		nb = ft_atoi(shlvl);
+		nb++;
+		free(tmp->value);
+		tmp->value = ft_itoa(nb);
+	}
+}
 
 int	ft_parsing_env(char **env, t_data *data)
 {
@@ -33,6 +48,7 @@ int	ft_parsing_env(char **env, t_data *data)
 				return (ft_put_error(1, EM_MALLOC), 1);
 			ft_envadd_back(&data->env, tmp);
 			env[i][j] = '=';
+			inc_shlvl(tmp);
 		}
 		i++;
 	}
@@ -74,7 +90,7 @@ int	ft_init_tab(t_data *data, char **env)
 {
 	if (env == NULL || env[0] == NULL)
 		return (ft_put_error(1, EM_ENV), 1);
-	if (ft_parsing_env(env, data))						//TODO incrementer le "SHLVL" de 1
+	if (ft_parsing_env(env, data))			//TODO incrementer le "SHLVL" de 1
 		return (1);
 	if (ft_set_tab(data))
 		return (1);
