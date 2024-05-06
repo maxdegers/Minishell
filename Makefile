@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 15:05:37 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/06 14:03:56 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g3
 
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)
@@ -76,8 +76,22 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
-leak: all
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+leak: all .internal_separate
+	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
+	@echo "   $(YELLOW)-$(DEFAULT)Suppressed Readline Lib"
+	@echo "   $(YELLOW)-$(DEFAULT)Show Leak Kinds"
+	@echo "   $(YELLOW)-$(DEFAULT)Track FDs"
+	@echo "   $(YELLOW)-$(DEFAULT)Show Mismatched Frees"
+	@echo "   $(YELLOW)-$(DEFAULT)Read Variable Information"
+	@echo "   $(YELLOW)-$(DEFAULT)Leak check"
+	@$(call separator)
+	@valgrind --suppressions=.config/valgrind_ignore_rl.txt \
+				--show-leak-kinds=all \
+				--track-fds=yes \
+				--show-mismatched-frees=yes \
+				--read-var-info=yes \
+				--leak-check=full \
+				./$(NAME)
 
 re		:	fclean .internal_separate all
 

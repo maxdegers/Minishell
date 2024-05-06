@@ -32,6 +32,9 @@ void	ft_run_cmd(t_data *data, t_block *block, int *fd)
 		ft_execve(data, block, fd);
 }
 
+# define RD 0
+# define WR 1
+
 int	ft_exec_line(t_data *data)
 {
 	t_block	*block;

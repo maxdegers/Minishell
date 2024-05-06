@@ -39,11 +39,18 @@
 # define REDIR_HEREDOC 5
 # define OPERAT 6
 ///
+
+///
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
 # define NONE '\0'
 # define ESPACE ' '
 # define TAB '\t'
+///
+
+/// PIPE
+# define RD 0
+# define WR 1
 ///
 
 # define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
