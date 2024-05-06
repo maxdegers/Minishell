@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/04/30 15:05:37 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/06 13:58:57 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g3
 
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)

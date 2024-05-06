@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 15:08:57 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:25:58 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_block_print(t_block *block)
 	{
 		ft_printf("cmd: %s\n", tmp->cmd);
 		ft_printf("heredoc_exp: %d\n", tmp->heredoc_exp);
+		ft_redir_print(tmp->redir);
 		ft_printf("args: ");
 		ft_arg_print(tmp->args);
 		ft_printf("\n");

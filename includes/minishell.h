@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 15:43:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:27:20 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,5 +214,6 @@ void		ft_param_expansion(t_data *data);
 int			ft_redir_expansion(t_data *data);
 int			ft_iscaracter_env(char c);
 void	ft_tokenadd_next(t_token *token, t_token *new);
-
+void	ft_add_redir(t_block *block, char *file, int type, t_data *data);
+void	ft_redir_print(t_redir *redir);
 #endif
