@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 13:44:39 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:51:42 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ void	ft_add_redir(t_block *block, char *file, int type, t_data *data)
 	if (!new)
 		exit_error(ERROR_MALLOC, NULL, data);
 	ft_redir_add_back(&block->redir, new);
+}
+
+void	ft_redir_free(t_redir *redir)
+{
+	t_redir	*tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		free(redir->file);
+		free(redir);
+		redir = tmp;
+	}
 }
 
 void	ft_redir_print(t_redir *redir)

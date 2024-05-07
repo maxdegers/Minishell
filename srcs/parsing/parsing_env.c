@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 10:26:17 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:13:59 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void	inc_shlvl(t_env	*tmp)
 {
-	char	*shlvl;
 	int		nb;
 
 	if (!ft_strcmp(tmp->name, "SHLVL"))
 	{
-		shlvl = tmp->value;
-		nb = ft_atoi(shlvl);
+		nb = ft_atoi(tmp->value);
 		nb++;
 		free(tmp->value);
 		tmp->value = ft_itoa(nb);

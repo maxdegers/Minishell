@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/06 13:23:00 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/07 10:30:14 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS	=	main/main.c					\
 			parsing/parsing_expand.c	\
 			parsing/ft_split_bis.c 		\
 			parsing/parsing_word.c		\
+			parsing/expand_here_doc.c	\
 			utils/t_env.c				\
 			utils/t_redir.c				\
 			utils/t_env_utils.c			\

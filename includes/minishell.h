@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 13:27:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:52:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,6 @@ t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
-void		ft_tokenprint(t_token *token);
 
 // main_loop.c
 int			ft_main_loop(t_data *data);
@@ -220,7 +219,10 @@ void		ft_param_expansion(t_data *data);
 //parsing redir.c
 int			ft_redir_expansion(t_data *data);
 int			ft_iscaracter_env(char c);
+void	ft_redir_print(t_redir *redir);
 void	ft_tokenadd_next(t_token *token, t_token *new);
 void	ft_add_redir(t_block *block, char *file, int type, t_data *data);
-void	ft_redir_print(t_redir *redir);
+void	ft_redir_free(t_redir *redir);
+int	ft_expand_here_doc(t_data *data);
+void	ft_block_print(t_block *block);
 #endif

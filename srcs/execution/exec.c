@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 16:07:36 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/07 09:46:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_run_cmd(t_data *data, t_block *block, int *fd)
 		ft_echo(block, fd[1]);
 	else if (ft_strcmp(block->cmd, "pwd") == 0)
 		ft_pwd(fd[1]);
-	else if (ft_strcmp(block->cmd, "cd") == 0)
+	else if (ft_strcmp(block->cmd, "cd") == 0)		//TODO test cd with pipes in bash
 		ft_cd(block, data);
 	else if (ft_strcmp(block->cmd, "export") == 0)		//TODO check amount of pipes
 		ft_export(data, block, fd[1]);				//TODO before calling the function

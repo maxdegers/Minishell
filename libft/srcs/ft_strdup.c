@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:21:50 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/01 17:02:52 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:43:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	new = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	new = ft_calloc(sizeof(char), (ft_strlen(s) + 1));
 	if (!new)
 		return (NULL);
 	i = -1;

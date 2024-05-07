@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 13:25:58 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 10:55:59 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_block_clear(t_block **block)
 			free(tmp->cmd);
 		if (tmp->args)
 			ft_free_tab(tmp->args);
-		// if (tmp->redir)
-		// 	ft_redir_clear(&tmp->redir);
+		if (tmp->redir)
+			ft_redir_free(tmp->redir);
 		free(tmp);
 		tmp = next;
 	}
