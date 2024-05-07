@@ -70,7 +70,21 @@ int	ft_redir(t_block *block, int *fd)
 {
 	int		in;
 	int		out;
+	////////////
+	t_redir	*tmp1;
+	t_redir	*tmp2;
 
+	tmp1 = malloc(sizeof(t_redir));
+	tmp1->fd = -1;
+	tmp1->type = REDIR_OUT;
+	tmp1->file = ft_strdup("out1");
+	tmp1->next = NULL;
+	tmp2=  malloc(sizeof(t_redir));
+	tmp2->fd = -1;
+	tmp2->type = REDIR_IN;
+	tmp2->file = ft_strdup("in1");
+	tmp2->next = NULL;
+	///////////////
 	if (ft_open_redir(block))
 		return (1);
 	ft_get_redirs(block, &in, &out);

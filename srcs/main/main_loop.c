@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 09:17:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:23:52 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static char	*ft_set_prompt(void)
 	prompt = ft_strjoin_free(prompt, B_YELLOW, 1);
 	prompt = ft_strjoin_free(prompt, "minishell", 1);
 	prompt = ft_strjoin_free(prompt, RESET, 1);
-	prompt = ft_strjoin_free(prompt, "🐚 ", 1);
+//	prompt = ft_strjoin_free(prompt, "\001🐚 \002", 1);
+	prompt = ft_strjoin_free(prompt, "\001\xF0\x9F\002\x90\x9A ", 1);
 	if (!prompt)
 	{
 		perror("malloc");

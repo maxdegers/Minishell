@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 16:36:05 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/06 14:27:04 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_execve(t_data *data, t_block *block, int *fd)
 	{	//CHILD
 		dup2(fd[1], STDOUT_FILENO);
 		if (execve(path, block->args, envp) == -1)
-			exit(0);
+			exit(0);			//TODO free everything
 	}
 	else
 	{	//PARENT
