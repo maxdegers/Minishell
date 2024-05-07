@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 16:57:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:05:35 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 
 	i = 0;
 	j = 0;
-	new = calloc(sizeof(char), (size + 1));
+	new = ft_calloc(sizeof(char), (size + 1));
 	if (!new)
 		exit_error(ERROR_MALLOC, NULL, data);
 	token->new = new;
