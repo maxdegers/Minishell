@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 15:15:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:17:09 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_set_redir(t_token *tmp, t_block *block, t_data *data)
 	i = 0;
 	while (tmp && ft_strcmp(tmp->data, "|") != 0)
 	{
+		if (tmp->type == REDIR_HEREDOC)
+			i++;
 		if (tmp->type >= REDIR_IN && tmp->type <= REDIR_HEREDOC)
 		{
 			ft_add_redir(block, tmp->data, tmp->type, data);
@@ -43,13 +45,10 @@ void	ft_set_redir(t_token *tmp, t_block *block, t_data *data)
 			i++;
 			tmp = tmp2;
 		}
-		if (tmp)
+		else if (tmp)
 			tmp = tmp->next;
 	}
-	if (i > 0)
-		block->heredoc_exp = 1;
-	else
-		block->heredoc_exp = 0;
+	block->heredoc_exp = i;
 }
 
 void	ft_set_block(t_data *data)

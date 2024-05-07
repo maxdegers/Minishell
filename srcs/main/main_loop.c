@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 13:33:55 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:17:24 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_main_loop(t_data *data)
 			g_error = ERROR_SYNTAX;
 			continue ;
 		}
-		// ft_exec_line(data);  //TODO exec
+		ft_exec_line(data);
 		destroy(data);
 	}
 	return (0);
