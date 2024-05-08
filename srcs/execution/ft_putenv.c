@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_env(t_data *data)
+void	ft_env(t_data *data)
 {
 	t_env *env;
 
@@ -23,5 +23,5 @@ int	ft_env(t_data *data)
 			ft_printf("%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
-	return (0);
+	return ;
 }

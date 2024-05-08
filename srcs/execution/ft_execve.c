@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/06 14:27:04 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/08 12:06:34 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_get_path(t_data *data, char *cmd)
 	return (NULL);
 }
 
-int	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
+void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 {
 	char	**envp;
 	char	*path;
@@ -62,13 +62,13 @@ int	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 	if (!path)
 	{
 		ft_printf_fd(1, "%s: command not found\n", block->cmd);
-		return (0);
+		return ;
 	}
 	if (execve(path, block->args, envp) == -1)
 	{
 		ft_free_tab(envp);
 		free(path);
-		exit_error(ERROR_EXEC, NULL, )
+		exit_error(ERROR_EXEC, NULL, data);
 	}
-	return (0);
+	return ;
 }

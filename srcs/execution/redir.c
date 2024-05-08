@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:18:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/08 10:55:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:21:55 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	ft_open_redir(t_block *block)
 		if (tmp->type == REDIR_APPEND)
 			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_APPEND,
 						S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
-		if (tmp->type == REDIR_HEREDOC)
-			tmp->fd = open(tmp->file, O_RDONLY);
 		if (tmp->fd == -1)
 			return (ft_close_error(block), 1);
 		tmp = tmp->next;
@@ -59,7 +57,11 @@ int	ft_get_redirs(t_block *block, int *in, int *out)
 	{
 		if (tmp->type == REDIR_OUT)
 			*out = tmp->fd;
+		if (tmp->type == REDIR_APPEND)
+			*out = tmp->fd;
 		if (tmp->type == REDIR_IN)
+			*in = tmp->fd;
+		if (tmp->type == REDIR_HEREDOC)
 			*in = tmp->fd;
 		tmp = tmp->next;
 	}
