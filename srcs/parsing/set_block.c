@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 09:17:09 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:14:28 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,30 @@ void	ft_set_redir(t_token *tmp, t_block *block, t_data *data)
 			tmp = tmp->next;
 	}
 	block->heredoc_exp = i;
+	ft_printf("ft_set_redir\n");
+	ft_tokenprint(data->token);
 }
 
 void	ft_set_block(t_data *data)
 {
-	t_token	*tmp;
 	t_block	*block;
 	char	**args;
 	size_t	i;
 
-	tmp = data->token;
-	while (tmp)
+	while (data->token)
 	{
 		block = ft_block_new(data);
 		i = 0;
-		ft_set_redir(tmp, block, data);
-		block->cmd = ft_strdup(tmp->data);
-		args = ft_calloc(sizeof(char *), (clac_size_block(tmp) + 1));
-		while (tmp && ft_strcmp(tmp->data, "|") != 0)
+		ft_set_redir(data->token, block, data);
+		block->cmd = ft_strdup(data->token->data);
+		args = ft_calloc(sizeof(char *), (clac_size_block(data->token) + 1));
+		while (data->token && ft_strcmp(data->token->data, "|") != 0)
 		{
-			args[i++] = ft_strdup(tmp->data);
-			tmp = tmp->next;
+			args[i++] = ft_strdup(data->token->data);
+			data->token = data->token->next;
 		}
 		block->args = args;
-		if (tmp)
-			tmp = tmp->next;
+		if (data->token)
+			data->token = data->token->next;
 	}
 }
