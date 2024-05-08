@@ -143,7 +143,7 @@ int	ft_exec_line(t_data *data)
 
 	block = data->block;
 	pipe_amount = get_pipe_amount(block);
-	if (pipe_amount == 0 && ft_is_builtin(block) == 1)
+	if (pipe_amount == 0 && ft_is_builtin(block) == 2)
 		return (ft_exec_simple_builtin(block, data), 0);
 	fd = ft_open_pipes(data, pipe_amount);
 
