@@ -102,6 +102,9 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 	ft_redir(block, fd);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
+	ft_exec_under_fork(block, data);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 
 }
 

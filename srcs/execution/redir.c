@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:18:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 14:46:59 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/08 10:55:15 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	ft_get_redirs(t_block *block, int *in, int *out)
 	t_redir		*tmp;
 
 	tmp = block->redir;
-	*in = 0;
-	*out = 1;
+	*in = -1;
+	*out = -1;
 	while (tmp)
 	{
 		if (tmp->type == REDIR_OUT)
@@ -70,25 +70,13 @@ int	ft_redir(t_block *block, int *fd)
 {
 	int		in;
 	int		out;
-	////////////
-	t_redir	*tmp1;
-	t_redir	*tmp2;
 
-	tmp1 = malloc(sizeof(t_redir));
-	tmp1->fd = -1;
-	tmp1->type = REDIR_OUT;
-	tmp1->file = ft_strdup("out1");
-	tmp1->next = NULL;
-	tmp2=  malloc(sizeof(t_redir));
-	tmp2->fd = -1;
-	tmp2->type = REDIR_IN;
-	tmp2->file = ft_strdup("in1");
-	tmp2->next = NULL;
-	///////////////
 	if (ft_open_redir(block))
 		return (1);
 	ft_get_redirs(block, &in, &out);
-	fd[0] = in;
-	fd[1] = out;
+	if (in != -1)
+		fd[0] = in;
+	if (out != -1)
+		fd[1] = out;
 	return (0);
 }
