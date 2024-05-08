@@ -50,10 +50,9 @@ char	*ft_get_path(t_data *data, char *cmd)
 	return (NULL);
 }
 
-int	ft_execve(t_data *data, t_block *block, int *fd)
+int	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 {
 	char	**envp;
-	int		pid;
 	char	*path;
 
 	envp = ft_env_to_tab(data->env);
@@ -65,21 +64,11 @@ int	ft_execve(t_data *data, t_block *block, int *fd)
 		ft_printf_fd(1, "%s: command not found\n", block->cmd);
 		return (0);
 	}
-	pid = fork();
-	if (pid == -1)
-		return (1);
-	if (pid == 0)
-	{	//CHILD
-		dup2(fd[1], STDOUT_FILENO);
-		if (execve(path, block->args, envp) == -1)
-			exit(0);			//TODO free everything
+	if (execve(path, block->args, envp) == -1)
+	{
+		ft_free_tab(envp);
+		free(path);
+		exit_error(ERROR_EXEC, NULL, )
 	}
-	else
-	{	//PARENT
-		wait(NULL);
-		return (0);
-	}
-	ft_free_tab(envp);
-	free(path);
 	return (0);
 }

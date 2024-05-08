@@ -37,12 +37,17 @@ t_env	*ft_envnew(char *name, char *value)
 	if (!new->name)
 		return (free(new), NULL);
 	if (!value)
+	{
 		new->show = false;
+		new->value = NULL;
+	}
 	else
+	{
 		new->show = true;
-	new->value = ft_strdup(value);
-	if (!new->value)
-		return (free(new->name), free(new), NULL);
+		new->value = ft_strdup(value);
+		if (!new->value)
+			return (free(new->name), free(new), NULL);
+	}
 	new->next = NULL;
 	return (new);
 }

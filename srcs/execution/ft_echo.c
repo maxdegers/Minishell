@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_echo(t_block *block, int fd)
+void	ft_echo(t_block *block)
 {
 	int		nl;
 	size_t	i;
@@ -26,12 +26,11 @@ void	ft_echo(t_block *block, int fd)
 	}
 	while (block->args[i])
 	{
-		ft_putstr_fd(block->args[i], fd);
+		ft_putstr_fd(block->args[i], 1);
 		i++;
 		if (block->args[i])
-			ft_putstr_fd(" ", fd);
+			ft_putstr_fd(" ", 1);
 	}
 	if (nl)
-		ft_putstr_fd("\n", fd);
-	return ;
+		ft_putstr_fd("\n", 1);
 }

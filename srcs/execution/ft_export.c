@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:52 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 22:32:22 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/07 15:57:07 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_env	*ft_sort_env(t_env **env)
 	return (head);
 }
 
-void	ft_put_env_exp(t_data *data, int fd)
+void	ft_put_env_exp(t_data *data)
 {
 	t_env	*dup;
 	t_env	*tmp;
@@ -85,41 +85,85 @@ void	ft_put_env_exp(t_data *data, int fd)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, "_") != 0)
-			ft_printf_fd(fd, "declare -x %s=\"%s\"\n", tmp->name, tmp->value);
+		{
+			if (tmp->show)
+				ft_printf("declare -x %s=\"%s\"\n", tmp->name, tmp->value);
+			else
+				ft_printf("declare -x %s\n", tmp->name);
+		}
 		tmp = tmp->next;
 	}
 	ft_envclear(&dup);
 }
 
-int	ft_export(t_data *data, t_block *block, int fd)		//TODO voir les export sans contenu (ex: export a)
+int	check_chars(char *s1)
+{
+	static char *s2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
+
+	if (ft_strchr(s2, s1[0]))
+		return (1);
+	ft_printf_fd(2, "minishell: export: `%s' is not a valid identifier\n", s1);
+	g_error = 1;
+	return (0);
+}
+
+int	ft_export_show(t_data *data, char *str)
+{
+	t_env	*tmp;
+	char	*var;
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	var = ft_substr(str, 0, i);
+	if (!var)
+		return (1);
+	tmp = ft_envfind(data->env, var);
+	if (tmp)
+	{
+		free(tmp->value);
+		tmp->value = ft_strdup(&str[i + 1]);
+	}
+	else
+	{
+		tmp = ft_envnew(var, &str[i + 1]);
+		if (!tmp)
+			return (free(var), 1);
+		ft_envadd_back(&data->env, tmp);
+	}
+	return (free(var), 0);
+}
+
+int	ft_export_nshow(t_data *data, char *str)
+{
+	t_env	*tmp;
+
+	if (ft_envfind(data->env, str))
+		return (0);
+	tmp = ft_envnew(str, NULL);
+	if (!tmp)
+		return (1);
+	ft_envadd_back(&data->env, tmp);
+	return (0);
+}
+
+int	ft_export(t_data *data, t_block *block)
 {
 	size_t	i;
-	size_t	j;
-	char	*var;
-	char	*val;
+	int		ret;
 
-	i = -1;
-	if (!block->args[1])
-		ft_put_env_exp(data, fd);
+	i = 0;
 	while (block->args[++i])
 	{
-		j = 0;
-		while (block->args[i][j] && block->args[i][j] != '=')
-			j++;
-		if (block->args[i][j] == '=')
-		{
-			var = ft_substr(block->args[i], 0, j);
-			val = ft_substr(block->args[i], j + 1, ft_strlen(block->args[i]) - j - 1);
-			ft_setenv(data, var, val);
-			free(var);
-			free(val);
-		}
+		if (!check_chars(block->args[i]))
+			return (0);
+		if (ft_strchr(block->args[i], '='))
+			ret = ft_export_show(data, block->args[i]);
 		else
-		{
-			var = ft_strdup(block->args[i]);
-			ft_setenv(data, var, NULL);
-			free(var);
-		}
+			ret = ft_export_nshow(data, block->args[i]);
+		if (ret)
+			return (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/06 14:03:56 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/07 16:04:55 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ leak: all .internal_separate
 	@echo "   $(YELLOW)-$(DEFAULT)Read Variable Information"
 	@echo "   $(YELLOW)-$(DEFAULT)Leak check"
 	@$(call separator)
-	@valgrind --suppressions=.config/valgrind_ignore_rl.txt \
+	@valgrind	--suppressions=.config/valgrind_ignore_rl.txt \
 				--show-leak-kinds=all \
 				--track-fds=yes \
 				--show-mismatched-frees=yes \

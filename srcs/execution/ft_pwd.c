@@ -26,14 +26,13 @@ int	clear_fd_redir(t_redir *redir)
 }
 */
 
-void	ft_pwd(int fd)
+void	ft_pwd(void)
 {
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		exit(1);
-	ft_printf_fd(fd, "%s\n", pwd);
+	ft_printf("%s\n", pwd);
 	free(pwd);
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 15:43:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:35:18 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,15 +137,16 @@ int			ft_exec_line(t_data *data);
 
 //built-ins
 int			ft_cd(t_block *block, t_data *data);
-void		ft_echo(t_block *block, int fd);
+void		ft_echo(t_block *block);
 int			ft_exit(t_data *data, t_block *block);
-int			ft_export(t_data *data, t_block *block, int fd);
-int			ft_env(t_data *data, int fd);
-void		ft_pwd(int fd);
+int			ft_export(t_data *data, t_block *block);
+void		ft_put_env_exp(t_data *data);
+int			ft_env(t_data *data);
+void		ft_pwd(void);
 int			ft_unset(t_block *block, t_data *data);
 
 //execve
-int			ft_execve(t_data *data, t_block *block, int *fd);
+int			ft_execve(t_data *data, t_block *block);
 
 //redirections
 int			ft_redir(t_block *block, int *fd);

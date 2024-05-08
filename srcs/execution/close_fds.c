@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   close_fds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 15:20:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/07 16:02:10 by mpitot           ###   ########.fr       */
+/*   Created: 2024/05/07 16:03:38 by mpitot            #+#    #+#             */
+/*   Updated: 2024/05/07 16:04:55 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_error = 0;
-
-int	main(int argc, char **argv, char **env)
+void	close2(int fd1, int fd2)
 {
-	t_data	data;
+	close(fd1);
+	close(fd2);
+}
 
-	(void)argv;
-	g_error = 0;
-	if (argc > 1)
-		return (ft_put_error(1, EM_ARGS), 1);
-	if (isatty(STDOUT_FILENO))
-		ft_putheader();
-	if (ft_init_tab(&data, env))
-		return (ft_megafree(&data), 1);
-	if (ft_main_loop(&data))
-		return (ft_megafree(&data), 1);
-	ft_megafree(&data);
-//	close(0);
-//	close(1);
-//	close(2);
-	return (0);
+void	close3(int fd1, int fd2, int fd3)
+{
+	close(fd1);
+	close(fd2);
+	close(fd3);
+}
+
+void	close4(int fd1, int fd2, int fd3, int fd4)
+{
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	close(fd4);
 }
