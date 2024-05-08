@@ -6,14 +6,14 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/08 15:48:13 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/08 16:08:27 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	=	main/main.c					\
 			main/main_loop.c			\
 			main/signals.c				\
-			main/satanast.c				\
+			main/ft_putheader.c				\
 			error/error.c				\
 			parsing/parsing_env.c		\
 			parsing/parsing_line.c		\
