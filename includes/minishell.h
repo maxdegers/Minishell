@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 14:23:31 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:49:29 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,4 +227,7 @@ void	ft_block_print(t_block *block);
 void	ft_tokenprint(t_token *token);
 void	ft_token_rm_redir(t_data *data, t_token *to_remouve);
 void	ft_token_rmfurst(t_data *data, t_token *to_remouve);
+void	do_expan(t_data *data, t_token *token, size_t size, int quote);
+size_t	ft_count(t_data *data, char *s, int type);
+
 #endif

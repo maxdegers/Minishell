@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 14:16:39 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:43:31 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,28 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 	}
 }
 
+void	make_block(t_data *data, char **args)
+{
+	size_t	i;
+
+	i = 0;
+	while (data->token && ft_strcmp(data->token->data, "|") != 0)
+	{
+		args[i++] = ft_strdup(data->token->data);
+		if (!args[i - 1])
+			exit_error(ERROR_MALLOC, NULL, data);
+		data->token = data->token->next;
+	}
+}
+
 void	ft_set_block(t_data *data)
 {
 	t_block	*block;
 	char	**args;
-	size_t	i;
 
 	while (data->token)
 	{
 		block = ft_block_new(data);
-		i = 0;
 		ft_set_redir(data->token, block, data);
 		if (data->token == NULL)
 			block->cmd = NULL;
@@ -75,11 +87,7 @@ void	ft_set_block(t_data *data)
 		args = ft_calloc(sizeof(char *), (clac_size_block(data->token) + 1));
 		if (!args)
 			exit_error(ERROR_MALLOC, NULL, data);
-		while (data->token && ft_strcmp(data->token->data, "|") != 0)
-		{
-			args[i++] = ft_strdup(data->token->data);
-			data->token = data->token->next;
-		}
+		make_block(data, args);
 		block->args = args;
 		if (data->token)
 			data->token = data->token->next;
