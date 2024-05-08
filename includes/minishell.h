@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 12:11:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:23:31 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_block
 	char			*cmd;
 	char			**args;
 	t_redir			*redir;
-	int				heredoc_exp;
 	struct s_block	*next;
 }	t_block;
 

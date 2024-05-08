@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 12:11:17 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:20:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,14 @@ int	ft_parsing_line(t_data *data, char *line)
 	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	ft_token_set(line, data);
-	ft_printf("START\n");
-	ft_tokenprint(data->token);
 	if (ft_redir_expansion(data) == 1)
 		return (1);
-	ft_printf("ft_redir_expansion\n");
-	ft_tokenprint(data->token);
 	ft_param_expansion(data);
 	word_split(data);
 	ft_parsing_quote(data);
-	ft_printf("ft_parsing_quote\n");
-	ft_tokenprint(data->token);
 	ft_set_block(data);
-	ft_block_print(data->block);
 	g_error = 0;
 	if (ft_expand_here_doc(data) == 1)
 		return (1);
-	ft_block_print(data->block);
 	return (0);
 }
