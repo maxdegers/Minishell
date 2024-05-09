@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:52 by mpitot            #+#    #+#             */
-/*   Updated: 2024/04/30 22:32:22 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/09 13:35:45 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,42 @@ int	ft_export_show(t_data *data, char *str)
 {
 	t_env	*tmp;
 	char	*var;
-	char	*val;
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	var = ft_substr(str, 0, i);
+	if (!var)
+		return (1);
+	tmp = ft_envfind(data->env, var);
+	if (tmp)
+	{
+		free(tmp->value);
+		tmp->value = ft_strdup(&str[i + 1]);
+	}
+	else
+	{
+		tmp = ft_envnew(var, &str[i + 1]);
+		if (!tmp)
+			return (free(var), 1);
+		ft_envadd_back(&data->env, tmp);
+	}
+	return (free(var), 0);
+}
+
+int	ft_export_nshow(t_data *data, char *str)
+{
+	t_env	*tmp;
+
+	if (ft_envfind(data->env, str))
+		return (0);
+	tmp = ft_envnew(str, NULL);
+	if (!tmp)
+		return (1);
+	ft_envadd_back(&data->env, tmp);
+	return (0);
+}
 
 int	ft_export(t_data *data, t_block *block)
 {

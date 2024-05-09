@@ -53,7 +53,6 @@ char	*ft_get_path(t_data *data, char *cmd)
 void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 {
 	char	**envp;
-	int		pid;
 	char	*path;
 
 	envp = ft_env_to_tab(data->env);
