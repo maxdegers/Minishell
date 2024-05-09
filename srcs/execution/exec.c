@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/08 16:40:16 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/09 12:05:05 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int	**ft_open_pipes(t_data *data, size_t pipe_amount)
 		}
 		i++;
 	}
+//	ft_printf("%d, %d\n", fd[0][0], fd[0][1]);
 	return (fd);
 }
 
@@ -121,11 +122,18 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 		exit_error(ERROR_MALLOC, "", data);		//TODO check ici aussi / faire un exit de child qui free tout
 	}
 	ft_redir(block, fd);
-	dup2(fd[1], STDOUT_FILENO);
-	dup2(fd[0], STDIN_FILENO);
+//	ft_printf("%d, %d\n", fd[0], fd[1]);
+	if (fd[0] != 0)
+	{
+		close(fd[0]);
+		dup2(fd[0], STDIN_FILENO);
+	}
+	if (fd[1] != 1)
+	{
+		close(fd[1]);
+		dup2(fd[1], STDOUT_FILENO);
+	}
 	ft_exec_under_fork(block, data);
-	close(fd[0]);
-	close(fd[1]);
 	exit(0);		//TODO free everything
 
 }
@@ -200,7 +208,7 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	{
 		ret_status = waitpid(pid[i], NULL, 0);
 	}
-	return (0);
+	return (ret_status);
 }
 
 int	ft_exec_line(t_data *data)
