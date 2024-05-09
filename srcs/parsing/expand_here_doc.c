@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 13:14:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:09:33 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ char	*join_lines(char *s1, char *s2, t_data *data)
 	return (free(s1), res);
 }
 
+void	ft_heredoc_pipe(t_data *data, t_redir *redir, char *line)
+{
+	int	fd[2];
+
+	if (pipe(fd) == -1)
+		exit_error(ERROR_PIPE, NULL, data);
+	ft_printf_fd(fd[1], "%s", line);
+	close(fd[1]);
+	redir->fd = fd[0];
+}
+
 int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
 {
 	char	*res;
@@ -50,15 +61,14 @@ int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
 		{
 			ft_printf("minishell: warning: here-document \
 delimited by end-of-file (wanted `%s')\n", redir->file);
-			return (free(res), free(line), 1);
+			break ;
 		}
 		if (ft_strcmp(line, redir->file) == 0)
 			break ;
 		res = join_lines(res, line, data);
 	}
 	free(line);
-	free(redir->file);
-	redir->file = ft_strdup(res);
+	ft_heredoc_pipe(data, redir, res);
 	if (!redir->file)
 		exit_error(ERROR_MALLOC, NULL, data);
 	return (free(res), 0);
@@ -79,8 +89,7 @@ int	ft_expand_here_doc(t_data *data)
 		{
 			if (redir->type == REDIR_HEREDOC)
 			{
-				if (here_doc_get_line(data, redir, line) == 1)
-					return (1);
+				here_doc_get_line(data, redir, line);
 			}
 			redir = redir->next;
 		}

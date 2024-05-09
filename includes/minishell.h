@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 15:43:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:57:48 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ extern int	g_error;
 
 typedef enum e_ERROR
 {
-	ERROR_MALLOC = 0,
+	ERROR_MALLOC = 1,
+	ERROR_PIPE = 1,
+	ERROR_FORK = 1,
 	ERROR_GERROR = 1,
 	ERROR_SYNTAX = 2,
 	ERROR_EXEC = 126,
