@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 14:23:57 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:14:24 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ delimited by end-of-file (wanted `%s')\n", redir->file);
 			return (free(res), free(line), 1);
 		}
 		if (ft_strcmp(line, redir->file) == 0)
-		{
-			free(line);
 			break ;
-		}
 		res = join_lines(res, line, data);
 	}
+	free(line);
+	free(redir->file);
 	redir->file = ft_strdup(res);
 	if (!redir->file)
 		exit_error(ERROR_MALLOC, NULL, data);
