@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:17:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/06 15:17:21 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/29 14:56:14 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ void	ft_handle_sig(int sig)
 	if (sig == SIGINT)
 	{
 		g_error = 130;
-		/*ft_putstr_fd("\n", 2);
+		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();*/
-
+		rl_redisplay();
 	}
 	if (sig == SIGQUIT)
 	{

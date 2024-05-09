@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/06 14:59:24 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:54:27 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_set_prompt(void)
+static char	*ft_set_prompt(t_data *data)
 {
 	char	*prompt;
 
 	prompt = NULL;
 	prompt = ft_strjoin_free(prompt, B_YELLOW, 1);
+	if (!prompt)
+		exit_error(ERROR_MALLOC, NULL, data);
 	prompt = ft_strjoin_free(prompt, "minishell", 1);
+	if (!prompt)
+		exit_error(ERROR_MALLOC, NULL, data);
 	prompt = ft_strjoin_free(prompt, RESET, 1);
-//	prompt = ft_strjoin_free(prompt, "\001🐚 \002", 1);
+	if (!prompt)
+		exit_error(ERROR_MALLOC, NULL, data);
 	prompt = ft_strjoin_free(prompt, "\001\xF0\x9F\002\x90\x9A ", 1);
 	if (!prompt)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
+		exit_error(ERROR_MALLOC, NULL, data);
 	return (prompt);
 }
 
@@ -35,7 +37,7 @@ int	ft_main_loop(t_data *data)
 	char	*line;
 
 	data->exit = 0;
-	data->prompt = ft_set_prompt();
+	data->prompt = ft_set_prompt(data);
 	while (!data->exit)
 	{
 		ft_set_signal();

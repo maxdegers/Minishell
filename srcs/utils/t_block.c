@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 15:08:57 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:31:22 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_block	*ft_block_new(t_data *data)
 	block->args = NULL;
 	block->redir = NULL;
 	block->next = NULL;
-	block->heredoc_exp = -1;
 	block->cmd = NULL;
 	if (data->block == NULL)
 		data->block = block;
@@ -57,7 +56,7 @@ void	ft_block_print(t_block *block)
 	while (tmp)
 	{
 		ft_printf("cmd: %s\n", tmp->cmd);
-		ft_printf("heredoc_exp: %d\n", tmp->heredoc_exp);
+		ft_redir_print(tmp->redir);
 		ft_printf("args: ");
 		ft_arg_print(tmp->args);
 		ft_printf("\n");
@@ -78,8 +77,8 @@ void	ft_block_clear(t_block **block)
 			free(tmp->cmd);
 		if (tmp->args)
 			ft_free_tab(tmp->args);
-		// if (tmp->redir)
-		// 	ft_redir_clear(&tmp->redir);
+		if (tmp->redir)
+			ft_redir_free(tmp->redir);
 		free(tmp);
 		tmp = next;
 	}

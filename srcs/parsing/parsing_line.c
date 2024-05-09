@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:47 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:20:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,7 @@ int	ft_parsing_line(t_data *data, char *line)
 	ft_parsing_quote(data);
 	ft_set_block(data);
 	g_error = 0;
+	if (ft_expand_here_doc(data) == 1)
+		return (1);
 	return (0);
 }

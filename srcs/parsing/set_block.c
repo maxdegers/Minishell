@@ -6,45 +6,90 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/04/30 14:09:38 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/08 15:43:31 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_set_block(t_data *data)
+size_t	clac_size_block(t_token *token)
+{
+	size_t	size;
+	t_token	*tmp;
+
+	size = 0;
+	tmp = token;
+	while (tmp && ft_strcmp(tmp->data, "|") != 0)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+	return (size);
+}
+
+void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 {
 	t_token	*tmp;
-	t_token	*tmp2;
-	t_block	*block;
-	size_t	size;
-	char	**args;
+
+	while (token && ft_strcmp(token->data, "|") != 0)
+	{
+		if (token->type >= REDIR_IN && token->type <= REDIR_HEREDOC)
+		{
+			ft_add_redir(block, token->data, token->type, data);
+			tmp = token->next;
+			if (data->token == token)
+			{
+				ft_token_rmfurst(data, token);
+				token = data->token;
+			}
+			else
+			{
+				ft_token_remouve(data, token);
+				token = tmp;
+			}
+		}
+		else if (token)
+			token = token->next;
+	}
+}
+
+void	make_block(t_data *data, char **args)
+{
 	size_t	i;
 
-	tmp = data->token;
-	while (tmp)
+	i = 0;
+	while (data->token && ft_strcmp(data->token->data, "|") != 0)
+	{
+		args[i++] = ft_strdup(data->token->data);
+		if (!args[i - 1])
+			exit_error(ERROR_MALLOC, NULL, data);
+		data->token = data->token->next;
+	}
+}
+
+void	ft_set_block(t_data *data)
+{
+	t_block	*block;
+	char	**args;
+
+	while (data->token)
 	{
 		block = ft_block_new(data);
-		size = 0;
-		i = 0;
-		block->cmd = ft_strdup(tmp->data);
-		tmp2 = tmp;
-		while (tmp && ft_strcmp(tmp->data, "|") != 0)
+		ft_set_redir(data->token, block, data);
+		if (data->token == NULL)
+			block->cmd = NULL;
+		else
 		{
-			size++;
-			tmp = tmp->next;
+			block->cmd = ft_strdup(data->token->data);
+			if (!block->cmd)
+				exit_error(ERROR_MALLOC, NULL, data);
 		}
-//		printf("size: %zu\n", size);
-		args = ft_calloc(sizeof(char *), (size + 1));
-		args[size] = NULL;
-		
-		while (tmp2 && ft_strcmp(tmp2->data, "|") != 0)
-		{
-			args[i++] = ft_strdup(tmp2->data);
-			tmp2 = tmp2->next;
-		}
+		args = ft_calloc(sizeof(char *), (clac_size_block(data->token) + 1));
+		if (!args)
+			exit_error(ERROR_MALLOC, NULL, data);
+		make_block(data, args);
 		block->args = args;
-		if (tmp)
-			tmp = tmp->next;
+		if (data->token)
+			data->token = data->token->next;
 	}
 }
