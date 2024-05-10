@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 10:32:56 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/10 10:51:32 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,8 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 	int		child_fd[2];
 
 	pid = malloc(sizeof(int) * (childs));
+	if (!pid)
+		return (NULL);		//TODO exit
 	i = 0;
 //	ft_printf("%d", childs);
 	while (i < childs)

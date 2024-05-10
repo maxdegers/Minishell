@@ -53,7 +53,7 @@ int	ft_main_loop(t_data *data)
 			g_error = ERROR_SYNTAX;
 			continue ;
 		}
-		// ft_exec_line(data);
+		 ft_exec_line(data);
 		destroy(data);
 	}
 	return (0);
