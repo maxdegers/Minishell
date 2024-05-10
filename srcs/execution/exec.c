@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 10:51:32 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/10 11:43:10 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	**ft_open_pipes(t_data *data, size_t pipe_amount)
 		{
 			while (--i)
 				close2(fd[i][0], fd[i][1]);
-			exit_error(ERROR_EXEC, NULL, data);	//TODO check ek daxi
+			exit_error(ERROR_PIPE, NULL, data);	//TODO check ek daxi
 		}
 		i++;
 	}
@@ -116,27 +116,27 @@ int	**ft_open_pipes(t_data *data, size_t pipe_amount)
 
 void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
-	if (ft_is_builtin(block) == 2)
+	if (ft_is_builtin(block) == 2)	//command that doesn't work under fork
 	{
-		close(fd[0]);
-		close(fd[1]);
-		exit_error(ERROR_MALLOC, "", data);		//TODO check ici aussi / faire un exit de child qui free tout
+		if (fd[0] != 0)
+			close(fd[0]);
+		if (fd[1] != 1)
+			close(fd[1]);
+		exit_child(data);
 	}
 	ft_redir(block, fd);
-//	ft_printf("%d, %d\n", fd[0], fd[1]);
-	if (fd[0] != 0)
+	if (fd[0] != STDIN_FILENO)
 	{
-		close(fd[0]);
-		dup2(fd[0], STDIN_FILENO);
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			exit_error(ERROR_DUP, NULL, data);
 	}
-	if (fd[1] != 1)
+	if (fd[1] != STDOUT_FILENO)
 	{
-		close(fd[1]);
-		dup2(fd[1], STDOUT_FILENO);
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			exit_error(ERROR_DUP, NULL, data);	//TODO check if any fd need to be closed
 	}
 	ft_exec_under_fork(block, data);
-	exit(0);		//TODO free everything
-
+	exit_child(data);
 }
 
 void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
@@ -152,9 +152,9 @@ void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
 	}
 	while (++i < pipe_amount)
 	{
-		if (fds[i][0] != used[0] || fds[i][0] != used[1])
+		if (fds[i][0] != used[0] && fds[i][0] != used[1])
 			close(fds[i][0]);
-		if (fds[i][1] != used[0] || fds[i][1] != used[1])
+		if (fds[i][1] != used[0] && fds[i][1] != used[1])
 			close(fds[i][1]);
 	}
 }

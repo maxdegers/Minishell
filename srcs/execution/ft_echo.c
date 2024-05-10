@@ -26,11 +26,11 @@ void	ft_echo(t_block *block)
 	}
 	while (block->args[i])
 	{
-		ft_putstr_fd(block->args[i], STDOUT_FILENO);
+		ft_printf("%s", block->args[i]);
 		i++;
 		if (block->args[i])
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			ft_printf(" ");
 	}
 	if (nl)
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		ft_printf("\n");
 }
