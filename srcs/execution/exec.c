@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 16:07:36 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/10 10:32:56 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ int	ft_is_builtin(t_block *block)
 size_t	get_pipe_amount(t_block *block)
 {
 	size_t	i;
+	t_block	*tmp;
 
 	i = 0;
-	while (block)
+	tmp = block;
+	while (tmp)
 	{
-		if (block->next)
-			i++;
-		block = block->next;
+		i++;
+		tmp = tmp->next;
 	}
-	return (i);
+	return (--i);
 }
 
 void	ft_exec_simple_builtin(t_block *block, t_data *data)
@@ -171,6 +172,7 @@ int	ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount)
 	else
 		res[1] = fds[i][1];
 	ft_close_useless_fds(fds, res, pipe_amount);
+//	ft_printf("child: %d\tin: %d  out: %d\n\n", i, res[0], res[1]);
 	return (0);
 }
 
@@ -182,6 +184,7 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 
 	pid = malloc(sizeof(int) * (childs));
 	i = 0;
+//	ft_printf("%d", childs);
 	while (i < childs)
 	{
 		pid[i] = fork();
@@ -189,8 +192,12 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 			return (NULL);		//TODO free all and kill all childs
 		if (pid[i] == 0)
 		{
+//			sleep(1);
 			ft_get_fd(fds, i, child_fd, childs - 1);
+//			sleep(1);
 			ft_child_process(data, block, child_fd);
+//			sleep(1);
+			exit(0);
 		}
 		block = block->next;
 		i++;
@@ -220,6 +227,7 @@ int	ft_exec_line(t_data *data)
 
 	block = data->block;
 	pipe_amount = get_pipe_amount(block);
+//	ft_printf("%d\n\n", pipe_amount);
 	if (pipe_amount == 0 && ft_is_builtin(block) == 2)
 		return (ft_exec_simple_builtin(block, data), 0);
 	fd = ft_open_pipes(data, pipe_amount);
