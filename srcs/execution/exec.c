@@ -228,6 +228,7 @@ int	ft_exec_line(t_data *data)
 	if (pipe_amount == 0 && ft_is_builtin(block) == 2)
 		return (ft_exec_simple_builtin(block, data), 0);
 	fd = ft_open_pipes(data, pipe_amount);
+	ft_set_signal_child();
 	pid = ft_fork(data, block, pipe_amount + 1, fd);
 	ft_close_useless_fds(fd, NULL, pipe_amount);
 	ft_wait_childs(pid, pipe_amount + 1);

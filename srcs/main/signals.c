@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:17:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 20:02:17 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:08:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 void	ft_set_signal(void)
 {
-	signal(SIGINT, ft_handle_sig);
-	signal(SIGQUIT, ft_handle_sig);
+	struct sigaction sig;
+
+	sig.sa_handler = &ft_handle_sig;
+	sigaction(SIGINT, &sig, NULL);
+	sigaction(SIGQUIT, &sig, NULL);
 }
 
 void	ft_set_signal_child(void)
 {
-	signal(SIGINT, ft_handle_sig_child);
-	signal(SIGQUIT, ft_handle_sig_child);
+	struct sigaction sig;
+
+	sig.sa_handler = &ft_handle_sig_child;
+	sigaction(SIGINT, &sig, NULL);
+	sigaction(SIGQUIT, &sig, NULL);
 }
 
 void	ft_handle_sig(int sig)
@@ -35,9 +41,7 @@ void	ft_handle_sig(int sig)
 		rl_redisplay();
 	}
 	if (sig == SIGQUIT)
-	{
 		(void)sig;
-	}
 }
 
 void	ft_handle_sig_child(int sig)
@@ -45,9 +49,8 @@ void	ft_handle_sig_child(int sig)
 	if (sig == SIGINT)
 	{
 		g_error = 130;
+		ft_putstr_fd("\n", 2);
 	}
 	if (sig == SIGQUIT)
-	{
 		(void)sig;
-	}
 }

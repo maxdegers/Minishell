@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 20:05:40 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/10 20:55:55 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,5 +240,8 @@ void	ft_token_rmfurst(t_data *data, t_token *to_remouve);
 void	do_expan(t_data *data, t_token *token, size_t size, int quote);
 size_t	ft_count(t_data *data, char *s, int type);
 void	exit_child(t_data *data, int **fds, int *fd);
+
+void	ft_handle_sig_child(int sig);
+void	ft_set_signal_child(void);
 
 #endif
