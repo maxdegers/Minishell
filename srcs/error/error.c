@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 13:21:14 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:07:01 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,22 @@ void	destroy(t_data *data)
 		ft_block_clear(&data->block);
 }
 
-void	exit_child(t_data *data)
+void	ft_free_int_tab(int **tab)
 {
+	size_t	i;
+
+	if (!tab)
+		return ;
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
+}
+
+void	exit_child(t_data *data, int **fds, int *fd)
+{
+	close2(fd[0], fd[1]);
+	ft_free_int_tab(fds);
 	destroy(data);
 	ft_megafree(data);
 	exit(g_error);

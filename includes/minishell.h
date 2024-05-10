@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 13:57:48 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:05:40 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
 void		destroy(t_data *data);
 void		exit_error(t_ERROR error, char *MSG, t_data *data);
+void		ft_free_int_tab(int **tab);
 
 // parsing_env.c
 int			ft_parsing_env(char **env, t_data *data);
@@ -238,6 +239,6 @@ void	ft_token_rm_redir(t_data *data, t_token *to_remouve);
 void	ft_token_rmfurst(t_data *data, t_token *to_remouve);
 void	do_expan(t_data *data, t_token *token, size_t size, int quote);
 size_t	ft_count(t_data *data, char *s, int type);
-void	exit_child(t_data *data);
+void	exit_child(t_data *data, int **fds, int *fd);
 
 #endif
