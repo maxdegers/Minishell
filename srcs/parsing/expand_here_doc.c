@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/09 14:09:33 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 11:44:18 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ char	*join_lines(char *s1, char *s2, t_data *data)
 	}
 	else
 	{
-		s1 = ft_strjoin_free(s1, "\n", 1);
-		if (!s1)
-			exit_error(ERROR_MALLOC, NULL, data);
 		res = ft_strjoin_free(s1, s2, 2);
 		if (!res)
 			exit_error(ERROR_MALLOC, NULL, data);
 	}
+	res = ft_strjoin_free(res, "\n", 1);
 	if (!res)
 		exit_error(ERROR_MALLOC, NULL, data);
 	return (free(s1), res);
