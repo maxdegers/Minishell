@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 11:43:10 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/10 20:30:41 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	**malloc_fd_tab(size_t size)
 	int		**fd;
 	size_t	i;
 
-	fd = malloc(sizeof(int *) * size);
+	fd = malloc(sizeof(int *) * (size + 1));
 	if (!fd)
 		return (NULL);
 	i = -1;
@@ -110,7 +110,7 @@ int	**ft_open_pipes(t_data *data, size_t pipe_amount)
 		}
 		i++;
 	}
-//	ft_printf("%d, %d\n", fd[0][0], fd[0][1]);
+	fd[i] = NULL;
 	return (fd);
 }
 
@@ -122,7 +122,7 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 			close(fd[0]);
 		if (fd[1] != 1)
 			close(fd[1]);
-		exit_child(data);
+		return ;
 	}
 	ft_redir(block, fd);
 	if (fd[0] != STDIN_FILENO)
@@ -136,7 +136,6 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 			exit_error(ERROR_DUP, NULL, data);	//TODO check if any fd need to be closed
 	}
 	ft_exec_under_fork(block, data);
-	exit_child(data);
 }
 
 void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
@@ -172,7 +171,6 @@ int	ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount)
 	else
 		res[1] = fds[i][1];
 	ft_close_useless_fds(fds, res, pipe_amount);
-//	ft_printf("child: %d\tin: %d  out: %d\n\n", i, res[0], res[1]);
 	return (0);
 }
 
@@ -186,7 +184,6 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 	if (!pid)
 		return (NULL);		//TODO exit
 	i = 0;
-//	ft_printf("%d", childs);
 	while (i < childs)
 	{
 		pid[i] = fork();
@@ -194,12 +191,10 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 			return (NULL);		//TODO free all and kill all childs
 		if (pid[i] == 0)
 		{
-//			sleep(1);
 			ft_get_fd(fds, i, child_fd, childs - 1);
-//			sleep(1);
 			ft_child_process(data, block, child_fd);
-//			sleep(1);
-			exit(0);
+			free(pid);
+			exit_child(data, fds, child_fd);
 		}
 		block = block->next;
 		i++;
@@ -236,6 +231,7 @@ int	ft_exec_line(t_data *data)
 	pid = ft_fork(data, block, pipe_amount + 1, fd);
 	ft_close_useless_fds(fd, NULL, pipe_amount);
 	ft_wait_childs(pid, pipe_amount + 1);
-	free(fd);
+	free(pid);
+	ft_free_int_tab(fd);
 	return (0);
 }
