@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 13:46:09 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:50:46 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ int	check_redir(t_data *data)
 	tmp = data->token;
 	while (tmp)
 	{
-		if (tmp->type > 0 && tmp->type < 6)
+		if (tmp->type > 1 && tmp->type < 6)
 		{
 			if (tmp->next == NULL || tmp->next->type != WORD)
 			{
-				if (tmp->next == NULL)
+				if (tmp->type == 1 && tmp->type == tmp->next->type)
+					ft_printf_fd(2, "minishell: syntax error near\
+		unexpected token `%s'\n", tmp->next->data);
+				else if (tmp->next == NULL)
 					ft_printf_fd(2, "minishell: syntax error\
  near unexpected token `newline'\n");
 				else

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 14:31:22 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:56:42 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_block	*ft_block_new(t_data *data)
 {
 	t_block	*block;
+	t_block	*tmp;
 
 	block = malloc(sizeof(t_block));
 	if (!block)
@@ -27,9 +28,10 @@ t_block	*ft_block_new(t_data *data)
 		data->block = block;
 	else
 	{
-		while (data->block->next)
-			data->block = data->block->next;
-		data->block->next = block;
+		tmp = data->block;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = block;
 	}
 	return (block);
 }

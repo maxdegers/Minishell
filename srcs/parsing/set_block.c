@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 15:43:31 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/10 10:54:42 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_set_block(t_data *data)
 	{
 		block = ft_block_new(data);
 		ft_set_redir(data->token, block, data);
-		if (data->token == NULL)
+		if (data->token == NULL && ft_strcmp(data->token->data, "|") == 0)
 			block->cmd = NULL;
 		else
 		{
