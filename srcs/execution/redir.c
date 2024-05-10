@@ -17,9 +17,10 @@ void	ft_close_error(t_block *block)
 	t_redir		*tmp;
 
 	tmp = block->redir;
-	while (tmp && tmp->fd != -1)
+	while (tmp)
 	{
-		close(tmp->fd);
+		if (tmp->fd != -1)
+			close(tmp->fd);
 		tmp = tmp->next;
 	}
 }

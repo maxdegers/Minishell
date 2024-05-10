@@ -71,6 +71,7 @@ typedef enum e_ERROR
 {
 	ERROR_MALLOC = 1,
 	ERROR_PIPE = 1,
+	ERROR_DUP = 1,
 	ERROR_FORK = 1,
 	ERROR_GERROR = 1,
 	ERROR_SYNTAX = 2,
