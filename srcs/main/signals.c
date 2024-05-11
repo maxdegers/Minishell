@@ -6,28 +6,19 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:17:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 21:08:46 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/11 15:06:23 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_set_signal(void)
+void	ft_set_signal(t_SIG_MODE mode)
 {
-	struct sigaction sig;
-
-	sig.sa_handler = &ft_handle_sig;
-	sigaction(SIGINT, &sig, NULL);
-	sigaction(SIGQUIT, &sig, NULL);
-}
-
-void	ft_set_signal_child(void)
-{
-	struct sigaction sig;
-
-	sig.sa_handler = &ft_handle_sig_child;
-	sigaction(SIGINT, &sig, NULL);
-	sigaction(SIGQUIT, &sig, NULL);
+	if (mode == SIG_MAIN)
+		signal(SIGINT, &ft_handle_sig);
+	else if (mode == SIG_CHILD)
+		signal(SIGINT, &ft_handle_sig_child);
+	signal(SIGQUIT, &ft_handle_sig);
 }
 
 void	ft_handle_sig(int sig)
@@ -51,6 +42,4 @@ void	ft_handle_sig_child(int sig)
 		g_error = 130;
 		ft_putstr_fd("\n", 2);
 	}
-	if (sig == SIGQUIT)
-		(void)sig;
 }

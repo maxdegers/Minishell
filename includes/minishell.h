@@ -80,6 +80,12 @@ typedef enum e_ERROR
 	ERROR_COTE = 128
 }				t_ERROR;
 
+typedef enum e_SIGNAL_MODE
+{
+	SIG_MAIN,
+	SIG_CHILD
+}	t_SIG_MODE;
+
 typedef struct s_trash
 {
 	void			*data;
@@ -204,7 +210,7 @@ int			ft_main_loop(t_data *data);
 
 // signal.c
 void		ft_handle_sig(int sig);
-void		ft_set_signal(void);
+void		ft_set_signal(t_SIG_MODE mode);
 
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
@@ -242,6 +248,5 @@ size_t	ft_count(t_data *data, char *s, int type);
 void	exit_child(t_data *data, int **fds, int *fd);
 
 void	ft_handle_sig_child(int sig);
-void	ft_set_signal_child(void);
 
 #endif

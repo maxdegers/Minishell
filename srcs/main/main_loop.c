@@ -40,7 +40,7 @@ int	ft_main_loop(t_data *data)
 	data->prompt = ft_set_prompt(data);
 	while (!data->exit)
 	{
-		ft_set_signal();
+		ft_set_signal(SIG_MAIN);
 		line = readline(data->prompt);
 		if (line == NULL)
 			return (ft_putstr_fd("exit\n", 1), 0);
