@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/10 20:30:41 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/11 15:54:05 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ int	ft_is_builtin(t_block *block)
 	|| ft_strcmp(block->cmd, "exit") == 0)
 		return (2);
 	return (0);
-}
-
-size_t	get_pipe_amount(t_block *block)
-{
-	size_t	i;
-	t_block	*tmp;
-
-	i = 0;
-	tmp = block;
-	while (tmp)
-	{
-		i++;
-		tmp = tmp->next;
-	}
-	return (--i);
 }
 
 void	ft_exec_simple_builtin(t_block *block, t_data *data)
@@ -68,153 +53,6 @@ void	ft_exec_under_fork(t_block *block, t_data *data)
 		ft_execve(data, block);
 }
 
-int	**malloc_fd_tab(size_t size)
-{
-	int		**fd;
-	size_t	i;
-
-	fd = malloc(sizeof(int *) * (size + 1));
-	if (!fd)
-		return (NULL);
-	i = -1;
-	while (++i < size)
-	{
-		fd[i] = malloc(sizeof(int) * 2);
-		if (!fd[i])
-		{
-			while (--i)
-				free(fd[i]);
-			free(fd);
-			return (NULL);
-		}
-	}
-	return (fd);
-}
-
-int	**ft_open_pipes(t_data *data, size_t pipe_amount)
-{
-	int		**fd;
-	size_t	i;
-
-	fd = malloc_fd_tab(pipe_amount);
-	if (!fd)
-		exit_error(ERROR_MALLOC, NULL, data);
-	i = 0;
-	while (i < pipe_amount)
-	{
-		if (pipe(fd[i]) == -1)
-		{
-			while (--i)
-				close2(fd[i][0], fd[i][1]);
-			exit_error(ERROR_PIPE, NULL, data);	//TODO check ek daxi
-		}
-		i++;
-	}
-	fd[i] = NULL;
-	return (fd);
-}
-
-void	ft_child_process(t_data *data, t_block *block, int *fd)
-{
-	if (ft_is_builtin(block) == 2)	//command that doesn't work under fork
-	{
-		if (fd[0] != 0)
-			close(fd[0]);
-		if (fd[1] != 1)
-			close(fd[1]);
-		return ;
-	}
-	ft_redir(block, fd);
-	if (fd[0] != STDIN_FILENO)
-	{
-		if (dup2(fd[0], STDIN_FILENO) == -1)
-			exit_error(ERROR_DUP, NULL, data);
-	}
-	if (fd[1] != STDOUT_FILENO)
-	{
-		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			exit_error(ERROR_DUP, NULL, data);	//TODO check if any fd need to be closed
-	}
-	ft_exec_under_fork(block, data);
-}
-
-void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
-{
-	size_t	i;
-
-	i = -1;
-	if (!used)
-	{
-		while (++i < pipe_amount)
-			close2(fds[i][0], fds[i][1]);
-		return ;
-	}
-	while (++i < pipe_amount)
-	{
-		if (fds[i][0] != used[0] && fds[i][0] != used[1])
-			close(fds[i][0]);
-		if (fds[i][1] != used[0] && fds[i][1] != used[1])
-			close(fds[i][1]);
-	}
-}
-
-int	ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount)
-{
-	if (pipe_amount == 0)
-		return (res[0] = 0, res[1] = 1, 0);
-	if (i == 0)
-		res[0] = 0;
-	else
-		res[0] = fds[i - 1][0];
-	if (i == pipe_amount)
-		res[1] = 1;
-	else
-		res[1] = fds[i][1];
-	ft_close_useless_fds(fds, res, pipe_amount);
-	return (0);
-}
-
-int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
-{
-	int		*pid;
-	size_t	i;
-	int		child_fd[2];
-
-	pid = malloc(sizeof(int) * (childs));
-	if (!pid)
-		return (NULL);		//TODO exit
-	i = 0;
-	while (i < childs)
-	{
-		pid[i] = fork();
-		if (pid[i] == -1)
-			return (NULL);		//TODO free all and kill all childs
-		if (pid[i] == 0)
-		{
-			ft_get_fd(fds, i, child_fd, childs - 1);
-			ft_child_process(data, block, child_fd);
-			free(pid);
-			exit_child(data, fds, child_fd);
-		}
-		block = block->next;
-		i++;
-	}
-	return (pid);
-}
-
-int	ft_wait_childs(int *pid, size_t child_amount)
-{
-	size_t	i;
-	int		ret_status;
-
-	i = -1;
-	while (++i < child_amount)
-	{
-		ret_status = waitpid(pid[i], NULL, 0);
-	}
-	return (ret_status);
-}
-
 int	ft_exec_line(t_data *data)
 {
 	t_block	*block;
@@ -224,7 +62,6 @@ int	ft_exec_line(t_data *data)
 
 	block = data->block;
 	pipe_amount = get_pipe_amount(block);
-//	ft_printf("%d\n\n", pipe_amount);
 	if (pipe_amount == 0 && ft_is_builtin(block) == 2)
 		return (ft_exec_simple_builtin(block, data), 0);
 	fd = ft_open_pipes(data, pipe_amount);

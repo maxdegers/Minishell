@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 20:55:55 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/11 15:43:53 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,18 @@ void		ft_putheader(void);
 
 // exec.c
 int			ft_exec_line(t_data *data);
+int	ft_is_builtin(t_block *block);
+void	ft_exec_under_fork(t_block *block, t_data *data);
+
+//pipes
+int	ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount);
+size_t	get_pipe_amount(t_block *block);
+int	**ft_open_pipes(t_data *data, size_t pipe_amount);
+
+//forks
+int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds);
+int	ft_wait_childs(int *pid, size_t child_amount);
+
 
 //built-ins
 int			ft_cd(t_block *block, t_data *data);
@@ -157,6 +169,7 @@ int			ft_unset(t_block *block, t_data *data);
 void		close2(int fd1, int fd2);
 void		close3(int fd1, int fd2, int fd3);
 void		close4(int fd1, int fd2, int fd3, int fd4);
+void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
 
 //execve
 void		ft_execve(t_data *data, t_block *block);

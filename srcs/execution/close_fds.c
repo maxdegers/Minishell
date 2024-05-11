@@ -32,3 +32,23 @@ void	close4(int fd1, int fd2, int fd3, int fd4)
 	close(fd3);
 	close(fd4);
 }
+
+void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
+{
+	size_t	i;
+
+	i = -1;
+	if (!used)
+	{
+		while (++i < pipe_amount)
+			close2(fds[i][0], fds[i][1]);
+		return ;
+	}
+	while (++i < pipe_amount)
+	{
+		if (fds[i][0] != used[0] && fds[i][0] != used[1])
+			close(fds[i][0]);
+		if (fds[i][1] != used[0] && fds[i][1] != used[1])
+			close(fds[i][1]);
+	}
+}

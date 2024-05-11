@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_token.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 16:39:19 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:44:58 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_token_clear(t_token **token)
 	{
 		tmp = (*token)->next;
 		free((*token)->data);
+//		free((*token)->new);
 		free(*token);
 		*token = tmp;
 	}
