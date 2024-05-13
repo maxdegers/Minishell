@@ -75,6 +75,7 @@ void	ft_set_block(t_data *data)
 {
 	t_block	*block;
 	char	**args;
+    t_token *tmp;
 
 	while (data->token)
 	{
@@ -94,6 +95,11 @@ void	ft_set_block(t_data *data)
 		make_block(data, args);
 		block->args = args;
 		if (data->token)
-			data->token = data->token->next;
+        {
+            tmp = data->token;
+            data->token = data->token->next;
+            free(tmp->data);
+            free(tmp);
+        }
 	}
 }

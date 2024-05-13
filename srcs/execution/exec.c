@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/11 15:54:05 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/13 17:20:53 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ void	ft_exec_simple_builtin(t_block *block, t_data *data)
 
 void	ft_exec_under_fork(t_block *block, t_data *data)
 {
+	if (ft_strcmp(block->cmd, "cd") == 0)
+		ft_cd(block, data);
+	if (ft_strcmp(block->cmd, "export") == 0)
+		ft_export(data, block);
+	if (ft_strcmp(block->cmd, "unset") == 0)
+		ft_unset(block, data);
+	if (ft_strcmp(block->cmd, "exit") == 0)
+		ft_exit(data, block);
 	if (ft_strcmp(block->cmd, "echo") == 0)
 		return (ft_echo(block));
 	if (ft_strcmp(block->cmd, "export") == 0)

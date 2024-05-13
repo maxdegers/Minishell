@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:12:57 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 20:07:01 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:06:18 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,11 @@ void	ft_free_int_tab(int **tab)
 
 void	exit_child(t_data *data, int **fds, int *fd)
 {
-	close2(fd[0], fd[1]);
-	ft_free_int_tab(fds);
+    if (fd[0] != 0)
+        close(fd[0]);
+    if (fd[1] != 1)
+        close(fd[1]);
+    ft_free_int_tab(fds);
 	destroy(data);
 	ft_megafree(data);
 	exit(g_error);
