@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:25:17 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/13 18:53:43 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:59:04 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_isnumber(char *s)
 void	ft_exit(t_data *data, t_block *block)
 {
 	if (!block->next)
-		ft_printf_fd(2, "exit\n");
+		ft_printf("exit\n");
 	if (block->args[1] && ft_isnumber(block->args[1]))
 	{
 		if (block->args[2])

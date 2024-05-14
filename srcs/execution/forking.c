@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forking.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:46:25 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/13 15:27:38 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:29:21 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	i = -1;
 	while (++i < child_amount)
 	{
-		ret_status = waitpid(pid[i], NULL, 0);	//TODO check les return error des childs
+		waitpid(pid[i], &ret_status, 0);	//TODO check les return error des childs
 	}
-	g_error = ret_status;
+//	g_error = ret_status;
 	return (ret_status);
 }
 
