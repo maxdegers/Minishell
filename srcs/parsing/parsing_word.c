@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 16:40:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:22:20 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,24 @@ void	word_split(t_data *data)
 {
 	t_token	*token;
 	size_t	i;
+	int		s_quote;
+	int		d_quote;
 
 	token = data->token;
+	s_quote = -1;
+	d_quote = -1;
 	while (token)
 	{
 		i = 0;
 		while (token->data[i])
 		{
-			if (ft_isblank(token->data[i]) == 1)
-			{
+			if (token->data[i] == S_QUOTE)
+				s_quote *= -1;
+			if (token->data[i] == D_QUOTE)
+				d_quote *= -1;
+			if (ft_isblank(token->data[i]) == 1
+				&& (s_quote != 1 && d_quote != 1))
 				do_word_split(data, token);
-			}
 			i++;
 		}
 		token = token->next;
