@@ -52,3 +52,22 @@ void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
 			close(fds[i][1]);
 	}
 }
+
+void	ft_close_heredoc_pipe(t_data *data)
+{
+	t_block	*block;
+	t_redir	*redir;
+
+	block = data->block;
+	while (block)
+	{
+		redir = block->redir;
+		while (redir)
+		{
+			if (redir->fd != -1)
+				close(redir->fd);
+			redir = redir->next;
+		}
+		block = block->next;
+	}
+}
