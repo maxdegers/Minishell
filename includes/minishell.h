@@ -156,9 +156,9 @@ int	ft_wait_childs(int *pid, size_t child_amount);
 
 
 //built-ins
-int			ft_cd(t_block *block, t_data *data);
+void		ft_cd(t_block *block, t_data *data);
 void		ft_echo(t_block *block);
-int			ft_exit(t_data *data, t_block *block);
+void		ft_exit(t_data *data, t_block *block);
 int			ft_export(t_data *data, t_block *block);
 void		ft_put_env_exp(t_data *data);
 void		ft_env(t_data *data);
@@ -169,7 +169,7 @@ int			ft_unset(t_block *block, t_data *data);
 void		close2(int fd1, int fd2);
 void		close3(int fd1, int fd2, int fd3);
 void		close4(int fd1, int fd2, int fd3, int fd4);
-void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
+void		ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
 
 //execve
 void		ft_execve(t_data *data, t_block *block);

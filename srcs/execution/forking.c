@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forking.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:46:25 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/11 15:54:05 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:27:38 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	{
 		ret_status = waitpid(pid[i], NULL, 0);	//TODO check les return error des childs
 	}
+	g_error = ret_status;
 	return (ret_status);
 }
 
 void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
-	if (ft_is_builtin(block) == 2)	//command that doesn't work under fork
+	/*if (ft_is_builtin(block) == 2)	//command that doesn't work under fork
 	{
 		if (fd[0] != 0)
 			close(fd[0]);
 		if (fd[1] != 1)
 			close(fd[1]);
 		return ;
-	}
+	}*/
 	ft_redir(block, fd);
 	if (fd[0] != STDIN_FILENO)
 	{
