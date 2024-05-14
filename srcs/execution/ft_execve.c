@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 19:21:15 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 20:00:27 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,6 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 	{
 		ft_free_tab(envp);
 		free(path);
-		g_error = 127;
+		g_error = 130;
 	}
 }

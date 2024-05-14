@@ -40,6 +40,6 @@ void	ft_handle_sig_child(int sig)
 	if (sig == SIGINT)
 	{
 		g_error = 130;
-		ft_putstr_fd("\n", 2);
+//		ft_putstr_fd("\n", 2);
 	}
 }

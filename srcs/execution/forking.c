@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:46:25 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 14:29:21 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 19:38:39 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	while (++i < child_amount)
 	{
 		waitpid(pid[i], &ret_status, 0);	//TODO check les return error des childs
+		if (WIFEXITED(ret_status))
+			g_error = WEXITSTATUS(ret_status);
 	}
 //	g_error = ret_status;
 	return (ret_status);
