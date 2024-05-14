@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:41:54 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/01 13:41:36 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:01:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ int	ft_change_env(t_env *env, char *name, char *value)
 	if (!tmp->value)
 		return (1);
 	return (0);
-}
-
-void	ft_envprint(t_env *env)
-{
-	while (env)
-	{
-		ft_printf("%s=%s\n", env->name, env->value);
-		env = env->next;
-	}
 }
 
 char	**ft_env_to_tab(t_env *env)
@@ -58,3 +49,36 @@ char	**ft_env_to_tab(t_env *env)
 	tab[i] = NULL;
 	return (tab);
 }
+
+char	*ft_envfind_data(t_env *env, char *name)
+{
+	if (name == NULL)
+		return (NULL);
+	while (env)
+	{
+		if (!ft_strcmp(env->name, name) && env->show)
+			return (env->value);
+		env = env->next;
+	}
+	return ("");
+}
+
+char	*ft_envfind_data_size(t_env *env, char *name, size_t size)
+{
+	while (env)
+	{
+		if (!ft_strncmp(env->name, name, size) && env->show)
+			return (env->value);
+		env = env->next;
+	}
+	return ("");
+}
+
+// void	ft_envprint(t_env *env)
+// {
+// 	while (env)
+// 	{
+// 		ft_printf("%s=%s\n", env->name, env->value);
+// 		env = env->next;
+// 	}
+// }

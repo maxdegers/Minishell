@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_token.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/11 15:44:58 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 13:59:23 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@ t_token	*ft_tokennew(char *line, size_t start, size_t end, int type)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	// if (start == end)
-	// {
-	// 	new->data = ;
-	// 	new->type = type;
-	// 	new->next = NULL;
-	// 	new->prev = NULL;
-	// 	return (new);
-	// }
 	new->data = malloc(sizeof(char) * (end - start + 1));
 	if (!new->data)
 		return (free(new), NULL);
@@ -87,18 +79,17 @@ void	ft_token_clear(t_token **token)
 	{
 		tmp = (*token)->next;
 		free((*token)->data);
-//		free((*token)->new);
 		free(*token);
 		*token = tmp;
 	}
 }
 
-void	ft_tokenprint(t_token *token)
-{
-	while (token)
-	{
-		ft_printf("data: %s\t\t\t", token->data);
-		ft_printf("type: %d\n", token->type);
-		token = token->next;
-	}
-}
+// void	ft_tokenprint(t_token *token)
+// {
+// 	while (token)
+// 	{
+// 		ft_printf("data: %s\t\t\t", token->data);
+// 		ft_printf("type: %d\n", token->type);
+// 		token = token->next;
+// 	}
+// }
