@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/11 15:47:47 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/11 17:12:22 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ READLINE_DIR	=	$(shell brew --prefix readline)
 endif
 READLINE_LIB	=	-lreadline -lhistory -L $(READLINE_DIR)/lib
 
-all		:	libft ${NAME}
+all		:	libft .internal_separate2 ${NAME}
 
 ${OBJS}	:	${OBJ_D}%.o: ${SRC_D}%.c Makefile includes/minishell.h includes/colors.h
 	@$(call print_progress,$<)
@@ -56,7 +56,6 @@ ${OBJ_D}:
 
 libft	:
 	@make --no-print-directory -C ./libft
-	@$(call separator)
 
 clean	:
 	@echo "Cleaning $(WHITE)[$(RED)libft$(WHITE)]...$(DEFAULT)"
@@ -76,7 +75,7 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
-leak: all .internal_separate
+leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
 	@echo "   $(YELLOW)-$(DEFAULT)Suppressed Readline Lib"
 	@echo "   $(YELLOW)-$(DEFAULT)Show Leak Kinds"
@@ -93,7 +92,7 @@ leak: all .internal_separate
 				--leak-check=full \
 				./$(NAME)
 
-re		:	fclean .internal_separate all
+re		:	fclean .internal_separate1 all
 
 .PHONY	:	all clean fclean re libft leak
 
@@ -104,6 +103,3 @@ re		:	fclean .internal_separate all
 
 .internal_announce	:
 	@echo "$(YELLOW)Compiling $(WHITE)[$(CYAN)minishell$(WHITE)]...$(DEFAULT)"
-
-.internal_separate	:
-	@echo "$(WHITE)------------------------------------------------------------$(DEFAULT)"
