@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 14:34:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:58:41 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_redir	*ft_redir_new(char *data, int type)
 	new->file = ft_strdup(data);
 	new->type = type;
 	new->next = NULL;
+	new->fd = -1;
 	return (new);
 }
 

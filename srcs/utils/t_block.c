@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:17:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 10:56:42 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:02:58 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,6 @@ t_block	*ft_block_new(t_data *data)
 	return (block);
 }
 
-void	ft_arg_print(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-	{
-		ft_printf("%s ", args[i]);
-		i++;
-	}
-	ft_printf("\n");
-}
-
-void	ft_block_print(t_block *block)
-{
-	t_block	*tmp;
-
-	tmp = block;
-	printf("\n\nblock\n");
-	while (tmp)
-	{
-		ft_printf("cmd: %s\n", tmp->cmd);
-		ft_redir_print(tmp->redir);
-		ft_printf("args: ");
-		ft_arg_print(tmp->args);
-		ft_printf("\n");
-		tmp = tmp->next;
-	}
-}
-
 void	ft_block_clear(t_block **block)
 {
 	t_block	*tmp;
@@ -86,3 +56,33 @@ void	ft_block_clear(t_block **block)
 	}
 	*block = NULL;
 }
+
+// void	ft_arg_print(char **args)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (args[i])
+// 	{
+// 		ft_printf("%s ", args[i]);
+// 		i++;
+// 	}
+// 	ft_printf("\n");
+// }
+
+// void	ft_block_print(t_block *block)
+// {
+// 	t_block	*tmp;
+
+// 	tmp = block;
+// 	printf("\n\nblock\n");
+// 	while (tmp)
+// 	{
+// 		ft_printf("cmd: %s\n", tmp->cmd);
+// 		ft_redir_print(tmp->redir);
+// 		ft_printf("args: ");
+// 		ft_arg_print(tmp->args);
+// 		ft_printf("\n");
+// 		tmp = tmp->next;
+// 	}
+// }

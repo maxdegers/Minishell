@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_block.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 10:21:40 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 13:56:47 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,16 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 	}
 }
 
-void	make_block(t_data *data, char **args)
+void	make_block(t_data *data, t_block	*block)
 {
+	char	**args;
 	size_t	i;
 	t_token	*tmp;
 
+	args = ft_calloc(sizeof(char *), (clac_size_block(data->token) + 1));
+	if (!args)
+		exit_error(ERROR_MALLOC, NULL, data);
+	block->args = args;
 	i = 0;
 	while (data->token && ft_strcmp(data->token->data, "|") != 0)
 	{
@@ -74,8 +79,7 @@ void	make_block(t_data *data, char **args)
 void	ft_set_block(t_data *data)
 {
 	t_block	*block;
-	char	**args;
-    t_token *tmp;
+	t_token	*tmp;
 
 	while (data->token)
 	{
@@ -89,17 +93,13 @@ void	ft_set_block(t_data *data)
 			if (!block->cmd)
 				exit_error(ERROR_MALLOC, NULL, data);
 		}
-		args = ft_calloc(sizeof(char *), (clac_size_block(data->token) + 1));
-		if (!args)
-			exit_error(ERROR_MALLOC, NULL, data);
-		make_block(data, args);
-		block->args = args;
+		make_block(data, block);
 		if (data->token)
-        {
-            tmp = data->token;
-            data->token = data->token->next;
-            free(tmp->data);
-            free(tmp);
-        }
+		{
+			tmp = data->token;
+			data->token = data->token->next;
+			free(tmp->data);
+			free(tmp);
+		}
 	}
 }
