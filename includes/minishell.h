@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/11 15:43:53 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:00:21 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,5 +261,6 @@ size_t	ft_count(t_data *data, char *s, int type);
 void	exit_child(t_data *data, int **fds, int *fd);
 
 void	ft_handle_sig_child(int sig);
+char	*ft_do_count(t_data *data, char *s, int type, char *tmp2);
 
 #endif
