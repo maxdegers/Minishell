@@ -77,6 +77,7 @@ int	ft_exec_line(t_data *data)
 	pid = ft_fork(data, block, pipe_amount + 1, fd);
 	ft_close_useless_fds(fd, NULL, pipe_amount);
 	ft_wait_childs(pid, pipe_amount + 1);
+	ft_close_heredoc_pipe(data);
 	free(pid);
 	ft_free_int_tab(fd);
 	return (0);
