@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 12:00:21 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/14 12:07:54 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,8 @@ void	exit_child(t_data *data, int **fds, int *fd);
 
 void	ft_handle_sig_child(int sig);
 char	*ft_do_count(t_data *data, char *s, int type, char *tmp2);
-
+void	heredoc_calc_expan_size(char *line, t_data *data,
+	size_t *size, size_t *i);
+void	ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
+char	*join_lines(char *s1, char *s2, t_data *data);
 #endif

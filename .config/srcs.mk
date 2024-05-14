@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/11 16:49:56 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/14 12:08:22 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_PARSING	=	parsing_env.c			\
 				parsing_expand_utils.c	\
 				ft_split_bis.c			\
 				parsing_word.c			\
-				expand_here_doc.c
+				expand_here_doc.c		\
+				expand_here_doc_utils.c
 PARSING	=	$(addprefix $(DIR_PARSING), $(SRC_PARSING))
 
 
