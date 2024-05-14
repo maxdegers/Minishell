@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:30 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 15:00:42 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:11:56 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,30 @@ static void	update_env(t_data *data, const char *path)
 	free(pwd);
 }
 
-int	ft_cd(t_block *block, t_data *data)
+void	ft_cd(t_block *block, t_data *data)
 {
 	t_block	*tmp;
+	t_env	*env;
 	char	*path;
 
 	tmp = block;
+	env = ft_envfind(data->env, "HOME");
 	if (!tmp->args[1])
 	{
-		path = ft_envfind_data(data->env, "HOME");
-		if (!path)
+		if (!env)
 		{
 			ft_printf("minishell: cd: HOME not set\n");
 			g_error = 1;
-			return (0);
+			return ;
 		}
+        path = env->value;
 	}
 	else
-		path = tmp->args[1];
+        path = tmp->args[1];
 	if (chdir(path) == -1)
 	{
 		ft_printf("minishell: cd: %s: No such file or directory\n", path);
 		g_error = 1;
 	}
 	update_env(data, path);
-	return (0);
 }

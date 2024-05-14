@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mpitot <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 16:36:05 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/13 15:21:02 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,16 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 	if (!path)
 	{
 		ft_printf_fd(1, "%s: command not found\n", block->cmd);
+		g_error = 127;
+		ft_free_tab(envp);
+		free(path);
 		return ;
 	}
 	if (execve(path, block->args, envp) == -1)
 	{
 		ft_free_tab(envp);
 		free(path);
-		exit_error(ERROR_EXEC, NULL, data);
+		g_error = 127;
+		return ;
 	}
-	return ;
 }

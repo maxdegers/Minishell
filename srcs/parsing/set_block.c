@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_block.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/10 10:54:42 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/13 10:21:40 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 void	make_block(t_data *data, char **args)
 {
 	size_t	i;
+	t_token	*tmp;
 
 	i = 0;
 	while (data->token && ft_strcmp(data->token->data, "|") != 0)
@@ -63,7 +64,10 @@ void	make_block(t_data *data, char **args)
 		args[i++] = ft_strdup(data->token->data);
 		if (!args[i - 1])
 			exit_error(ERROR_MALLOC, NULL, data);
+		tmp = data->token;
 		data->token = data->token->next;
+		free(tmp->data);
+		free(tmp);
 	}
 }
 
@@ -71,6 +75,7 @@ void	ft_set_block(t_data *data)
 {
 	t_block	*block;
 	char	**args;
+    t_token *tmp;
 
 	while (data->token)
 	{
@@ -90,6 +95,11 @@ void	ft_set_block(t_data *data)
 		make_block(data, args);
 		block->args = args;
 		if (data->token)
-			data->token = data->token->next;
+        {
+            tmp = data->token;
+            data->token = data->token->next;
+            free(tmp->data);
+            free(tmp);
+        }
 	}
 }
