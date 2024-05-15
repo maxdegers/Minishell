@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 10:49:09 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:57:35 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ void	set_type(t_data *data)
 
 int	puterror_check_redir(t_token *tmp)
 {
-	if (tmp->type == 1)
+	if (tmp->type == 1 && tmp->next == NULL)
 	{
-		
+		ft_printf_fd(2, "minishell: syntax error near \
+unexpected token `%s'\n", tmp->data);
+		g_error = 2;
+		return (1);
 	}
 	else if (tmp->next == NULL || tmp->next->type != WORD)
 	{
@@ -55,8 +58,10 @@ near unexpected token `newline'\n");
 		else
 			ft_printf_fd(2, "minishell: syntax error near\
 unexpected token `%s'\n", tmp->next->data);
+		g_error = 2;
 		return (1);
 	}
+	return (0);
 }
 
 int	check_redir(t_data *data)
@@ -82,8 +87,10 @@ int	ft_redir_expansion(t_data *data)
 	t_token	*tmp;
 
 	set_type(data);
+	ft_tokenprint(data->token);
 	if (check_redir(data) == 1)
 		return (1);
+	write(1,"1\n", 2);
 	token = data->token;
 	while (token)
 	{
