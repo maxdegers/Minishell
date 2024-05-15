@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 20:08:38 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:10:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:59:06 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	ft_main_loop(t_data *data)
 		if (ft_parsing_line(data, line) == 1)
 		{
 			destroy(data);
-			g_error = ERROR_SYNTAX;
 			continue ;
 		}
 		ft_exec_line(data);

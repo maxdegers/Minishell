@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 12:58:34 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:20:56 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,6 @@ void	set_type(t_data *data)
 	}
 }
 
-int	puterror_check_redir(t_token *tmp)
-{
-	if (tmp->type == 1 && tmp->next == NULL)
-	{
-		ft_printf_fd(2, "minishell: syntax error near \
-unexpected token `%s'\n", tmp->data);
-		g_error = 2;
-		return (1);
-	}
-	else if (tmp->next == NULL || tmp->next->type != WORD)
-	{
-		if (tmp->type == 1 && tmp->type == tmp->next->type)
-			ft_printf_fd(2, "minishell: syntax error near\
-unexpected token `%s'\n", tmp->next->data);
-		else if (tmp->next == NULL)
-			ft_printf_fd(2, "minishell: syntax error\
-near unexpected token `newline'\n");
-		else
-			ft_printf_fd(2, "minishell: syntax error near\
-unexpected token `%s'\n", tmp->next->data);
-		g_error = 2;
-		return (1);
-	}
-	return (0);
-}
-
 int	check_redir(t_data *data)
 {
 	t_token	*tmp;
@@ -71,10 +45,21 @@ int	check_redir(t_data *data)
 	tmp = data->token;
 	while (tmp)
 	{
-		if (tmp->type > 0 && tmp->type < 6)
+		if (tmp->type > 1 && tmp->type < 6)
 		{
-			if (puterror_check_redir(tmp) == 1)
+			if (tmp->next == NULL || tmp->next->type != WORD)
+			{
+				if (tmp->type == 1 && tmp->type == tmp->next->type)
+					ft_printf_fd(2, "minishell: syntax error near\
+		unexpected token `%s'\n", tmp->next->data);
+				else if (tmp->next == NULL)
+					ft_printf_fd(2, "minishell: syntax error\
+ near unexpected token `newline'\n");
+				else
+					ft_printf_fd(2, "minishell: syntax error near\
+ unexpected token `%s'\n", tmp->next->data);
 				return (1);
+			}
 		}
 		tmp = tmp->next;
 	}
