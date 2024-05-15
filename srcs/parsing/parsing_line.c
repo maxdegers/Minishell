@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 13:00:34 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:34:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,20 @@ void	ft_check_token(t_data *data)
 {
 	t_token	*token;
 
-	while ()
+	token = data->token;
+	while (token)
 	{
-		/* code */
+		if (token->is_expend == 1 && ft_strcmp(token->data, "") == 0)
+		{
+			if (token->prev == NULL)
+				ft_token_rmfurst(data, token);
+			else
+				ft_token_remouve(data, token);
+			token = data->token;
+		}
+		else if (token)
+			token = token->next;
 	}
-	
 }
 
 int	ft_parsing_line(t_data *data, char *line)
