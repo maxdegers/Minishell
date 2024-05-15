@@ -84,6 +84,6 @@ void	ft_putheader(void)
 		B_YELLOW, B_RED);
 	ft_printf("            #####%s***************************%s#####\n",
 		B_YELLOW, B_RED);
-	ft_printf("            ######################### by mbrousse\n");
-	ft_printf("            ############################ & mpitot%s\n\n", RESET);
+	ft_printf("            ######################### %sby mbrousse\n", RED);
+	ft_printf("            ############################ %s& mpitot%s\n\n", RED, RESET);
 }
