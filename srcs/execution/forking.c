@@ -29,15 +29,15 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 
 void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
-	int		redir_ret;
+	char	*redir_ret;
 
 	redir_ret = ft_redir(block, fd);
 	if (redir_ret)
 	{
-		if (redir_ret == 1)
-			ft_printf_fd(2, "minishell: %s: No such file or directory\n");
-		else if (redir_ret == 2)
-			ft_printf_fd(2, "minishell: %s: Permission denied\n");
+		if (errno == ENOENT)
+			ft_printf_fd(2, "minishell: %s: No such file or directory\n", redir_ret);
+		else if (errno == EACCES)
+			ft_printf_fd(2, "minishell: %s: Permission denied\n", redir_ret);
 		return ;
 	}
 	if (fd[0] != STDIN_FILENO)

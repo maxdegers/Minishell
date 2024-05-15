@@ -176,7 +176,7 @@ void	ft_close_heredoc_pipe(t_data *data);
 void		ft_execve(t_data *data, t_block *block);
 
 //redirections
-int			ft_redir(t_block *block, int *fd);
+char		*ft_redir(t_block *block, int *fd);
 
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);
