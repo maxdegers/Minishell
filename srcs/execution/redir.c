@@ -28,7 +28,6 @@ void	ft_close_error(t_block *block)
 int	ft_open_redir(t_block *block)
 {
 	t_redir		*tmp;
-	int			ret_error;
 
 	tmp = block->redir;
 	while (tmp)
