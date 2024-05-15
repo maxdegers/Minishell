@@ -20,25 +20,26 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	i = -1;
 	while (++i < child_amount)
 	{
-		waitpid(pid[i], &ret_status, 0);	//TODO check les return error des childs
+		waitpid(pid[i], &ret_status, 0);
 		if (WIFEXITED(ret_status))
 			g_error = WEXITSTATUS(ret_status);
 	}
-//	g_error = ret_status;
 	return (ret_status);
 }
 
 void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
-	/*if (ft_is_builtin(block) == 2)	//command that doesn't work under fork
+	int		redir_ret;
+
+	redir_ret = ft_redir(block, fd);
+	if (redir_ret)
 	{
-		if (fd[0] != 0)
-			close(fd[0]);
-		if (fd[1] != 1)
-			close(fd[1]);
+		if (redir_ret == 1)
+			ft_printf_fd(2, "minishell: %s: No such file or directory\n");
+		else if (redir_ret == 2)
+			ft_printf_fd(2, "minishell: %s: Permission denied\n");
 		return ;
-	}*/
-	ft_redir(block, fd);
+	}
 	if (fd[0] != STDIN_FILENO)
 	{
 		if (dup2(fd[0], STDIN_FILENO) == -1)
