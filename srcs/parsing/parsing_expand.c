@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:25:55 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:34:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,6 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 	new[j] = '\0';
 	free(token->data);
 	token->data = new;
-}
-
-size_t	ft_count_itoa(t_data *data, char *s, int type)
-{
-	size_t	i;
-
-	if (s == NULL && type == 0)
-		exit_error(ERROR_MALLOC, NULL, data);
-	i = 0;
-	while (s[i])
-		i++;
-	free(s);
-	return (i);
 }
 
 size_t	ft_count(t_data *data, char *s, int type)
