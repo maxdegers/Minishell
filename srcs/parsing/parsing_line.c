@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/13 13:57:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:21:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,32 @@ static int	checkerreur(char *line)
 	return (0);
 }
 
+int	ft_check_token(t_data *data)
+{
+	t_token	*token;
+
+	token = data->token;
+	while (token)
+	{
+		if (token->is_expend == 1 && ft_strcmp(token->data, "") == 0)
+		{
+			if (token->type > 1 && token->type < 6)
+			{
+				ft_put_error(1, "minishell: ambiguous redirect\n");
+				return (1);
+			}
+			if (token->prev == NULL)
+				ft_token_rmfurst(data, token);
+			else
+				ft_token_remouve(data, token);
+			token = data->token;
+		}
+		else if (token)
+			token = token->next;
+	}
+	return (0);
+}
+
 int	ft_parsing_line(t_data *data, char *line)
 {
 	data->line = line;
@@ -98,8 +124,12 @@ int	ft_parsing_line(t_data *data, char *line)
 	ft_param_expansion(data);
 	word_split(data);
 	ft_parsing_quote(data);
-	ft_set_block(data);
+	if (ft_check_token(data) == 1)
+		return (1);
 	g_error = 0;
+	if (data->token == NULL)
+		return (1);
+	ft_set_block(data);
 	if (ft_expand_here_doc(data) == 1)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 16:07:08 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:04:06 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isblank(char c)
 {
-	if (c == SPACE || c == TAB)
+	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
 }

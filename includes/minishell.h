@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 12:07:54 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:34:31 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ typedef struct s_token
 	char			*data;
 	int				type;
 	char			*new;
-	char			is_inquote;
+	int				is_expend;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 15:45:24 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:34:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 	if (!new)
 		exit_error(ERROR_MALLOC, NULL, data);
 	token->new = new;
+	token->is_expend = 1;
 	while (token->data[i] != '\0')
 	{
 		if (token->data[i] == S_QUOTE)
