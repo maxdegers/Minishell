@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+int	ft_is_path_directory(char *path)
+{
+	DIR	*dir;
+
+	dir = opendir(path);
+	if (dir)
+	{
+		closedir(dir);
+		return (1);
+	}
+	return (0);
+}
+
 char	*ft_join_path(char *path, char *cmd)
 {
 	char	*tmp;
@@ -31,6 +44,11 @@ char	*ft_get_absolute_path(char *cmd)
 	res = ft_strdup(cmd);
 	if (!res)
 		return (NULL);
+	if (ft_is_path_directory(cmd))
+	{
+		g_error = 126;
+		return (NULL);
+	}
 	if (access(res, F_OK) == 0)
 	{
 		if (access(res, X_OK) == 0)
@@ -56,15 +74,19 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 	{
 		g_error = 0;
 		res = ft_join_path(path[i], cmd);
+		if (ft_is_path_directory(res))
+		{
+			g_error = 126;
+			return (ft_free_tab(path), free(res), NULL);
+		}
 		if (access(res, F_OK) == 0)
 		{
 			if (access(res, X_OK) == 0)
 				return (ft_free_tab(path), res);
 			g_error = 126;
-			return (ft_free_tab(path), NULL);
+			return (ft_free_tab(path), free(res), NULL);
 		}
-		else
-			g_error = 127;
+		g_error = 127;
 		free(res);
 	}
 	return (ft_free_tab(path), NULL);
@@ -82,6 +104,11 @@ char	*ft_get_cwd_exec_path(char *cmd)
 	free(pwd);
 	if (!res)
 		return (cmd);
+	if (ft_is_path_directory(res))
+	{
+		g_error = 126;
+		return (free(res), NULL);
+	}
 	if (access(res, F_OK) == 0)
 	{
 		if (access(res, X_OK) == 0)
@@ -115,8 +142,10 @@ void	ft_print_error_path(t_block *block)
 			block->cmd);
 	else if (g_error == 127)
 		ft_printf_fd(2, "%s: command not found\n", block->cmd);
-	else if (g_error == 126)
+	else if (g_error == 126 && errno == ENOTDIR)
 		ft_printf_fd(2, "%s: Permission denied\n", block->cmd);
+	else if (g_error == 126)
+		ft_printf_fd(2, "minishell: %s: Is a directory\n", block->cmd);
 }
 
 void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
