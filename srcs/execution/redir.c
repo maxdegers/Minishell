@@ -39,13 +39,7 @@ char	*ft_open_redir(t_block *block)
 		if (tmp->type == REDIR_APPEND)
 			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (tmp->fd == -1)
-		{
-			if (tmp->type == REDIR_IN && errno == ENOENT)
-				return (ft_close_error(block), tmp->file);
-			if ((tmp->type == REDIR_IN && errno == EACCES)
-				|| tmp->type == REDIR_OUT || tmp->type == REDIR_APPEND)
-				return (ft_close_error(block), tmp->file);
-		}
+			return (ft_close_error(block), tmp->file);
 		tmp = tmp->next;
 	}
 	return (NULL);

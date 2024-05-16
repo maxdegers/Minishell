@@ -38,6 +38,8 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 			ft_printf_fd(2, "minishell: %s: No such file or directory\n", redir_ret);
 		else if (errno == EACCES)
 			ft_printf_fd(2, "minishell: %s: Permission denied\n", redir_ret);
+		else if (errno == EISDIR)
+			ft_printf_fd(2, "minishell: %s: Is a directory\n", redir_ret);
 		g_error = 1;
 		return ;
 	}
