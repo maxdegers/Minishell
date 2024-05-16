@@ -35,7 +35,7 @@ char	*ft_get_absolute_path(char *cmd)
 	{
 		if (access(res, X_OK) == 0)
 			return (res);
-		g_error = 1;
+		g_error = 126;
 	}
 	else
 		g_error = 127;
@@ -60,7 +60,7 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 		{
 			if (access(res, X_OK) == 0)
 				return (ft_free_tab(path), res);
-			g_error = 1;
+			g_error = 126;
 			return (ft_free_tab(path), NULL);
 		}
 		else
@@ -86,7 +86,7 @@ char	*ft_get_cwd_exec_path(char *cmd)
 	{
 		if (access(res, X_OK) == 0)
 			return (res);
-		g_error = 1;
+		g_error = 126;
 	}
 	else
 		g_error = 127;
@@ -119,6 +119,8 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 		return (ft_free_tab(envp), exit_error(ERROR_MALLOC, NULL,data));
 	else if (!path)
 	{
+		if (g_error == 127 && block->cmd[0] == '.' && block->cmd[1] == '/')
+			ft_printf_fd(2, "%s: No such file or directory\n", block->cmd);
 		if (g_error == 127)
 			ft_printf_fd(2, "%s: command not found\n", block->cmd);
 		if (g_error == 1)

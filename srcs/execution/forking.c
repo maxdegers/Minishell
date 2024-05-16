@@ -27,22 +27,32 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	return (ret_status);
 }
 
+void	ft_error_open(char *str)
+{
+	if (errno == ENOENT)
+	{
+		ft_printf_fd(2, "minishell: %s: No such file or directory\n", str);
+		g_error = 1;
+	}
+	else if (errno == EACCES)
+	{
+		ft_printf_fd(2, "minishell: %s: Permission denied\n", str);
+		g_error = 1;
+	}
+	else if (errno == EISDIR)
+	{
+		ft_printf_fd(2, "minishell: %s: Is a directory\n", str);
+		g_error = 126;
+	}
+}
+
 void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
 	char	*redir_ret;
 
 	redir_ret = ft_redir(block, fd);
 	if (redir_ret)
-	{
-		if (errno == ENOENT)
-			ft_printf_fd(2, "minishell: %s: No such file or directory\n", redir_ret);
-		else if (errno == EACCES)
-			ft_printf_fd(2, "minishell: %s: Permission denied\n", redir_ret);
-		else if (errno == EISDIR)
-			ft_printf_fd(2, "minishell: %s: Is a directory\n", redir_ret);
-		g_error = 1;
-		return ;
-	}
+		return (ft_error_open(redir_ret));
 	if (fd[0] != STDIN_FILENO)
 	{
 		if (dup2(fd[0], STDIN_FILENO) == -1)
