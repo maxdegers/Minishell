@@ -127,10 +127,9 @@ char	*ft_get_path(t_data *data, char *cmd)
 		return (NULL);
 	if (cmd[0] == '/')
 		return (ft_get_absolute_path(cmd));
-	else if (cmd[0] == '.' && cmd[1] == '/')
+	 if (cmd[0] == '.' && cmd[1] == '/')
 		return (ft_get_cwd_exec_path(cmd));
-	else
-		return (ft_get_relative_path(data, cmd));
+	return (ft_get_relative_path(data, cmd));
 }
 
 void	ft_print_error_path(t_block *block)
@@ -142,7 +141,7 @@ void	ft_print_error_path(t_block *block)
 			block->cmd);
 	else if (g_error == 127)
 		ft_printf_fd(2, "%s: command not found\n", block->cmd);
-	else if (g_error == 126 && errno == ENOTDIR)
+	else if (g_error == 126 && (errno == ENOTDIR || errno == EACCES))
 		ft_printf_fd(2, "%s: Permission denied\n", block->cmd);
 	else if (g_error == 126)
 		ft_printf_fd(2, "minishell: %s: Is a directory\n", block->cmd);

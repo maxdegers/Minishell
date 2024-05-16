@@ -32,7 +32,10 @@ void	ft_handle_sig(int sig)
 		rl_redisplay();
 	}
 	if (sig == SIGQUIT)
-		(void)sig;
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	ft_handle_sig_child(int sig)

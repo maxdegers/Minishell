@@ -85,7 +85,9 @@ void	ft_set_block(t_data *data)
 	{
 		block = ft_block_new(data);
 		ft_set_redir(data->token, block, data);
-		if (data->token == NULL && data->token->type == PIPE)
+		if (data->token == NULL )
+			block->cmd = NULL;
+		else if (data->token->type == PIPE)
 			block->cmd = NULL;
 		else
 		{
