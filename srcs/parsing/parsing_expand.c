@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:15:42 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:34:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 12:15:17 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ void	do_expan_size(t_token *token, t_data *data,
 		ft_add_to_str(token->new, j, tmp);
 		*i -= 1;
 	}
+	else if (token->data[*i + 1] != D_QUOTE && token->data[*i + 1] != S_QUOTE)
+	{
+		tmp = ft_strdup("$");
+		if (!tmp)
+			exit_error(ERROR_MALLOC, NULL, data);
+		ft_add_to_str(token->new, j, tmp);
+	}
 }
 
 void	do_expan(t_data *data, t_token *token, size_t size, int quote)
@@ -86,18 +93,19 @@ void	do_expan(t_data *data, t_token *token, size_t size, int quote)
 	if (!new)
 		exit_error(ERROR_MALLOC, NULL, data);
 	token->new = new;
-	token->is_expend = 1;
 	while (token->data[i] != '\0')
 	{
 		if (token->data[i] == S_QUOTE)
 			quote *= -1;
 		if (token->data[i] == '$' && quote != 1)
+		{
 			do_expan_size(token, data, &i, &j);
+			token->is_expend = 1;
+		}
 		else
 			new[j++] = token->data[i];
 		i++;
 	}
-	new[j] = '\0';
 	free(token->data);
 	token->data = new;
 }
