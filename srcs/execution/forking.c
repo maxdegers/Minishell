@@ -86,6 +86,7 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 			ft_get_fd(fds, i, child_fd, childs - 1);
 			ft_child_process(data, block, child_fd);
 			free(pid);
+			ft_close_heredoc_pipe(data);
 			exit_child(data, fds, child_fd);
 		}
 		block = block->next;

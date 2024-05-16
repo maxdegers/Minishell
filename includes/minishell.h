@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 13:16:11 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:33:20 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+///
+# define ENV_VALID "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_"
+///
 
 ///
 # define WORD 0
@@ -142,25 +146,30 @@ void		ft_putheader(void);
 
 // exec.c
 int			ft_exec_line(t_data *data);
-int	ft_is_builtin(t_block *block);
-void	ft_exec_under_fork(t_block *block, t_data *data);
+int			ft_is_builtin(t_block *block);
+void		ft_exec_under_fork(t_block *block, t_data *data);
 
 //pipes
-int	ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount);
-size_t	get_pipe_amount(t_block *block);
-int	**ft_open_pipes(t_data *data, size_t pipe_amount);
+int			ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount);
+size_t		get_pipe_amount(t_block *block);
+int			**ft_open_pipes(t_data *data, size_t pipe_amount);
 
 //forks
-int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds);
-int	ft_wait_childs(int *pid, size_t child_amount);
+int			*ft_fork(t_data *data, t_block *block, size_t childs, int **fds);
+int			ft_wait_childs(int *pid, size_t child_amount);
 
 
 //built-ins
 void		ft_cd(t_block *block, t_data *data);
 void		ft_echo(t_block *block);
 void		ft_exit(t_data *data, t_block *block);
+
 int			ft_export(t_data *data, t_block *block);
+int			determine_export_type(const char *arg);
+char		**ft_export_split(char *str, char *split);
+void		ft_export_fork(t_data *data, t_block *block);
 void		ft_put_env_exp(t_data *data);
+
 void		ft_env(t_data *data);
 void		ft_pwd(void);
 int			ft_unset(t_block *block, t_data *data);
@@ -170,7 +179,7 @@ void		close2(int fd1, int fd2);
 void		close3(int fd1, int fd2, int fd3);
 void		close4(int fd1, int fd2, int fd3, int fd4);
 void		ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
-void	ft_close_heredoc_pipe(t_data *data);
+void		ft_close_heredoc_pipe(t_data *data);
 
 //execve
 void		ft_execve(t_data *data, t_block *block);
@@ -248,22 +257,22 @@ void		ft_param_expansion(t_data *data);
 //parsing redir.c
 int			ft_redir_expansion(t_data *data);
 int			ft_iscaracter_env(char c);
-void	ft_redir_print(t_redir *redir);
-void	ft_tokenadd_next(t_token *token, t_token *new);
-void	ft_add_redir(t_block *block, char *file, int type, t_data *data);
-void	ft_redir_free(t_redir *redir);
-int	ft_expand_here_doc(t_data *data);
-void	ft_block_print(t_block *block);
-void	ft_tokenprint(t_token *token);
-void	ft_token_rm_redir(t_data *data, t_token *to_remouve);
-void	ft_token_rmfurst(t_data *data, t_token *to_remouve);
-void	do_expan(t_data *data, t_token *token, size_t size, int quote);
-size_t	ft_count(t_data *data, char *s, int type);
-void	exit_child(t_data *data, int **fds, int *fd);
+void		ft_redir_print(t_redir *redir);
+void		ft_tokenadd_next(t_token *token, t_token *new);
+void		ft_add_redir(t_block *block, char *file, int type, t_data *data);
+void		ft_redir_free(t_redir *redir);
+int			ft_expand_here_doc(t_data *data);
+void		ft_block_print(t_block *block);
+void		ft_tokenprint(t_token *token);
+void		ft_token_rm_redir(t_data *data, t_token *to_remouve);
+void		ft_token_rmfurst(t_data *data, t_token *to_remouve);
+void		do_expan(t_data *data, t_token *token, size_t size, int quote);
+size_t		ft_count(t_data *data, char *s, int type);
+void		exit_child(t_data *data, int **fds, int *fd);
 
-void	ft_handle_sig_child(int sig);
-char	*ft_do_count(t_data *data, char *s, int type, char *tmp2);
-void	heredoc_calc_expan_size(char *line, t_data *data,
+void		ft_handle_sig_child(int sig);
+char		*ft_do_count(t_data *data, char *s, int type, char *tmp2);
+void		heredoc_calc_expan_size(char *line, t_data *data,
 	size_t *size, size_t *i);
 void	ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
 char	*join_lines(char *s1, char *s2, t_data *data);

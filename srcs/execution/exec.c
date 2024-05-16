@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/13 17:20:53 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/16 17:43:17 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_is_builtin(t_block *block)
 {
+	if (block->cmd == NULL)
+		return (0);
 	if (ft_strcmp(block->cmd, "echo") == 0
 	|| ft_strcmp(block->cmd, "pwd") == 0
 	|| (ft_strcmp(block->cmd, "export") == 0 && !block->args[1])
@@ -29,6 +31,8 @@ int	ft_is_builtin(t_block *block)
 
 void	ft_exec_simple_builtin(t_block *block, t_data *data)
 {
+	if (block->cmd == NULL)
+		return ;
 	if (ft_strcmp(block->cmd, "cd") == 0)
 		ft_cd(block, data);
 	if (ft_strcmp(block->cmd, "export") == 0)
@@ -41,14 +45,16 @@ void	ft_exec_simple_builtin(t_block *block, t_data *data)
 
 void	ft_exec_under_fork(t_block *block, t_data *data)
 {
+	if (block->cmd == NULL)
+		return ;
 	if (ft_strcmp(block->cmd, "cd") == 0)
-		ft_cd(block, data);
+		return (ft_cd(block, data));
 	if (ft_strcmp(block->cmd, "export") == 0)
-		ft_export(data, block);
+		return (ft_export_fork(data, block));
 	if (ft_strcmp(block->cmd, "unset") == 0)
-		ft_unset(block, data);
+		return ;
 	if (ft_strcmp(block->cmd, "exit") == 0)
-		ft_exit(data, block);
+		return (ft_exit(data, block));
 	if (ft_strcmp(block->cmd, "echo") == 0)
 		return (ft_echo(block));
 	if (ft_strcmp(block->cmd, "export") == 0)
@@ -57,8 +63,7 @@ void	ft_exec_under_fork(t_block *block, t_data *data)
 		return (ft_pwd());
 	if (ft_strcmp(block->cmd, "env") == 0)
 		return (ft_env(data));
-	else
-		ft_execve(data, block);
+	ft_execve(data, block);
 }
 
 int	ft_exec_line(t_data *data)
