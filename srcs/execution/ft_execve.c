@@ -123,7 +123,7 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 			ft_printf_fd(2, "%s: No such file or directory\n", block->cmd);
 		else if (g_error == 127)
 			ft_printf_fd(2, "%s: command not found\n", block->cmd);
-		else if (g_error == 1)
+		else if (g_error == 126)
 			ft_printf_fd(2, "%s: Permission denied\n", block->cmd);
 		ft_free_tab(envp);
 		free(path);
