@@ -121,6 +121,8 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 	{
 		if (g_error == 127 && block->cmd[0] == '.' && block->cmd[1] == '/')
 			ft_printf_fd(2, "%s: No such file or directory\n", block->cmd);
+		else if (g_error == 127 && block->cmd[0] == '/')
+			ft_printf_fd(2, "minishell: %s: No such file or directory\n", block->cmd);
 		else if (g_error == 127)
 			ft_printf_fd(2, "%s: command not found\n", block->cmd);
 		else if (g_error == 126)
