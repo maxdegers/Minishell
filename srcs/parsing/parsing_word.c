@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 14:22:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:49:50 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ void	do_word_split(t_data *data, t_token *token)
 		i++;
 	}
 	free(tab);
+}
+
+int	word_check(t_data *data)
+{
+	t_token	*token;
+
+	token = data->token;
+	while (token)
+	{
+		if (ft_islineblank(token->data) == 1)
+		{
+			if (data->token == token)
+				ft_token_rmfurst(data, token);
+			else
+				ft_token_remouve(data, token);
+			token = data->token;
+		}
+		else if (token)
+			token = token->next;
+	}
+	if (data->token == NULL)
+		return (1);
+	return (0);
 }
 
 void	word_split(t_data *data)
