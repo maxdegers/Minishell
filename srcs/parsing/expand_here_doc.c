@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 12:07:27 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:00:59 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,30 @@ char	*do_expand_herdoc(t_data *data, char *line, size_t size)
 	return (new);
 }
 
-char	*ft_expand_heredoc(t_data *data, char *line)
+int	ft_check_is_incote_heredoc(char *line)
+{
+	size_t	i;
+	int		s_quote;
+	int		d_quote;
+
+	s_quote = -1;
+	d_quote = -1;
+	i = 0;
+	while (line[i] && i < (ft_strlen(line) - 1))
+	{
+		if (line[i] == S_QUOTE)
+			s_quote *= -1;
+		if (line[i] == D_QUOTE)
+			d_quote *= -1;
+		i++;
+	}
+	if (s_quote == 1 || d_quote == 1)
+		return (1);
+	else
+		return (0);
+}
+
+char	*ft_expand_heredoc(t_data *data, char *line, t_redir *redir)
 {
 	char	*res;
 	size_t	size;
@@ -72,18 +95,23 @@ char	*ft_expand_heredoc(t_data *data, char *line)
 
 	i = 0;
 	size = 0;
-	while (line[i] != '\0')
+	if (redir->is_in_cote == 0)
 	{
-		if (line[i] == '$')
+		while (line[i] != '\0')
 		{
-			heredoc_calc_expan_size(line, data, &size, &i);
+			if (line[i] == '$')
+			{
+				heredoc_calc_expan_size(line, data, &size, &i);
+			}
+			else
+				size++;
+			i++;
 		}
-		else
-			size++;
-		i++;
+		res = do_expand_herdoc(data, line, size);
+		return (res);
 	}
-	res = do_expand_herdoc(data, line, size);
-	return (res);
+	else
+		return (line);
 }
 
 int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
@@ -107,7 +135,7 @@ delimited by end-of-file (wanted `%s')\n", redir->file);
 		res = join_lines(res, line, data);
 	}
 	free(line);
-	res = ft_expand_heredoc(data, res);
+	res = ft_expand_heredoc(data, res, redir);
 	ft_heredoc_pipe(data, redir, res);
 	if (!redir->file)
 		exit_error(ERROR_MALLOC, NULL, data);

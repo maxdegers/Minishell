@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:00:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/02 11:31:15 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:53:08 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	do_cote_remove(t_token *token, char quote, char *new)
 	{
 		if (token->data[i] == S_QUOTE || token->data[i] == D_QUOTE)
 		{
+			token->is_in_cote = 1;
 			quote = token->data[i];
 			i += 1;
 			while (token->data[i] && token->data[i] != quote)

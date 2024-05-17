@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 12:22:55 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:37:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,14 @@ int	ft_redir_expansion(t_data *data)
 			token = token->next;
 			token->type = token->prev->type;
 			if (!tmp)
+			{
 				ft_token_rmfurst(data, token->prev);
+				token = data->token;
+			}
 			else
 				ft_token_remouve(data, tmp->next);
-			token = data->token;
 		}
-		else
-			token = token->next;
+		token = token->next;
 	}
 	return (0);
 }
