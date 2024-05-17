@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:44:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 15:45:59 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:28:32 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 
 	if (token->data[*i + 1] == '?')
 	{
-		*size += ft_count(data, ft_itoa(g_error), 0);
+		tmp = ft_itoa(g_error);
+		*size += ft_count(data, tmp, 0);
+		free(tmp);
 		*i += 1;
 	}
 	else if (ft_iscaracter_env(token->data[*i + 1]) == 1
@@ -36,6 +38,8 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 		free(tmp);
 		*i -= 1;
 	}
+	else
+		*size += 1;
 }
 
 size_t	calc_expan(t_token	*token, t_data *data, int quote)

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 13:56:47 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:42:05 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	clac_size_block(t_token *token)
 
 	size = 0;
 	tmp = token;
-	while (tmp && ft_strcmp(tmp->data, "|") != 0)
+	while (tmp && tmp->type != PIPE)
 	{
 		size++;
 		tmp = tmp->next;
@@ -64,7 +64,7 @@ void	make_block(t_data *data, t_block	*block)
 		exit_error(ERROR_MALLOC, NULL, data);
 	block->args = args;
 	i = 0;
-	while (data->token && ft_strcmp(data->token->data, "|") != 0)
+	while (data->token && data->token->type != PIPE)
 	{
 		args[i++] = ft_strdup(data->token->data);
 		if (!args[i - 1])
@@ -85,7 +85,9 @@ void	ft_set_block(t_data *data)
 	{
 		block = ft_block_new(data);
 		ft_set_redir(data->token, block, data);
-		if (data->token == NULL && ft_strcmp(data->token->data, "|") == 0)
+		if (data->token == NULL )
+			block->cmd = NULL;
+		else if (data->token->type == PIPE)
 			block->cmd = NULL;
 		else
 		{

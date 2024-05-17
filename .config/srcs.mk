@@ -53,17 +53,18 @@ SRC_UTILS	=	t_env.c			\
 UTILS	=	$(addprefix $(DIR_UTILS), $(SRC_UTILS))
 
 DIR_EXEC		=	execution/
-SRC_EXEC		=	exec.c	\
-				ft_cd.c		\
-				ft_echo.c	\
-				ft_execve.c	\
-				ft_exit.c	\
-				ft_export.c	\
-				ft_putenv.c	\
-				ft_pwd.c	\
-				ft_unset.c	\
-				redir.c		\
-				close_fds.c	\
-				forking.c	\
+SRC_EXEC		=	exec.c			\
+				ft_cd.c				\
+				ft_echo.c			\
+				ft_execve.c			\
+				ft_exit.c			\
+				ft_export.c			\
+				ft_export_utils.c	\
+				ft_putenv.c			\
+				ft_pwd.c			\
+				ft_unset.c			\
+				redir.c				\
+				close_fds.c			\
+				forking.c			\
 				piping.c
 EXEC	=	$(addprefix $(DIR_EXEC), $(SRC_EXEC))
