@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 21:33:20 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:59:30 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_redir
 	int				fd;
 	int				type;
 	char			*file;
+	int				is_in_cote;
 	struct s_redir	*next;
 }	t_redir;
 
@@ -118,6 +119,7 @@ typedef struct s_token
 	int				type;
 	char			*new;
 	int				is_expend;
+	int				is_in_cote;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -259,7 +261,7 @@ int			ft_redir_expansion(t_data *data);
 int			ft_iscaracter_env(char c);
 void		ft_redir_print(t_redir *redir);
 void		ft_tokenadd_next(t_token *token, t_token *new);
-void		ft_add_redir(t_block *block, char *file, int type, t_data *data);
+void		ft_add_redir(t_block *block, t_token *token, t_data *data);
 void		ft_redir_free(t_redir *redir);
 int			ft_expand_here_doc(t_data *data);
 void		ft_block_print(t_block *block);

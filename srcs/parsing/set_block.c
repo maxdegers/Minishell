@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 10:42:05 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:55:59 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 	{
 		if (token->type >= REDIR_IN && token->type <= REDIR_HEREDOC)
 		{
-			ft_add_redir(block, token->data, token->type, data);
+			ft_add_redir(block, token, data);
 			tmp = token->next;
 			if (data->token == token)
 			{

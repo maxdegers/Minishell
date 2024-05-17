@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:41:02 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 10:22:43 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:53:34 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_token	*ft_tokennew(char *line, size_t start, size_t end, int type)
 	new->next = NULL;
 	new->prev = NULL;
 	new->is_expend = 0;
+	new->is_in_cote = 0;
 	return (new);
 }
 

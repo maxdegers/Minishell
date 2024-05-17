@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 15:20:56 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:37:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	put_type(t_token *token)
 		token->type = PIPE;
 }
 
-void	set_type(t_data *data)
+int	set_type(t_data *data)
 {
 	t_token	*tmp;
 
@@ -36,6 +36,19 @@ void	set_type(t_data *data)
 		put_type(tmp);
 		tmp = tmp->next;
 	}
+	tmp = data->token;
+	while (tmp)
+	{
+		if (tmp->next && tmp->type == 1 && tmp->type == tmp->next->type)
+		{
+			ft_printf_fd(2, "minishell: syntax error near\
+ unexpected token `%s'\n", tmp->next->data);
+			g_error = 2;
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int	check_redir(t_data *data)
@@ -49,15 +62,13 @@ int	check_redir(t_data *data)
 		{
 			if (tmp->next == NULL || tmp->next->type != WORD)
 			{
-				if (tmp->type == 1 && tmp->type == tmp->next->type)
-					ft_printf_fd(2, "minishell: syntax error near\
-		unexpected token `%s'\n", tmp->next->data);
-				else if (tmp->next == NULL)
+				if (tmp->next == NULL)
 					ft_printf_fd(2, "minishell: syntax error\
  near unexpected token `newline'\n");
 				else
 					ft_printf_fd(2, "minishell: syntax error near\
  unexpected token `%s'\n", tmp->next->data);
+				g_error = 2;
 				return (1);
 			}
 		}
@@ -71,7 +82,8 @@ int	ft_redir_expansion(t_data *data)
 	t_token	*token;
 	t_token	*tmp;
 
-	set_type(data);
+	if (set_type(data) == 1)
+		return (1);
 	if (check_redir(data) == 1)
 		return (1);
 	token = data->token;
