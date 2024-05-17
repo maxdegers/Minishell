@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:06:32 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 12:13:14 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:38:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ void	heredoc_calc_expan_size(char *line, t_data *data,
 		*size += ft_count(data, ft_itoa(g_error), 0);
 		*i += 1;
 	}
-	else if (ft_iscaracter_env(line[*i + 1]) == 1
-		|| line[*i + 1] != '\0')
+	else if (ft_iscaracter_env(line[*i + 1], 0) == 1
+		&& line[*i + 1] != '\0')
 	{
 		*i += 1;
 		start = *i;
-		while (line[*i] && ft_iscaracter_env(line[*i]) == 1)
+		while (line[*i] && ft_iscaracter_env(line[*i], 1) == 1)
+			*i += 1;
+		if (ft_isdigit(line[*i]) == 1)
 			*i += 1;
 		end = *i;
 		tmp = ft_strdup_size(&line[start], end - start);
@@ -70,4 +72,8 @@ void	heredoc_calc_expan_size(char *line, t_data *data,
 		free(tmp);
 		*i -= 1;
 	}
+	else if (ft_check_is_incote(line, i) == 1
+		|| line[*i + 1] == '\0'
+		|| ft_iscaracter_env(line[*i + 1], 0) == 0)
+		*size += 1;
 }

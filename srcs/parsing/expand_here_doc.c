@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 13:00:59 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:38:33 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,27 @@ void	heredoc_do_expan_size(char *line, t_data *data,
 		ft_add_to_str(data->error_cmd, j, tmp);
 		*i += 1;
 	}
-	else if (ft_iscaracter_env(line[*i + 1]) == 1
-		|| line[*i + 1] != '\0')
+	else if (ft_iscaracter_env(line[*i + 1], 0) == 1
+		&& line[*i + 1] != '\0')
 	{
 		*i += 1;
 		start = *i;
-		while (line[*i] && ft_iscaracter_env(line[*i]) == 1)
+		while (line[*i] && ft_iscaracter_env(line[*i], 1) == 1)
+			*i += 1;
+		if (ft_isdigit(line[*i]) == 1)
 			*i += 1;
 		end = *i;
 		tmp = ft_strdup_size(&line[start], end - start);
 		tmp = ft_do_count(data, ft_envfind_data(data->env, tmp), 1, tmp);
 		ft_add_to_str(data->error_cmd, j, tmp);
 		*i -= 1;
+	}
+	else if (ft_check_is_incote(line, i) == 1 || line[*i + 1] == '\0' || ft_iscaracter_env(line[*i + 1], 0) == 0)
+	{
+		tmp = ft_strdup("$");
+		if (!tmp)
+			exit_error(ERROR_MALLOC, NULL, data);
+		ft_add_to_str(data->error_cmd, j, tmp);
 	}
 }
 

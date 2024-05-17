@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 12:59:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:23:42 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);
 //parsing redir.c
 int			ft_redir_expansion(t_data *data);
-int			ft_iscaracter_env(char c);
+int			ft_iscaracter_env(char c, int type);
 void		ft_redir_print(t_redir *redir);
 void		ft_tokenadd_next(t_token *token, t_token *new);
 void		ft_add_redir(t_block *block, t_token *token, t_data *data);

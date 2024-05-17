@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:55:41 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 11:04:06 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:24:17 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,17 @@ int	ft_iscontrol_operator(char c)
 	return (0);
 }
 
-int	ft_iscaracter_env(char c)
+int	ft_iscaracter_env(char c, int type)
 {
-	if (ft_isalnum(c) == 1 || c == '_')
-		return (1);
+	if (type == 0)
+	{
+		if (ft_isalnum(c) == 1 || c == '_')
+			return (1);
+	}
+	else
+	{
+		if (ft_isalpha(c) == 1 || c == '_')
+			return (1);
+	}
 	return (0);
 }
