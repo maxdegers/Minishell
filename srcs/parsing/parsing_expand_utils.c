@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:44:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 11:28:32 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:17:53 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 		free(tmp);
 		*i += 1;
 	}
-	else if (ft_iscaracter_env(token->data[*i + 1]) == 1
-		|| token->data[*i + 1] != '\0')
+	else if ((ft_iscaracter_env(token->data[*i + 1]) == 1
+			|| token->data[*i + 1] != '\0') && token->data[*i + 1] != D_QUOTE && token->data[*i + 1] != SPACE)
 	{
 		*i += 1;
 		start = *i;
@@ -38,7 +38,7 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 		free(tmp);
 		*i -= 1;
 	}
-	else
+	else if (ft_check_is_incote(token->data, i) == 1 || token->data[*i + 1] == '\0')
 		*size += 1;
 }
 
