@@ -25,7 +25,7 @@ void	ft_close_error(t_block *block)
 	}
 }
 
-int	ft_open_redir(t_block *block)
+char	*ft_open_redir(t_block *block)
 {
 	t_redir		*tmp;
 
@@ -35,16 +35,14 @@ int	ft_open_redir(t_block *block)
 		if (tmp->type == REDIR_IN)
 			tmp->fd = open(tmp->file, O_RDONLY);
 		if (tmp->type == REDIR_OUT)
-			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_TRUNC,
-						S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
+			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (tmp->type == REDIR_APPEND)
-			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_APPEND,
-						S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
+			tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (tmp->fd == -1)
-			return (ft_close_error(block), 1);
+			return (ft_close_error(block), tmp->file);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	ft_get_redirs(t_block *block, int *in, int *out)
@@ -69,17 +67,19 @@ int	ft_get_redirs(t_block *block, int *in, int *out)
 	return (0);
 }
 
-int	ft_redir(t_block *block, int *fd)
+char	*ft_redir(t_block *block, int *fd)
 {
 	int		in;
 	int		out;
+	char	*ret;
 
-	if (ft_open_redir(block))
-		return (1);
+	ret = ft_open_redir(block);
+	if (ret)
+		return (ret);
 	ft_get_redirs(block, &in, &out);
 	if (in != -1)
 		fd[0] = in;
 	if (out != -1)
 		fd[1] = out;
-	return (0);
+	return (NULL);
 }

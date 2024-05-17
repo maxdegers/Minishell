@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+int	ft_is_flag(char *arg)
+{
+	size_t	i;
+
+	i = 0;
+	if (arg[i] != '-')
+		return (0);
+	while (arg[++i])
+	{
+		if (arg[i] != 'n')
+			return (0);
+	}
+	return (1);
+}
+
 void	ft_echo(t_block *block)
 {
 	int		nl;
@@ -19,7 +34,7 @@ void	ft_echo(t_block *block)
 
 	nl = 1;
 	i = 1;
-	if (block->args[1] && ft_strcmp(block->args[1], "-n") == 0)
+	if (block->args[1] && ft_is_flag(block->args[1]))
 	{
 		nl = 0;
 		i++;
