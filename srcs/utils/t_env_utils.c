@@ -37,6 +37,11 @@ char	**ft_env_to_tab(t_env *env)
 		return (NULL);
 	while (env)
 	{
+		if (!env->show)
+		{
+			env = env->next;
+			continue ;
+		}
 		tab[i] = ft_strjoin(env->name, "=");
 		if (!tab[i])
 			return (ft_free_tab(tab), NULL);
