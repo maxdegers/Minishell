@@ -1,9 +1,9 @@
 <h1 align="center">
-LE PITIT_SHELL
+MINISHELL
 </h1>
 
 <h4 align="center">
-Aussi mignon qu’un vrai shell!
+Experience the core of command line interfaces!
 </h4>
 </p>
 
@@ -21,47 +21,39 @@ Aussi mignon qu’un vrai shell!
 
 ## About
 ___
-This project is focused on creating a minimalistic shell, which is a program that allows users to interact with their operating system by typing commands. By participating in this project, individuals can learn how to create a functional and efficient shell that performs tasks such as running programs, managing input and output, and handling errors.
+Minishell, as part of the 42 curriculum, is a simplified version of a UNIX shell. This project is designed to introduce students to the basics of system programming, process management, and interaction with the kernel via a user-created command interpreter.
 
 ____
 ## Index
 ___
 ### Project Objectives
 
-The objectives of the project are:
-- Create a program that simulates a shell.
-- Handle errors and signals.
-- Handle environment variables.
-- Handle local variables.
-- Handle simple redirections (< and >).
-- Handle pipes (|).
+The goals of Minishell are:
+- Emulate the basic functionality of a traditional UNIX shell.
+- Interpret commands entered by the user.
+- Implement error and signal handling.
+- Manage environment and local variables.
+- Handle input/output redirections and pipes.
 
 ### Implemented Features
 
-The implemented features in this project are:
-- Handling errors and signals.
-- Handling environment variables.
-- Handling local variables.
-- Handling simple redirections (< and >).
-- Handling advanced redirections (<< and >>).
-- Handling pipes (|).
-- Handling the "echo" command.
-- Handling the "cd" command.
-- Handling the "env" command.
-- Handling the "export" command.
-- Handling the "unset" command.
-- Handling the "exit" command.
+In this version of Minishell, the following features have been implemented:
+- Basic command interpretation and execution.
+- Error and signal management.
+- Environment and local variables management.
+- Simple (<, >) and advanced (<<, >>) redirections.
+- Pipe mechanisms (|).
+- Built-in commands like `echo`, `cd`, `env`, `export`, `unset`, and `exit`.
 
 ### Non-Implemented Features
 
-The non-implemented features in this project are:
-- Handling the semi-colon command separator ;
+Some advanced features not covered include:
+- Complex chaining of commands with semicolons (;).
 
 ### Conclusion
 
-The Minishell project at École 42 was an excellent opportunity to put into practice the programming skills acquired throughout the curriculum. Handling errors and signals, environment variables, local variables, redirections, and pipes was a very enriching experience and helped to better understand how a shell works.
+The Minishell project provides a hands-on approach to understanding the inner workings of a shell, teaching valuable skills in systems programming and process management. It's a critical step for students at École 42 to deepen their understanding of operating system fundamentals.
 
-___
 ## Usage
 ___
 ### Instructions
@@ -76,12 +68,6 @@ $ ./minishell
 ```
 **3. Special Compiling Rules**
 
-To compile the program with fsanitize, run:
-
-```shell
-$ make debug
-$ ./minishell
-```
 To compile the program with valgrind, run:
 
 ```shell
