@@ -79,4 +79,4 @@ $ make leak
 * [The Open Group Base Specifications - Shell Command Language](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
 * [Introduction to Systems Programming: a Hands-on Approach - Chapter 5. Writing Your Own Shell ](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
 
-by [mpitot](https://profile.intra.42.fr/users/mpitot) & [mbrousse](https://profile.intra.42.fr/users/mbrousse).
+by [mpitot](https://github.com/MPIT0T) & [mbrousse](https://github.com/maxdegers).
