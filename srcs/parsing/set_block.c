@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 12:55:59 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:02:36 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 	}
 }
 
-void	make_block(t_data *data, t_block	*block)
+int	make_block(t_data *data, t_block	*block)
 {
 	char	**args;
 	size_t	i;
@@ -74,6 +74,7 @@ void	make_block(t_data *data, t_block	*block)
 		free(tmp->data);
 		free(tmp);
 	}
+	return (1);
 }
 
 void	ft_set_block(t_data *data)
@@ -85,7 +86,7 @@ void	ft_set_block(t_data *data)
 	{
 		block = ft_block_new(data);
 		ft_set_redir(data->token, block, data);
-		if (data->token == NULL )
+		if (data->token == NULL)
 			block->cmd = NULL;
 		else if (data->token->type == PIPE)
 			block->cmd = NULL;
@@ -95,8 +96,7 @@ void	ft_set_block(t_data *data)
 			if (!block->cmd)
 				exit_error(ERROR_MALLOC, NULL, data);
 		}
-		make_block(data, block);
-		if (data->token)
+		if (make_block(data, block) && data->token)
 		{
 			tmp = data->token;
 			data->token = data->token->next;

@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 19:23:42 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:03:15 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,4 +281,9 @@ char	*join_lines(char *s1, char *s2, t_data *data);
 int	ft_islineblank(char *line);
 int	word_check(t_data *data);
 int	ft_check_is_incote(char *line, size_t *i);
+void	ft_cal_expand_utils(size_t *i, size_t *size, char *line, t_data *data);
+void	ft_expand_utils(size_t *i, size_t *j, t_token *token, t_data *data);
+void	ft_expand_heredoc_utils(size_t *i, size_t *j, char *line, t_data *data);
+int	check_pipe_token(t_data *data);
+int	set_type(t_data *data);
 #endif
