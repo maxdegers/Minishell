@@ -3,7 +3,7 @@ MINISHELL
 </h1>
 
 <h4 align="center">
-Experience the core of command line interfaces!
+As beautiful as a shell !!
 </h4>
 </p>
 
