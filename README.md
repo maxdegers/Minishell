@@ -40,7 +40,7 @@ In this version of Minishell, the following features have been implemented:
 - Error and signal management.
 - Environment and local variables management.
 - Simple (<, >) and advanced (<<, >>) redirections.
-- Pipe mechanisms (|).
+- Pipe mechanisms ( | ).
 - Built-in commands like `echo`, `cd`, `env`, `export`, `unset`, and `exit`.
 
 ### Non-Implemented Features
