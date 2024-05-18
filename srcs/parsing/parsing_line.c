@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 18:54:08 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:58:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,34 +113,14 @@ int	ft_check_token(t_data *data)
 	return (0);
 }
 
-int	check_pipe_token(t_data *data)
-{
-	t_token	*token;
-
-	token = data->token;
-	while (token)
-	{
-		if (data->token->type == PIPE)
-		{
-			ft_put_error(1, "syntax error near unexpected token `|'\n");
-			return (1);
-		}
-		if (!token->next && token->type == PIPE)
-		{
-			ft_put_error(1, "syntax error near unexpected token `|'\n");
-			return (1);
-		}
-		token = token->next;
-	}
-	return (0);
-}
-
 int	ft_parsing_line(t_data *data, char *line)
 {
 	data->line = line;
 	if (checkerreur(line) == 1)
 		return (ft_put_error(255, "minishell: invalid pattern\n"), 1);
 	ft_token_set(line, data);
+	if (set_type(data) == 1)
+		return (1);
 	if (ft_redir_expansion(data) == 1)
 		return (1);
 	if (check_pipe_token(data) == 1)

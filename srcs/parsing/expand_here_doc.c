@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 19:38:33 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:53:16 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	heredoc_do_expan_size(char *line, t_data *data,
 	size_t *i, size_t *j)
 {
-	size_t	start;
-	size_t	end;
 	char	*tmp;
 
 	if (line[*i + 1] == '?')
@@ -27,20 +25,9 @@ void	heredoc_do_expan_size(char *line, t_data *data,
 	}
 	else if (ft_iscaracter_env(line[*i + 1], 0) == 1
 		&& line[*i + 1] != '\0')
-	{
-		*i += 1;
-		start = *i;
-		while (line[*i] && ft_iscaracter_env(line[*i], 1) == 1)
-			*i += 1;
-		if (ft_isdigit(line[*i]) == 1)
-			*i += 1;
-		end = *i;
-		tmp = ft_strdup_size(&line[start], end - start);
-		tmp = ft_do_count(data, ft_envfind_data(data->env, tmp), 1, tmp);
-		ft_add_to_str(data->error_cmd, j, tmp);
-		*i -= 1;
-	}
-	else if (ft_check_is_incote(line, i) == 1 || line[*i + 1] == '\0' || ft_iscaracter_env(line[*i + 1], 0) == 0)
+		ft_expand_heredoc_utils(i, j, line, data);
+	else if (ft_check_is_incote(line, i) == 1
+		|| line[*i + 1] == '\0' || ft_iscaracter_env(line[*i + 1], 0) == 0)
 	{
 		tmp = ft_strdup("$");
 		if (!tmp)
@@ -71,29 +58,6 @@ char	*do_expand_herdoc(t_data *data, char *line, size_t size)
 	}
 	free(line);
 	return (new);
-}
-
-int	ft_check_is_incote_heredoc(char *line)
-{
-	size_t	i;
-	int		s_quote;
-	int		d_quote;
-
-	s_quote = -1;
-	d_quote = -1;
-	i = 0;
-	while (line[i] && i < (ft_strlen(line) - 1))
-	{
-		if (line[i] == S_QUOTE)
-			s_quote *= -1;
-		if (line[i] == D_QUOTE)
-			d_quote *= -1;
-		i++;
-	}
-	if (s_quote == 1 || d_quote == 1)
-		return (1);
-	else
-		return (0);
 }
 
 char	*ft_expand_heredoc(t_data *data, char *line, t_redir *redir)

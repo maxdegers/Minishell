@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:44:35 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 19:34:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:04:57 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 {
-	size_t	start;
-	size_t	end;
 	char	*tmp;
 
 	if (token->data[*i + 1] == '?')
@@ -28,19 +26,7 @@ void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
 	else if (ft_iscaracter_env(token->data[*i + 1], 0) == 1
 		&& token->data[*i + 1] != '\0' && token->data[*i + 1] != D_QUOTE
 		&& token->data[*i + 1] != SPACE)
-	{
-		*i += 1;
-		start = *i;
-		while (token->data[*i] && ft_iscaracter_env(token->data[*i], 1) == 1)
-			*i += 1;
-		if (ft_isdigit(token->data[*i]) == 1)
-			*i += 1;
-		end = *i;
-		tmp = ft_strdup_size(&token->data[start], end - start);
-		*size += ft_count(data, ft_envfind_data(data->env, tmp), 1);
-		free(tmp);
-		*i -= 1;
-	}
+		ft_cal_expand_utils(i, size, token->data, data);
 	else if (ft_check_is_incote(token->data, i) == 1
 		|| token->data[*i + 1] == '\0'
 		|| ft_iscaracter_env(token->data[*i + 1], 0) == 0)
@@ -89,4 +75,16 @@ void	ft_param_expansion(t_data *data)
 		}
 		tmp = tmp->next;
 	}
+}
+
+size_t	ft_count(t_data *data, char *s, int type)
+{
+	size_t	i;
+
+	if (s == NULL && type == 0)
+		exit_error(ERROR_MALLOC, NULL, data);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
