@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 20:00:27 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/17 20:06:23 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_get_absolute_path(char *cmd)
 	if (ft_is_path_directory(cmd))
 	{
 		g_error = 126;
-		return (NULL);
+		return (free(res), NULL);
 	}
 	if (access(res, F_OK) == 0)
 	{
@@ -127,8 +127,8 @@ char	*ft_get_path(t_data *data, char *cmd)
 		return (NULL);
 	if (cmd[0] == '/')
 		return (ft_get_absolute_path(cmd));
-	 if (cmd[0] == '.' && cmd[1] == '/')
-		return (ft_get_cwd_exec_path(cmd));
+	if (cmd[0] == '.' && cmd[1] == '/')
+		 return (ft_get_cwd_exec_path(cmd));
 	return (ft_get_relative_path(data, cmd));
 }
 
@@ -139,7 +139,7 @@ void	ft_print_error_path(t_block *block)
 	else if (g_error == 127 && block->cmd[0] == '/')
 		ft_printf_fd(2, "minishell: %s: No such file or directory\n",
 			block->cmd);
-	else if (g_error == 127)
+	else if (g_error == 127 || !block->cmd[0])
 		ft_printf_fd(2, "%s: command not found\n", block->cmd);
 	else if (g_error == 126 && (errno == ENOTDIR || errno == EACCES))
 		ft_printf_fd(2, "%s: Permission denied\n", block->cmd);
