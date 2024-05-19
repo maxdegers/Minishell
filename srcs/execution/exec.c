@@ -50,7 +50,10 @@ void	ft_exec_under_fork(t_block *block, t_data *data)
 	if (ft_strcmp(block->cmd, "cd") == 0)
 		return (ft_cd(block, data));
 	if (ft_strcmp(block->cmd, "export") == 0)
-		return (ft_export_fork(data, block));
+	{
+		ft_export(data, block);
+		return ;
+	}
 	if (ft_strcmp(block->cmd, "unset") == 0)
 		return ;
 	if (ft_strcmp(block->cmd, "exit") == 0)

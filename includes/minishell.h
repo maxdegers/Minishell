@@ -168,7 +168,6 @@ void		ft_exit(t_data *data, t_block *block);
 int			ft_export(t_data *data, t_block *block);
 int			determine_export_type(const char *arg);
 char		**ft_export_split(char *str, char *split);
-void		ft_export_fork(t_data *data, t_block *block);
 void		ft_put_env_exp(t_data *data);
 
 void		ft_env(t_data *data);

@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/18 21:14:07 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/20 00:24:32 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ leak: all .internal_separate3
 	@echo "   $(YELLOW)-$(DEFAULT)Show Mismatched Frees"
 	@echo "   $(YELLOW)-$(DEFAULT)Read Variable Information"
 	@echo "   $(YELLOW)-$(DEFAULT)Leak check"
+	@echo "   $(YELLOW)-$(DEFAULT)Trace children"
 	@$(call separator)
 	@valgrind	--suppressions=.config/valgrind_ignore_rl.txt \
 				--show-leak-kinds=all \
@@ -90,6 +91,7 @@ leak: all .internal_separate3
 				--show-mismatched-frees=yes \
 				--read-var-info=yes \
 				--leak-check=full \
+				--trace-children=yes \
 				./$(NAME)
 
 re		:	fclean .internal_separate1 all

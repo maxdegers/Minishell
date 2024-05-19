@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:52 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/18 21:26:50 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 00:20:48 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	ft_add_env(t_data *data, char *str, int type)
 		return (ft_add_env_shown(data, str));
 	if (type == 3)
 		return (ft_append_env(data, str));
+	return (0);
 }
 
 int	ft_export(t_data *data, t_block *block)
@@ -108,7 +109,7 @@ int	ft_export(t_data *data, t_block *block)
 				block->args[i]);
 			return (0);
 		}
-		ft_add_env(data, block->args[i], type);
+		ret = ft_add_env(data, block->args[i], type);
 		if (ret)
 			return (1);
 	}
