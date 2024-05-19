@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:46:25 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 19:38:39 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/19 23:53:07 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_child_process(t_data *data, t_block *block, int *fd)
 	if (fd[1] != STDOUT_FILENO)
 	{
 		if (dup2(fd[1], STDOUT_FILENO) == -1)
-			exit_error(ERROR_DUP, NULL, data);	//TODO check if any fd need to be closed
+			exit_error(ERROR_DUP, NULL, data);
 	}
 	ft_exec_under_fork(block, data);
 }
@@ -74,7 +74,7 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 
 	pid = malloc(sizeof(int) * (childs));
 	if (!pid)
-		return (NULL);		//TODO exit
+		return (ft_free_int_tab(fds), exit_error(1, NULL, data), NULL);
 	i = 0;
 	while (i < childs)
 	{

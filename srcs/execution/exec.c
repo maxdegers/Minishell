@@ -17,14 +17,14 @@ int	ft_is_builtin(t_block *block)
 	if (block->cmd == NULL)
 		return (0);
 	if (ft_strcmp(block->cmd, "echo") == 0
-	|| ft_strcmp(block->cmd, "pwd") == 0
-	|| (ft_strcmp(block->cmd, "export") == 0 && !block->args[1])
-	|| ft_strcmp(block->cmd, "env") == 0)
+		|| ft_strcmp(block->cmd, "pwd") == 0
+		|| (ft_strcmp(block->cmd, "export") == 0 && !block->args[1])
+		|| ft_strcmp(block->cmd, "env") == 0)
 		return (1);
 	if (ft_strcmp(block->cmd, "cd") == 0
-	|| (ft_strcmp(block->cmd, "export") == 0 && block->args[1])
-	|| ft_strcmp(block->cmd, "unset") == 0
-	|| ft_strcmp(block->cmd, "exit") == 0)
+		|| (ft_strcmp(block->cmd, "export") == 0 && block->args[1])
+		|| ft_strcmp(block->cmd, "unset") == 0
+		|| ft_strcmp(block->cmd, "exit") == 0)
 		return (2);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:27:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/16 21:47:01 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:18:09 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ char	**ft_export_split(char *str, char *split)
 
 int	determine_export_type(const char *arg)
 {
-	size_t	i;
-	static char *s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
+	size_t		i;
+	static char	*s = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_";
 
 	i = 0;
 	while (arg[i] && ft_strchr(s, arg[i]))

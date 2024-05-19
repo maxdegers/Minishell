@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 15:52:40 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/11 15:52:40 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/19 23:56:51 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	**ft_open_pipes(t_data *data, size_t pipe_amount)
 		{
 			while (--i)
 				close2(fd[i][0], fd[i][1]);
-			exit_error(ERROR_PIPE, NULL, data);	//TODO check ek daxi
+			exit_error(ERROR_PIPE, NULL, data);
 		}
 		i++;
 	}
