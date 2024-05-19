@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:06:32 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/14 12:13:14 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:41:37 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,16 @@ void	ft_heredoc_pipe(t_data *data, t_redir *redir, char *line)
 void	heredoc_calc_expan_size(char *line, t_data *data,
 	size_t *size, size_t *i)
 {
-	size_t	start;
-	size_t	end;
-	char	*tmp;
-
 	if (line[*i + 1] == '?')
 	{
 		*size += ft_count(data, ft_itoa(g_error), 0);
 		*i += 1;
 	}
-	else if (ft_iscaracter_env(line[*i + 1]) == 1
-		|| line[*i + 1] != '\0')
-	{
-		*i += 1;
-		start = *i;
-		while (line[*i] && ft_iscaracter_env(line[*i]) == 1)
-			*i += 1;
-		end = *i;
-		tmp = ft_strdup_size(&line[start], end - start);
-		*size += ft_count(data, ft_envfind_data(data->env, tmp), 1);
-		free(tmp);
-		*i -= 1;
-	}
+	else if (ft_iscaracter_env(line[*i + 1], 0) == 1
+		&& line[*i + 1] != '\0')
+		ft_cal_expand_utils(i, size, line, data);
+	else if (ft_check_is_incote(line, i) == 1
+		|| line[*i + 1] == '\0'
+		|| ft_iscaracter_env(line[*i + 1], 0) == 0)
+		*size += 1;
 }

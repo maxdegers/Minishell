@@ -6,7 +6,7 @@
 #    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/14 12:08:22 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/18 20:56:41 by mbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_MAIN	=	main.c			\
 MAIN	=	$(addprefix $(DIR_MAIN), $(SRC_MAIN))
 
 DIR_ERROR	=	error/
-SRC_ERROR	=	error.c
+SRC_ERROR	=	error.c\
+				error_utils.c
 ERROR	=	$(addprefix $(DIR_ERROR), $(SRC_ERROR))
 
 DIR_PARSING	=	parsing/
@@ -49,7 +50,9 @@ SRC_UTILS	=	t_env.c			\
 				t_redir.c		\
 				t_token.c		\
 				t_token_utils.c	\
-				t_block.c
+				t_block.c		\
+				here_doc.c		\
+				pipe.c
 UTILS	=	$(addprefix $(DIR_UTILS), $(SRC_UTILS))
 
 DIR_EXEC		=	execution/

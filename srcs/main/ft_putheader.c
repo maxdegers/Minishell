@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   satanast.c                                         :+:      :+:    :+:   */
+/*   ft_putheader.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:12:05 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/08 16:03:36 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:49:54 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	ft_putheader(void)
 		B_YELLOW, B_RED);
 	ft_printf("            ######################### %sby %smbrousse\n",
 		RED, U_RED);
-	ft_printf("%s            %s############################ %s%s& %smpitot%s\n\n",
+	ft_printf("%s            %s############################ %s%s& \
+%smpitot%s\n\n",
 		RESET, B_RED, RESET, RED, U_RED, RESET);
 }

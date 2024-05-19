@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 18:17:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/11 15:06:23 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/19 23:51:39 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ void	ft_handle_sig_child(int sig)
 	if (sig == SIGINT)
 	{
 		g_error = 130;
-//		ft_putstr_fd("\n", 2);
 	}
 }

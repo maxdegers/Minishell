@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 12:37:57 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:58:37 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ int	ft_redir_expansion(t_data *data)
 	t_token	*token;
 	t_token	*tmp;
 
-	if (set_type(data) == 1)
-		return (1);
 	if (check_redir(data) == 1)
 		return (1);
 	token = data->token;

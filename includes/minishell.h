@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/17 12:59:30 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/19 23:55:08 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ int			**ft_open_pipes(t_data *data, size_t pipe_amount);
 int			*ft_fork(t_data *data, t_block *block, size_t childs, int **fds);
 int			ft_wait_childs(int *pid, size_t child_amount);
 
-
 //built-ins
 void		ft_cd(t_block *block, t_data *data);
 void		ft_echo(t_block *block);
@@ -258,7 +257,7 @@ void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
 void		ft_param_expansion(t_data *data);
 //parsing redir.c
 int			ft_redir_expansion(t_data *data);
-int			ft_iscaracter_env(char c);
+int			ft_iscaracter_env(char c, int type);
 void		ft_redir_print(t_redir *redir);
 void		ft_tokenadd_next(t_token *token, t_token *new);
 void		ft_add_redir(t_block *block, t_token *token, t_data *data);
@@ -275,10 +274,18 @@ void		exit_child(t_data *data, int **fds, int *fd);
 void		ft_handle_sig_child(int sig);
 char		*ft_do_count(t_data *data, char *s, int type, char *tmp2);
 void		heredoc_calc_expan_size(char *line, t_data *data,
-	size_t *size, size_t *i);
-void	ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
-char	*join_lines(char *s1, char *s2, t_data *data);
-int	ft_islineblank(char *line);
-int	word_check(t_data *data);
-int	ft_check_is_incote(char *line, size_t *i);
+				size_t *size, size_t *i);
+void		ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
+char		*join_lines(char *s1, char *s2, t_data *data);
+int			ft_islineblank(char *line);
+int			word_check(t_data *data);
+int			ft_check_is_incote(char *line, size_t *i);
+void		ft_cal_expand_utils(size_t *i, size_t *size,
+				char *line, t_data *data);
+void		ft_expand_utils(size_t *i, size_t *j, t_token *token,
+				t_data *data);
+void		ft_expand_heredoc_utils(size_t *i, size_t *j, char *line,
+				t_data *data);
+int			check_pipe_token(t_data *data);
+int			set_type(t_data *data);
 #endif

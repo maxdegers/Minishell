@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap.c                                          :+:      :+:    :+:   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 15:30:28 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/19 23:51:18 by mbrousse         ###   ########.fr       */
+/*   Created: 2024/05/18 20:31:54 by mbrousse          #+#    #+#             */
+/*   Updated: 2024/05/18 20:32:26 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap(int *a, int *b)
-{
-	int		c;
+#include "minishell.h"
 
-	c = *a;
-	*a = *b;
-	*b = c;
+void	exit_child(t_data *data, int **fds, int *fd)
+{
+	if (fd[0] != 0)
+		close(fd[0]);
+	if (fd[1] != 1)
+		close(fd[1]);
+	ft_free_int_tab(fds);
+	destroy(data);
+	ft_megafree(data);
+	exit(g_error);
 }
