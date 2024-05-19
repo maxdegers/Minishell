@@ -6,13 +6,13 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:25:17 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 14:59:04 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/18 21:17:42 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_isnumber(char *s)
+int	ft_isnumber(char *s)
 {
 	size_t	i;
 
@@ -44,7 +44,8 @@ void	ft_exit(t_data *data, t_block *block)
 	}
 	if (block->args[1])
 	{
-		ft_printf_fd(2, "minishell: exit: %s: numeric argument required\n", block->args[1]);
+		ft_printf_fd(2, "minishell: exit: %s: numeric argument required\n",
+			block->args[1]);
 		ft_megafree(data);
 		exit(2);
 	}

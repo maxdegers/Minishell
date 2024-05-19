@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 22:33:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/02 14:23:08 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/17 19:17:26 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_echo(t_block *block)
 
 	nl = 1;
 	i = 1;
-	if (block->args[1] && ft_is_flag(block->args[1]))
+	while (block->args[i] && ft_is_flag(block->args[i]))
 	{
 		nl = 0;
 		i++;

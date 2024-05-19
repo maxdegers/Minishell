@@ -184,6 +184,9 @@ void		ft_close_heredoc_pipe(t_data *data);
 
 //execve
 void		ft_execve(t_data *data, t_block *block);
+int			ft_is_path_directory(char *path);
+char		*ft_join_path(char *path, char *cmd);
+void		ft_print_error_path(t_block *block);
 
 //redirections
 char		*ft_redir(t_block *block, int *fd);

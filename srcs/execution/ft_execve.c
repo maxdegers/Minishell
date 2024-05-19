@@ -6,36 +6,11 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/14 20:00:27 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/18 21:16:32 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_is_path_directory(char *path)
-{
-	DIR	*dir;
-
-	dir = opendir(path);
-	if (dir)
-	{
-		closedir(dir);
-		return (1);
-	}
-	return (0);
-}
-
-char	*ft_join_path(char *path, char *cmd)
-{
-	char	*tmp;
-	char	*res;
-
-	tmp = ft_strjoin(path, "/");
-	if (!tmp)
-		return (NULL);
-	res = ft_strjoin(tmp, cmd);
-	return (free(tmp), res);
-}
 
 char	*ft_get_absolute_path(char *cmd)
 {
@@ -45,10 +20,7 @@ char	*ft_get_absolute_path(char *cmd)
 	if (!res)
 		return (NULL);
 	if (ft_is_path_directory(cmd))
-	{
-		g_error = 126;
-		return (NULL);
-	}
+		return (free(res), NULL);
 	if (access(res, F_OK) == 0)
 	{
 		if (access(res, X_OK) == 0)
@@ -75,10 +47,7 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 		g_error = 0;
 		res = ft_join_path(path[i], cmd);
 		if (ft_is_path_directory(res))
-		{
-			g_error = 126;
 			return (ft_free_tab(path), free(res), NULL);
-		}
 		if (access(res, F_OK) == 0)
 		{
 			if (access(res, X_OK) == 0)
@@ -105,10 +74,7 @@ char	*ft_get_cwd_exec_path(char *cmd)
 	if (!res)
 		return (cmd);
 	if (ft_is_path_directory(res))
-	{
-		g_error = 126;
 		return (free(res), NULL);
-	}
 	if (access(res, F_OK) == 0)
 	{
 		if (access(res, X_OK) == 0)
@@ -122,32 +88,16 @@ char	*ft_get_cwd_exec_path(char *cmd)
 
 char	*ft_get_path(t_data *data, char *cmd)
 {
-
 	if (!cmd)
 		return (NULL);
 	if (cmd[0] == '/')
 		return (ft_get_absolute_path(cmd));
-	 if (cmd[0] == '.' && cmd[1] == '/')
+	if (cmd[0] == '.' && cmd[1] == '/')
 		return (ft_get_cwd_exec_path(cmd));
 	return (ft_get_relative_path(data, cmd));
 }
 
-void	ft_print_error_path(t_block *block)
-{
-	if (g_error == 127 && block->cmd[0] == '.' && block->cmd[1] == '/')
-		ft_printf_fd(2, "%s: No such file or directory\n", block->cmd);
-	else if (g_error == 127 && block->cmd[0] == '/')
-		ft_printf_fd(2, "minishell: %s: No such file or directory\n",
-			block->cmd);
-	else if (g_error == 127)
-		ft_printf_fd(2, "%s: command not found\n", block->cmd);
-	else if (g_error == 126 && (errno == ENOTDIR || errno == EACCES))
-		ft_printf_fd(2, "%s: Permission denied\n", block->cmd);
-	else if (g_error == 126)
-		ft_printf_fd(2, "minishell: %s: Is a directory\n", block->cmd);
-}
-
-void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
+void	ft_execve(t_data *data, t_block *block)
 {
 	char	**envp;
 	char	*path;
@@ -157,7 +107,8 @@ void	ft_execve(t_data *data, t_block *block)		//TODO refaire la fonction nette
 		exit_error(ERROR_MALLOC, NULL, data);
 	path = ft_get_path(data, block->cmd);
 	if (!path && g_error == 0)
-		return (ft_free_tab(envp), exit_error(ERROR_MALLOC, NULL,data));
+		return (ft_free_tab(envp),
+			exit_error(ERROR_MALLOC, NULL, data));
 	else if (!path)
 	{
 		ft_print_error_path(block);

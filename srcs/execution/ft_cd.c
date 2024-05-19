@@ -56,7 +56,7 @@ int	update_oldpwd(t_data *data, char *oldpwd)
 
 int	update_env(t_data *data, char *oldpwd)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
@@ -97,13 +97,11 @@ void	ft_cd(t_block *block, t_data *data)
 	if (ft_check_arg_num(block) > 2)
 		return (free(oldpwd));
 	env = ft_envfind(data->env, "HOME");
+	if (!env && !block->args)
+		return (ft_put_error(1, "minishell: cd: HOME not set\n"),
+			free(oldpwd));
 	if (!block->args[1])
-	{
-		if (!env)
-			return (ft_put_error(1, "minishell: cd: HOME not set\n"),
-					free(oldpwd));
 		path = env->value;
-	}
 	else
 		path = block->args[1];
 	if (chdir(path) == -1)

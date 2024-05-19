@@ -60,6 +60,7 @@ SRC_EXEC		=	exec.c			\
 				ft_cd.c				\
 				ft_echo.c			\
 				ft_execve.c			\
+				ft_execve_utils.c	\
 				ft_exit.c			\
 				ft_export.c			\
 				ft_export_utils.c	\
