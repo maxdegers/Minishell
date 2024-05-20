@@ -6,7 +6,7 @@
 #    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/06 16:12:25 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/20 01:28:51 by mpitot           ###   ########.fr        #
+#    Updated: 2024/05/20 17:39:22 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g3
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror #-g3
 
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)
@@ -74,6 +74,13 @@ fclean	:
 	@echo "$(WHITE)[$(RED)$(OBJ_D)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
+
+sanitize: fclean libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
+	@$(call print_progress,$(NAME))
+	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB} -fsanitize=address -g3
+	@$(eval CHANGED=1)
+	@$(call erase)
+	@$(call done_and_dusted,$(NAME))
 
 leak: all .internal_separate3
 	@echo "$(MAGENTA)Valgrind $(WHITE)~ $(YELLOW)Flags:$(DEFAULT)"
