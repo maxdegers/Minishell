@@ -66,7 +66,7 @@ $ ./minishell
 ```
 **3. Special Compiling Rules**
 
-To compile the program with valgrind, run:
+To compile the program and execute it with valgrind, run:
 
 ```shell
 $ make leak
