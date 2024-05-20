@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/08 15:37:28 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:15:01 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_parsing_env(char **env, t_data *data)
 	int			j;
 	t_env		*tmp;
 
-	data->env = NULL;
 	i = 0;
 	while (env[i])
 	{
@@ -86,9 +85,12 @@ int	ft_set_tab(t_data *data)
 
 int	ft_init_tab(t_data *data, char **env)
 {
+	data->env = NULL;
 	if (env == NULL || env[0] == NULL)
-		return (ft_put_error(1, EM_ENV), 1);
-	if (ft_parsing_env(env, data))
+	{
+		ft_put_error(1, EM_ENV);
+	}
+	else if (ft_parsing_env(env, data))
 		return (1);
 	if (ft_set_tab(data))
 		return (1);
