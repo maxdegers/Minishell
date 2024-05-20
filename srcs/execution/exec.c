@@ -63,7 +63,7 @@ void	ft_exec_under_fork(t_block *block, t_data *data)
 	if (ft_strcmp(block->cmd, "export") == 0)
 		return (ft_put_env_exp(data));
 	if (ft_strcmp(block->cmd, "pwd") == 0)
-		return (ft_pwd());
+		return (ft_pwd(data));
 	if (ft_strcmp(block->cmd, "env") == 0)
 		return (ft_env(data));
 	ft_execve(data, block);

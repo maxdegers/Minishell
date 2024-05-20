@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 22:33:15 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/17 19:17:26 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 15:40:58 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,18 @@ void	ft_echo(t_block *block)
 
 	nl = 1;
 	i = 1;
+	// write(1, "A", 1);
 	while (block->args[i] && ft_is_flag(block->args[i]))
 	{
 		nl = 0;
 		i++;
 	}
+	// write(1, "A", 1);
 	while (block->args[i])
 	{
 		ft_printf("%s", block->args[i]);
 		i++;
+		// write(1, "A", 1);
 		if (block->args[i])
 			ft_printf(" ");
 	}
