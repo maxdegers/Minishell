@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 02:31:28 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 02:46:03 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,31 @@
 # include <readline/history.h>
 
 ///
-# define ENV_VALID "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_"
-///
-
-///
 # define WORD 0
 # define PIPE 1
 # define REDIR_IN 2
 # define REDIR_OUT 3
 # define REDIR_APPEND 4
 # define REDIR_HEREDOC 5
-# define OPERAT 6
 ///
 
 ///
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
-# define NONE '\0'
-# define ESPACE ' '
 # define TAB '\t'
 ///
 
-/// PIPE
-# define RD 0
-# define WR 1
 ///
-
 # define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
-# define EM_FORK "\033[0;31mError:\n\t\033[0mfork failed\n"
-# define EM_PIPE "\033[0;31mError:\n\t\033[0mpipe failed\n"
-# define EM_EXECVE "\033[0;31mError:\n\t\033[0mexecve failed\n"
-# define EM_OPEN "\033[0;31mError:\n\t\033[0mopen failed\n"
-# define EM_CLOSE "\033[0;31mError:\n\t\033[0mclose failed\n"
-# define EM_DUP2 "\033[0;31mError:\n\t\033[0mdup2 failed\n"
-# define EM_WAIT "\033[0;31mError:\n\t\033[0mwait failed\n"
-# define EM_SIGNAL "\033[0;31mError:\n\t\033[0msignal failed\n"
 # define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
 # define EM_ENV "\033[0;31mError:\n\t\033[0menv not found\n"
+///
 
 extern int	g_error;
 
+/*****************************************************************************/
+/*                                   ENUM                                    */
+/*****************************************************************************/
 typedef enum e_ERROR
 {
 	ERROR_MALLOC = 1,
@@ -90,12 +75,9 @@ typedef enum e_SIGNAL_MODE
 	SIG_CHILD
 }	t_SIG_MODE;
 
-typedef struct s_trash
-{
-	void			*data;
-	struct s_trash	*next;
-}	t_trash;
-
+/*****************************************************************************/
+/*                                  STRUCT                                   */
+/*****************************************************************************/
 typedef struct s_redir
 {
 	int				fd;
@@ -143,7 +125,6 @@ typedef struct s_data
 	t_env			*env;
 }	t_data;
 
-
 /*****************************************************************************/
 /*                                   MAIN                                    */
 /*****************************************************************************/
@@ -155,7 +136,6 @@ void		ft_handle_sig_child(int sig);
 void		ft_set_signal(t_SIG_MODE mode);
 // main_loop.c
 int			ft_main_loop(t_data *data);
-
 
 /*****************************************************************************/
 /*                                 EXECUTION                                 */
@@ -203,7 +183,6 @@ void		close2(int fd1, int fd2);
 void		ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
 void		ft_close_heredoc_pipe(t_data *data);
 
-
 /*****************************************************************************/
 /*                                   ERROR                                   */
 /*****************************************************************************/
@@ -215,7 +194,6 @@ void		exit_error(t_ERROR error, char *MSG, t_data *data);
 void		ft_free_int_tab(int **tab);
 // error_utils.c
 void		exit_child(t_data *data, int **fds, int *fd);
-
 
 /*****************************************************************************/
 /*                                  PARSING                                  */
@@ -235,7 +213,7 @@ char		**get_path(t_data *data);
 // parsing_expand.c
 void		do_expan(t_data *data, t_token *token, size_t size, int quote);
 void		do_expan_size(t_token *token, t_data *data,
-					 size_t *i, size_t *j);
+				size_t *i, size_t *j);
 int			ft_check_is_incote(char *line, size_t *i);
 char		*ft_do_count(t_data *data, char *s, int type, char *tmp2);
 void		ft_add_to_str(char *str, size_t *i, char *add);
@@ -291,13 +269,16 @@ void		ft_redir_free(t_redir *redir);
 int			check_pipe_token(t_data *data);
 // here_doc.c
 void		ft_cal_expand_utils(size_t *i, size_t *size,
-								char *line, t_data *data);
+				char *line, t_data *data);
 void		ft_expand_utils(size_t *i, size_t *j, t_token *token, t_data *data);
 void		ft_expand_heredoc_utils(size_t *i, size_t *j,
-									char *line, t_data *data);
+				char *line, t_data *data);
 // t_block.c
 t_block		*ft_block_new(t_data *data);
 void		ft_block_clear(t_block **block);
+
+/*****************************************************************************/
+/*                                                                           */
 /*****************************************************************************/
 
 #endif

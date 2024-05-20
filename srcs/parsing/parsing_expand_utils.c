@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-static void	calc_expan_size(t_token	*token, t_data *data, size_t *size, size_t *i)
+static void	calc_expan_size(t_token	*token, t_data *data,
+							size_t *size, size_t *i)
 {
 	char	*tmp;
 
