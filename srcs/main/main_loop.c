@@ -32,19 +32,6 @@ static char	*ft_set_prompt(t_data *data)
 	return (prompt);
 }
 
-int	ft_islineblank(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isblank(line[i++]))
-			return (0);
-	}
-	return (1);
-}
-
 int	ft_main_loop(t_data *data)
 {
 	char	*line;

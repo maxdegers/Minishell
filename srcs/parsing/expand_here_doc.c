@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	heredoc_do_expan_size(char *line, t_data *data,
+static void	heredoc_do_expan_size(char *line, t_data *data,
 	size_t *i, size_t *j)
 {
 	char	*tmp;
@@ -36,7 +36,7 @@ void	heredoc_do_expan_size(char *line, t_data *data,
 	}
 }
 
-char	*do_expand_herdoc(t_data *data, char *line, size_t size)
+static char	*do_expand_herdoc(t_data *data, char *line, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -60,7 +60,7 @@ char	*do_expand_herdoc(t_data *data, char *line, size_t size)
 	return (new);
 }
 
-char	*ft_expand_heredoc(t_data *data, char *line, t_redir *redir)
+static char	*ft_expand_heredoc(t_data *data, char *line, t_redir *redir)
 {
 	char	*res;
 	size_t	size;
@@ -87,7 +87,7 @@ char	*ft_expand_heredoc(t_data *data, char *line, t_redir *redir)
 		return (line);
 }
 
-int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
+static int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
 {
 	char	*res;
 

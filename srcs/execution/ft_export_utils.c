@@ -60,7 +60,7 @@ int	determine_export_type(const char *arg)
 	return (-1);
 }
 
-t_env	*ft_sort_env(t_env **env)
+static t_env	*ft_sort_env(t_env **env)
 {
 	t_env	*tmp;
 	t_env	*head;
@@ -89,7 +89,7 @@ t_env	*ft_sort_env(t_env **env)
 	return (head);
 }
 
-t_env	*ft_dup_env(t_env *env)
+static t_env	*ft_dup_env(t_env *env)
 {
 	t_env	*new;
 	t_env	*tmp;

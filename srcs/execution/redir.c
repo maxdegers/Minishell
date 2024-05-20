@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_close_error(t_block *block)
+static void	ft_close_error(t_block *block)
 {
 	t_redir		*tmp;
 
@@ -25,7 +25,7 @@ void	ft_close_error(t_block *block)
 	}
 }
 
-char	*ft_open_redir(t_block *block)
+static char	*ft_open_redir(t_block *block)
 {
 	t_redir		*tmp;
 
@@ -45,7 +45,7 @@ char	*ft_open_redir(t_block *block)
 	return (NULL);
 }
 
-int	ft_get_redirs(t_block *block, int *in, int *out)
+static int	ft_get_redirs(t_block *block, int *in, int *out)
 {
 	t_redir		*tmp;
 

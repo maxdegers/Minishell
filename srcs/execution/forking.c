@@ -27,7 +27,7 @@ int	ft_wait_childs(int *pid, size_t child_amount)
 	return (ret_status);
 }
 
-void	ft_error_open(char *str)
+static void	ft_error_open(char *str)
 {
 	if (errno == ENOENT)
 	{
@@ -46,7 +46,7 @@ void	ft_error_open(char *str)
 	}
 }
 
-void	ft_child_process(t_data *data, t_block *block, int *fd)
+static void	ft_child_process(t_data *data, t_block *block, int *fd)
 {
 	char	*redir_ret;
 

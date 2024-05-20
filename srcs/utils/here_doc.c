@@ -68,26 +68,3 @@ void	ft_expand_heredoc_utils(size_t *i, size_t *j, char *line, t_data *data)
 	ft_add_to_str(data->error_cmd, j, tmp);
 	*i -= 1;
 }
-
-int	ft_check_is_incote_heredoc(char *line)
-{
-	size_t	i;
-	int		s_quote;
-	int		d_quote;
-
-	s_quote = -1;
-	d_quote = -1;
-	i = 0;
-	while (line[i] && i < (ft_strlen(line) - 1))
-	{
-		if (line[i] == S_QUOTE)
-			s_quote *= -1;
-		if (line[i] == D_QUOTE)
-			d_quote *= -1;
-		i++;
-	}
-	if (s_quote == 1 || d_quote == 1)
-		return (1);
-	else
-		return (0);
-}

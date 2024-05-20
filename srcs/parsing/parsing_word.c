@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/16 10:49:50 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	do_word_split(t_data *data, t_token *token)
+static void	do_word_split(t_data *data, t_token *token)
 {
 	char	**tab;
 	size_t	i;
@@ -45,9 +45,9 @@ int	word_check(t_data *data)
 		if (ft_islineblank(token->data) == 1)
 		{
 			if (data->token == token)
-				ft_token_rmfurst(data, token);
+				ft_token_rmfirst(data, token);
 			else
-				ft_token_remouve(data, token);
+				ft_token_remove(data, token);
 			token = data->token;
 		}
 		else if (token)

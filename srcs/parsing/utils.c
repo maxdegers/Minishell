@@ -40,3 +40,16 @@ int	ft_iscaracter_env(char c, int type)
 	}
 	return (0);
 }
+
+int	ft_islineblank(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isblank(line[i++]))
+			return (0);
+	}
+	return (1);
+}

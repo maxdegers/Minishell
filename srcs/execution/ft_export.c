@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_add_env_hidden(t_data *data, char *str)
+static int	ft_add_env_hidden(t_data *data, char *str)
 {
 	char	**tab;
 	t_env	*new;
@@ -29,7 +29,7 @@ int	ft_add_env_hidden(t_data *data, char *str)
 	return (ft_free_tab(tab), 1);
 }
 
-int	ft_add_env_shown(t_data *data, char *str)
+static int	ft_add_env_shown(t_data *data, char *str)
 {
 	char	**tab;
 	t_env	*new;
@@ -54,7 +54,7 @@ int	ft_add_env_shown(t_data *data, char *str)
 	return (ft_free_tab(tab), 0);
 }
 
-int	ft_append_env(t_data *data, char *str)
+static int	ft_append_env(t_data *data, char *str)
 {
 	char	**tab;
 	t_env	*new;
@@ -78,7 +78,7 @@ int	ft_append_env(t_data *data, char *str)
 	return (ft_free_tab(tab), 0);
 }
 
-int	ft_add_env(t_data *data, char *str, int type)
+static int	ft_add_env(t_data *data, char *str, int type)
 {
 	if (type == 1)
 		return (ft_add_env_hidden(data, str));

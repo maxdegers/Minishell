@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 12:49:49 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 20:58:37 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 02:32:02 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	put_type(t_token *token)
+static void	put_type(t_token *token)
 {
 	if (ft_strcmp(token->data, ">") == 0)
 		token->type = REDIR_OUT;
@@ -51,7 +51,7 @@ int	set_type(t_data *data)
 	return (0);
 }
 
-int	check_redir(t_data *data)
+static int	check_redir(t_data *data)
 {
 	t_token	*tmp;
 
@@ -94,11 +94,11 @@ int	ft_redir_expansion(t_data *data)
 			token->type = token->prev->type;
 			if (!tmp)
 			{
-				ft_token_rmfurst(data, token->prev);
+				ft_token_rmfirst(data, token->prev);
 				token = data->token;
 			}
 			else
-				ft_token_remouve(data, tmp->next);
+				ft_token_remove(data, tmp->next);
 		}
 		token = token->next;
 	}

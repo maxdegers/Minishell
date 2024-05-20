@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	do_cote_remove(t_token *token, char quote, char *new)
+static void	do_cote_remove(t_token *token, char quote, char *new)
 {
 	size_t	i;
 	size_t	j;
@@ -41,7 +41,7 @@ void	do_cote_remove(t_token *token, char quote, char *new)
 	token->data = new;
 }
 
-size_t	calc_cote(t_token *token, char quote, size_t size)
+static size_t	calc_cote(t_token *token, char quote, size_t size)
 {
 	size_t	i;
 

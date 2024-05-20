@@ -11,20 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-
-int	clear_fd_redir(t_redir *redir)
-{
-	t_redir	*tmp;
-
-	while (tmp)
-	{
-		tmp->fd = open(tmp->file, O_WRONLY | O_CREAT | O_TRUNC);
-		if (tmp->fd == -1)
-			return (-1);
-	}
-}
-*/
 
 void	ft_pwd(void)
 {

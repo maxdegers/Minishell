@@ -85,13 +85,3 @@ void	ft_token_clear(t_token **token)
 		*token = tmp;
 	}
 }
-
-// void	ft_tokenprint(t_token *token)
-// {
-// 	while (token)
-// 	{
-// 		ft_printf("data: %s\t\t\t", token->data);
-// 		ft_printf("type: %d\n", token->type);
-// 		token = token->next;
-// 	}
-// }

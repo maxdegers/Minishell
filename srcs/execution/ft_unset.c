@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_remove_env(t_env *env, char *name)
+static void	ft_remove_env(t_env *env, char *name)
 {
 	t_env	*tmp;
 	t_env	*prev;

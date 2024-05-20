@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   set_block.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:03:37 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 21:02:36 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 01:53:49 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	clac_size_block(t_token *token)
+static size_t	clac_size_block(t_token *token)
 {
 	size_t	size;
 	t_token	*tmp;
@@ -27,7 +27,7 @@ size_t	clac_size_block(t_token *token)
 	return (size);
 }
 
-void	ft_set_redir(t_token *token, t_block *block, t_data *data)
+static void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 {
 	t_token	*tmp;
 
@@ -39,12 +39,12 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 			tmp = token->next;
 			if (data->token == token)
 			{
-				ft_token_rmfurst(data, token);
+				ft_token_rmfirst(data, token);
 				token = data->token;
 			}
 			else
 			{
-				ft_token_remouve(data, token);
+				ft_token_remove(data, token);
 				token = tmp;
 			}
 		}
@@ -53,7 +53,7 @@ void	ft_set_redir(t_token *token, t_block *block, t_data *data)
 	}
 }
 
-int	make_block(t_data *data, t_block	*block)
+static int	make_block(t_data *data, t_block	*block)
 {
 	char	**args;
 	size_t	i;

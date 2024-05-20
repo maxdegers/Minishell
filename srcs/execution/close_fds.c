@@ -18,21 +18,6 @@ void	close2(int fd1, int fd2)
 	close(fd2);
 }
 
-void	close3(int fd1, int fd2, int fd3)
-{
-	close(fd1);
-	close(fd2);
-	close(fd3);
-}
-
-void	close4(int fd1, int fd2, int fd3, int fd4)
-{
-	close(fd1);
-	close(fd2);
-	close(fd3);
-	close(fd4);
-}
-
 void	ft_close_useless_fds(int **fds, int *used, size_t pipe_amount)
 {
 	size_t	i;

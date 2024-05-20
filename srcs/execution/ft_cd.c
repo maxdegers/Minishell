@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	update_pwd(t_data *data, char *pwd)
+static int	update_pwd(t_data *data, char *pwd)
 {
 	t_env	*tmp;
 	t_env	*tmp2;
@@ -33,7 +33,7 @@ int	update_pwd(t_data *data, char *pwd)
 	return (0);
 }
 
-int	update_oldpwd(t_data *data, char *oldpwd)
+static int	update_oldpwd(t_data *data, char *oldpwd)
 {
 	t_env	*tmp;
 	t_env	*tmp2;
@@ -54,7 +54,7 @@ int	update_oldpwd(t_data *data, char *oldpwd)
 	return (0);
 }
 
-int	update_env(t_data *data, char *oldpwd)
+static int	update_env(t_data *data, char *oldpwd)
 {
 	char	*pwd;
 
@@ -70,7 +70,7 @@ int	update_env(t_data *data, char *oldpwd)
 	return (0);
 }
 
-int	ft_check_arg_num(t_block *block)
+static int	ft_check_arg_num(t_block *block)
 {
 	size_t	i;
 

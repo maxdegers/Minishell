@@ -3,78 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   t_token_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:55:13 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/15 14:33:47 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 02:35:46 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_token_size(t_token *token)
-{
-	size_t	i;
-
-	i = 0;
-	while (token)
-	{
-		i++;
-		token = token->next;
-	}
-	return (i);
-}
-
-char	**ft_tokento_tab(t_token *token)
-{
-	char	**tab;
-	size_t	i;
-
-	i = 0;
-	tab = malloc(sizeof(char *) * (ft_token_size(token) + 1));
-	if (!tab)
-		return (NULL);
-	while (token)
-	{
-		tab[i] = ft_strdup(token->data);
-		if (!tab[i])
-			return (ft_free_tab(tab), NULL);
-		token = token->next;
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
-}
-
-void	ft_token_remouve(t_data *data, t_token *to_remouve)
+void	ft_token_remove(t_data *data, t_token *to_remove)
 {
 	t_token	*tmp;
 
-	if (!data->token || !to_remouve)
+	if (!data->token || !to_remove)
 		return ;
-	if (data->token == to_remouve)
-		ft_token_rmfurst(data, to_remouve);
+	if (data->token == to_remove)
+		ft_token_rmfirst(data, to_remove);
 	tmp = data->token;
 	while (tmp->next)
 	{
-		if (tmp->next == to_remouve)
+		if (tmp->next == to_remove)
 		{
-			tmp->next = to_remouve->next;
-			free(to_remouve->data);
-			free(to_remouve);
+			tmp->next = to_remove->next;
+			free(to_remove->data);
+			free(to_remove);
 			return ;
 		}
 		tmp = tmp->next;
 	}
 }
 
-void	ft_token_rmfurst(t_data *data, t_token *to_remouve)
+void	ft_token_rmfirst(t_data *data, t_token *to_remove)
 {
 	t_token	*tmp;
 
-	if (!data->token || !to_remouve)
+	if (!data->token || !to_remove)
 		return ;
-	if (data->token == to_remouve)
+	if (data->token == to_remove)
 	{
 		if (!data->token->next)
 		{
@@ -89,26 +55,5 @@ void	ft_token_rmfurst(t_data *data, t_token *to_remouve)
 		data->token = tmp;
 		data->token->prev = NULL;
 		return ;
-	}
-}
-
-void	ft_token_rm_redir(t_data *data, t_token *to_remouve)
-{
-	t_token	*tmp;
-
-	if (!data->token || !to_remouve)
-		return ;
-	tmp = data->token;
-	while (tmp->next)
-	{
-		if (tmp->next == to_remouve)
-		{
-			tmp->next = to_remouve->next;
-			to_remouve->next->prev = tmp;
-			free(to_remouve->data);
-			free(to_remouve);
-			return ;
-		}
-		tmp = tmp->next;
 	}
 }

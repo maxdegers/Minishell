@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_isnumber(char *s)
+static int	ft_isnumber(char *s)
 {
 	size_t	i;
 

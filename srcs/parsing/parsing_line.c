@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 20:58:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 	return (0);
 }
 
-void	ft_token_set(char *line, t_data *data)
+static void	ft_token_set(char *line, t_data *data)
 {
 	size_t	i;
 	size_t	end;
@@ -87,7 +87,7 @@ static int	checkerreur(char *line)
 	return (0);
 }
 
-int	ft_check_token(t_data *data)
+static int	ft_check_token(t_data *data)
 {
 	t_token	*token;
 
@@ -102,9 +102,9 @@ int	ft_check_token(t_data *data)
 				return (1);
 			}
 			if (token->prev == NULL)
-				ft_token_rmfurst(data, token);
+				ft_token_rmfirst(data, token);
 			else
-				ft_token_remouve(data, token);
+				ft_token_remove(data, token);
 			token = data->token;
 		}
 		else if (token)

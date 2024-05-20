@@ -27,7 +27,7 @@ size_t	get_pipe_amount(t_block *block)
 	return (--i);
 }
 
-int	**malloc_fd_tab(size_t size)
+static int	**malloc_fd_tab(size_t size)
 {
 	int		**fd;
 	size_t	i;

@@ -64,22 +64,3 @@ void	ft_redir_free(t_redir *redir)
 		redir = tmp;
 	}
 }
-
-void	ft_redir_print(t_redir *redir)
-{
-	t_redir	*tmp;
-
-	tmp = redir;
-	while (tmp)
-	{
-		ft_printf("file: %s\t", tmp->file);
-		tmp = tmp->next;
-	}
-	tmp = redir;
-	while (tmp)
-	{
-		ft_printf("type: %d\t", tmp->type);
-		tmp = tmp->next;
-	}
-	ft_printf("\n");
-}

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	ft_is_flag(char *arg)
+static int	ft_is_flag(const char *arg)
 {
 	size_t	i;
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    srcs.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 12:18:49 by mpitot            #+#    #+#              #
-#    Updated: 2024/05/18 20:56:41 by mbrousse         ###   ########.fr        #
+#    Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC_PARSING	=	parsing_env.c			\
 				utils.c					\
 				set_block.c				\
 				parsing_redir.c			\
-				parsing_cote.c			\
+				parsing_quote.c			\
 				parsing_expand.c		\
 				parsing_expand_utils.c	\
 				ft_split_bis.c			\
@@ -55,8 +55,8 @@ SRC_UTILS	=	t_env.c			\
 				pipe.c
 UTILS	=	$(addprefix $(DIR_UTILS), $(SRC_UTILS))
 
-DIR_EXEC		=	execution/
-SRC_EXEC		=	exec.c			\
+DIR_EXEC	=	execution/
+SRC_EXEC	=	exec.c			\
 				ft_cd.c				\
 				ft_echo.c			\
 				ft_execve.c			\

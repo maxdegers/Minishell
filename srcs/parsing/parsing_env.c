@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	inc_shlvl(t_env	*tmp)
+static void	inc_shlvl(t_env	*tmp)
 {
 	int		nb;
 

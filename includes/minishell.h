@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/19 23:55:08 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 02:31:28 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,151 +143,161 @@ typedef struct s_data
 	t_env			*env;
 }	t_data;
 
-// main.c
-void		ft_putheader(void);
 
+/*****************************************************************************/
+/*                                   MAIN                                    */
+/*****************************************************************************/
+// ft_putheader.c
+void		ft_putheader(void);
+// signal.c
+void		ft_handle_sig(int sig);
+void		ft_handle_sig_child(int sig);
+void		ft_set_signal(t_SIG_MODE mode);
+// main_loop.c
+int			ft_main_loop(t_data *data);
+
+
+/*****************************************************************************/
+/*                                 EXECUTION                                 */
+/*****************************************************************************/
 // exec.c
 int			ft_exec_line(t_data *data);
-int			ft_is_builtin(t_block *block);
 void		ft_exec_under_fork(t_block *block, t_data *data);
-
-//pipes
+void		ft_exec_simple_builtin(t_block *block, t_data *data);
+int			ft_is_builtin(t_block *block);
+// piping.c
 int			ft_get_fd(int **fds, size_t i, int *res, size_t pipe_amount);
 size_t		get_pipe_amount(t_block *block);
 int			**ft_open_pipes(t_data *data, size_t pipe_amount);
-
-//forks
+// forking.c
 int			*ft_fork(t_data *data, t_block *block, size_t childs, int **fds);
 int			ft_wait_childs(int *pid, size_t child_amount);
-
-//built-ins
+// ft_cd.c
 void		ft_cd(t_block *block, t_data *data);
+// ft_echo.c
 void		ft_echo(t_block *block);
+// ft_exit.c
 void		ft_exit(t_data *data, t_block *block);
-
+// ft_export.c
 int			ft_export(t_data *data, t_block *block);
+// ft_export_utils.c
 int			determine_export_type(const char *arg);
 char		**ft_export_split(char *str, char *split);
 void		ft_put_env_exp(t_data *data);
-
+// ft_env.c
 void		ft_env(t_data *data);
+// ft_pwd.c
 void		ft_pwd(void);
+// ft_unset.c
 int			ft_unset(t_block *block, t_data *data);
-
-//closers
-void		close2(int fd1, int fd2);
-void		close3(int fd1, int fd2, int fd3);
-void		close4(int fd1, int fd2, int fd3, int fd4);
-void		ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
-void		ft_close_heredoc_pipe(t_data *data);
-
-//execve
+// ft_execve.c
 void		ft_execve(t_data *data, t_block *block);
+// ft_execve_utils.c
 int			ft_is_path_directory(char *path);
 char		*ft_join_path(char *path, char *cmd);
 void		ft_print_error_path(t_block *block);
-
-//redirections
+// ft_redir.c
 char		*ft_redir(t_block *block, int *fd);
+// close_fds.c
+void		close2(int fd1, int fd2);
+void		ft_close_useless_fds(int **fds, int *used, size_t pipe_amount);
+void		ft_close_heredoc_pipe(t_data *data);
 
+
+/*****************************************************************************/
+/*                                   ERROR                                   */
+/*****************************************************************************/
 // error.c
 void		ft_put_error(t_ERROR error, char *MSG);
 void		ft_megafree(t_data *data);
 void		destroy(t_data *data);
 void		exit_error(t_ERROR error, char *MSG, t_data *data);
 void		ft_free_int_tab(int **tab);
+// error_utils.c
+void		exit_child(t_data *data, int **fds, int *fd);
 
+
+/*****************************************************************************/
+/*                                  PARSING                                  */
+/*****************************************************************************/
+// parsing_line.c
+int			ft_parsing_line(t_data *data, char *line);
+// parsing_word.c
+void		word_split(t_data *data);
+int			word_check(t_data *data);
+// parsing_quote.c
+void		ft_parsing_quote(t_data *data);
 // parsing_env.c
 int			ft_parsing_env(char **env, t_data *data);
 int			ft_set_tab(t_data *data);
 int			ft_init_tab(t_data *data, char **env);
 char		**get_path(t_data *data);
-
+// parsing_expand.c
+void		do_expan(t_data *data, t_token *token, size_t size, int quote);
+void		do_expan_size(t_token *token, t_data *data,
+					 size_t *i, size_t *j);
+int			ft_check_is_incote(char *line, size_t *i);
+char		*ft_do_count(t_data *data, char *s, int type, char *tmp2);
+void		ft_add_to_str(char *str, size_t *i, char *add);
+// parsing_expand_utils.c
+void		ft_param_expansion(t_data *data);
+size_t		ft_count(t_data *data, char *s, int type);
+// parsing_redir.c
+int			ft_redir_expansion(t_data *data);
+int			set_type(t_data *data);
+// set_block.c
+void		ft_set_block(t_data *data);
+// expand_here_doc.c
+int			ft_expand_here_doc(t_data *data);
+// expand_here_doc_utils.c
+void		heredoc_calc_expan_size(char *line, t_data *data,
+				size_t *size, size_t *i);
+void		ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
+char		*join_lines(char *s1, char *s2, t_data *data);
+// ft_split_bis.c
+char		**ft_word_split(char const *s);
 // utils.c
 int			ft_isblank(char c);
 int			ft_iscontrol_operator(char c);
-
+int			ft_iscaracter_env(char c, int type);
+int			ft_islineblank(char *line);
+/*****************************************************************************/
+/*                                   UTILS                                   */
+/*****************************************************************************/
 // t_env.c
 size_t		ft_envsize(t_env *env);
 t_env		*ft_envnew(char *name, char *value);
 void		ft_envadd_back(t_env **env, t_env *new);
 void		ft_envclear(t_env **env);
 t_env		*ft_envfind(t_env *env, char *name);
-char		*ft_envfind_data(t_env *env, char *name);
-void		ft_envprint(t_env *env);
-void		lt_remove(t_data *data, t_token *to_remouve);
-
 // t_env_utils.c
-int			ft_change_env(t_env *env, char *name, char *value);
+char		*ft_envfind_data(t_env *env, char *name);
 char		**ft_env_to_tab(t_env *env);
-
-// t_token_utils.c
-char		**ft_tokento_tab(t_token *token);
-void		ft_token_remouve(t_data *data, t_token *to_remouve);
-
 // t_token.c
 t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
 void		ft_tokenadd_back(t_token **token, t_token *new);
 void		ft_token_clear(t_token **token);
-
-// main_loop.c
-int			ft_main_loop(t_data *data);
-
-// signal.c
-void		ft_handle_sig(int sig);
-void		ft_set_signal(t_SIG_MODE mode);
-
-// parsing_line.c
-int			ft_parsing_line(t_data *data, char *line);
-
-// parsing_line_utils.c
-void		ft_add_to_str(char *str, size_t *i, char *add);
-void		expansion2(t_token *token, size_t *i, size_t *j, t_data *data);
-void		ft_param_expansion2(t_token *token, size_t size, t_data *data,
-				char *new);
-
-void		ft_block_print(t_block *block);
-void		ft_set_block(t_data *data);
-t_block		*ft_block_new(t_data *data);
-void		ft_block_clear(t_block **block);
-void		ft_parsing_quote(t_data *data);
-char		**ft_word_split(char const *s);
-void		word_split(t_data *data);
-
-void		expansion1(t_token *tmp, size_t *size, t_data *data, size_t *i);
-void		ft_param_expansion(t_data *data);
-//parsing redir.c
-int			ft_redir_expansion(t_data *data);
-int			ft_iscaracter_env(char c, int type);
-void		ft_redir_print(t_redir *redir);
 void		ft_tokenadd_next(t_token *token, t_token *new);
+// t_token_utils.c
+void		ft_token_remove(t_data *data, t_token *to_remove);
+void		ft_token_rmfirst(t_data *data, t_token *to_remove);
+// t_redir.c
+t_redir		*ft_redir_new(char *data, int type);
+void		ft_redir_add_back(t_redir **redir, t_redir *new);
 void		ft_add_redir(t_block *block, t_token *token, t_data *data);
 void		ft_redir_free(t_redir *redir);
-int			ft_expand_here_doc(t_data *data);
-void		ft_block_print(t_block *block);
-void		ft_tokenprint(t_token *token);
-void		ft_token_rm_redir(t_data *data, t_token *to_remouve);
-void		ft_token_rmfurst(t_data *data, t_token *to_remouve);
-void		do_expan(t_data *data, t_token *token, size_t size, int quote);
-size_t		ft_count(t_data *data, char *s, int type);
-void		exit_child(t_data *data, int **fds, int *fd);
-
-void		ft_handle_sig_child(int sig);
-char		*ft_do_count(t_data *data, char *s, int type, char *tmp2);
-void		heredoc_calc_expan_size(char *line, t_data *data,
-				size_t *size, size_t *i);
-void		ft_heredoc_pipe(t_data *data, t_redir *redir, char *line);
-char		*join_lines(char *s1, char *s2, t_data *data);
-int			ft_islineblank(char *line);
-int			word_check(t_data *data);
-int			ft_check_is_incote(char *line, size_t *i);
-void		ft_cal_expand_utils(size_t *i, size_t *size,
-				char *line, t_data *data);
-void		ft_expand_utils(size_t *i, size_t *j, t_token *token,
-				t_data *data);
-void		ft_expand_heredoc_utils(size_t *i, size_t *j, char *line,
-				t_data *data);
+// pipe.c
 int			check_pipe_token(t_data *data);
-int			set_type(t_data *data);
+// here_doc.c
+void		ft_cal_expand_utils(size_t *i, size_t *size,
+								char *line, t_data *data);
+void		ft_expand_utils(size_t *i, size_t *j, t_token *token, t_data *data);
+void		ft_expand_heredoc_utils(size_t *i, size_t *j,
+									char *line, t_data *data);
+// t_block.c
+t_block		*ft_block_new(t_data *data);
+void		ft_block_clear(t_block **block);
+/*****************************************************************************/
+
 #endif
