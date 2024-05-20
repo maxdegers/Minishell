@@ -109,7 +109,7 @@ void	ft_execve(t_data *data, t_block *block)
 	if (!path && g_error == 0)
 		return (ft_free_tab(envp),
 			exit_error(ERROR_MALLOC, NULL, data));
-	else if (!path)
+	if (!path)
 	{
 		ft_print_error_path(block);
 		ft_free_tab(envp);
