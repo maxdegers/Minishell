@@ -56,10 +56,9 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 				return (ft_free_tab(path), res);
 			return (g_error = 126, ft_free_tab(path), free(res), NULL);
 		}
-		g_error = 127;
 		free(res);
 	}
-	return (ft_free_tab(path), NULL);
+	return (g_error = 127, ft_free_tab(path), NULL);
 }
 
 char	*ft_get_cwd_exec_path(char *cmd)
