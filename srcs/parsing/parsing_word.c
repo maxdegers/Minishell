@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 14:36:49 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:42:07 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	do_word_split(t_data *data, t_token *token)
 		if (!new)
 			exit_error(ERROR_MALLOC, NULL, data);
 		ft_tokenadd_next(token, new);
+		token = new;
 		i++;
 	}
 	free(tab);
