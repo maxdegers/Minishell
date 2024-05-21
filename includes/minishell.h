@@ -50,6 +50,7 @@
 # define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
 # define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
 # define EM_ENV "\033[0;31mError:\n\t\033[0menv not found\n"
+# define EM_TTY "\033[0;31mError:\n\t\033[0minput is not a terminal\n"
 ///
 
 extern int	g_error;

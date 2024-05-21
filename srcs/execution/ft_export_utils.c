@@ -129,14 +129,3 @@ void	ft_put_env_exp(t_data *data)
 	}
 	ft_envclear(&dup);
 }
-
-t_env	*ft_envfind_again(t_env *env, char *name)
-{
-	while (env)
-	{
-		if (!ft_strcmp(env->name, name))
-			return (env);
-		env = env->next;
-	}
-	return (NULL);
-}

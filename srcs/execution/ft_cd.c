@@ -57,7 +57,6 @@ static int	update_oldpwd(t_data *data, char *oldpwd)
 	}
 	free(tmp1->value);
 	tmp1->value = ft_strdup(oldpwd);
-	// ft_printf("%s\n", tmp1->value);
 	if (!tmp1->value && errno == ENOMEM)
 		return (1);
 	return (0);
