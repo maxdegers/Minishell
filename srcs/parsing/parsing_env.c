@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 16:50:40 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:12:42 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,10 @@ int	ft_init_tab(t_data *data, char **env)
 {
 	data->env = NULL;
 	if (env == NULL || env[0] == NULL)
-	{
-		ft_put_error(1, EM_ENV);
-	}
+		ft_create_env(data);
 	else if (ft_parsing_env(env, data))
 		return (1);
+	ft_check_env(data);
 	if (ft_set_tab(data))
 		return (1);
 	return (0);

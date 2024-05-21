@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 18:09:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:18:01 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,8 @@ t_env		*ft_envfind(t_env *env, char *name);
 // t_env_utils.c
 char		*ft_envfind_data(t_env *env, char *name);
 char		**ft_env_to_tab(t_env *env);
+void		ft_create_env(t_data *data);
+void		ft_check_env(t_data *data);
 // t_token.c
 t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);
