@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 02:46:03 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 18:09:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 
 ///
 # define WORD 0
@@ -72,7 +73,8 @@ typedef enum e_ERROR
 typedef enum e_SIGNAL_MODE
 {
 	SIG_MAIN,
-	SIG_CHILD
+	SIG_CHILD,
+	SIG_HEREDOC
 }	t_SIG_MODE;
 
 /*****************************************************************************/
@@ -134,6 +136,7 @@ void		ft_putheader(void);
 void		ft_handle_sig(int sig);
 void		ft_handle_sig_child(int sig);
 void		ft_set_signal(t_SIG_MODE mode);
+void		ft_handle_sig_heredoc(int sig);
 // main_loop.c
 int			ft_main_loop(t_data *data);
 

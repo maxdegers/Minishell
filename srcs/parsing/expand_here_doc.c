@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/18 20:53:16 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:10:48 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ static int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
 	while (1)
 	{
 		line = readline("> ");
+		if (g_error == 130)
+		{
+			return (free(res), free(line), 1);
+		}
 		if (!line)
 		{
 			ft_printf("minishell: warning: here-document \
@@ -130,7 +134,11 @@ int	ft_expand_here_doc(t_data *data)
 		{
 			if (redir->type == REDIR_HEREDOC)
 			{
+				ft_set_signal(SIG_HEREDOC);
 				here_doc_get_line(data, redir, line);
+				ft_set_signal(SIG_MAIN);
+				if (g_error == 130)
+					return (1);
 			}
 			redir = redir->next;
 		}

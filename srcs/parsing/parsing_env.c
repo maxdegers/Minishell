@@ -6,13 +6,13 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:32:43 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 14:15:01 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:50:40 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	inc_shlvl(t_env	*tmp)
+static void	inc_shlvl(t_env	*tmp, t_data *data)
 {
 	int		nb;
 
@@ -21,7 +21,17 @@ static void	inc_shlvl(t_env	*tmp)
 		nb = ft_atoi(tmp->value);
 		nb++;
 		free(tmp->value);
+		if (nb < 0)
+			nb = 0;
+		if (nb >= 1000)
+		{
+			ft_printf_fd(1, "warning: shell level (%i) too high,\
+ resetting to 1\n", nb);
+			nb = 1;
+		}
 		tmp->value = ft_itoa(nb);
+		if (!tmp->value)
+			exit_error(ERROR_MALLOC, NULL, data);
 	}
 }
 
@@ -45,7 +55,7 @@ int	ft_parsing_env(char **env, t_data *data)
 				return (ft_put_error(1, EM_MALLOC), 1);
 			ft_envadd_back(&data->env, tmp);
 			env[i][j] = '=';
-			inc_shlvl(tmp);
+			inc_shlvl(tmp, data);
 		}
 		i++;
 	}
