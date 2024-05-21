@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 14:17:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:36:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,12 @@ int	word_check(t_data *data)
 	return (0);
 }
 
-int	word_split(t_data *data)
+int	word_split(t_data *data, int s_quote, int d_quote)
 {
 	t_token	*token;
 	size_t	i;
-	int		s_quote;
-	int		d_quote;
 
 	token = data->token;
-	s_quote = -1;
-	d_quote = -1;
 	while (token)
 	{
 		i = 0;

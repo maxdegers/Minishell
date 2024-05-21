@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 10:16:31 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 18:10:48 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:39:45 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ static int	here_doc_get_line(t_data *data, t_redir *redir, char *line)
 	{
 		line = readline("> ");
 		if (g_error == 130)
-		{
 			return (free(res), free(line), 1);
-		}
 		if (!line)
 		{
 			ft_printf("minishell: warning: here-document \
@@ -111,12 +109,11 @@ delimited by end-of-file (wanted `%s')\n", redir->file);
 			break ;
 		res = join_lines(res, line, data);
 	}
-	free(line);
 	res = ft_expand_heredoc(data, res, redir);
 	ft_heredoc_pipe(data, redir, res);
 	if (!redir->file)
-		exit_error(ERROR_MALLOC, NULL, data);
-	return (free(res), 0);
+		return (free(line), exit_error(ERROR_MALLOC, NULL, data), 1);
+	return (free(line), free(res), 0);
 }
 
 int	ft_expand_here_doc(t_data *data)
