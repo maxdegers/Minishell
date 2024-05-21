@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 16:42:07 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:23:13 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	do_word_split(t_data *data, t_token *token)
 			exit_error(ERROR_MALLOC, NULL, data);
 		ft_tokenadd_next(token, new);
 		token = new;
+		free(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -68,7 +69,7 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 	while (token)
 	{
 		i = 0;
-		while (token->data[i])
+		while (token->data && token->data[i])
 		{
 			if (token->data[i] == S_QUOTE)
 				s_quote *= -1;
@@ -80,6 +81,7 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 				if (token->type > 1 && token->type < 5)
 					return (ft_put_error(1, EM_ANB), 1);
 				do_word_split(data, token);
+				break ;
 			}
 			i++;
 		}
