@@ -47,6 +47,7 @@ static int	ft_add_env_shown(t_data *data, char *str)
 		ft_envadd_back(&data->env, new);
 		return (ft_free_tab(tab), 0);
 	}
+	tmp->show = true;
 	free(tmp->value);
 	if (!tab[1])
 		tmp->value = ft_strdup("");
@@ -75,6 +76,7 @@ static int	ft_append_env(t_data *data, char *str)
 		ft_envadd_back(&data->env, new);
 		return (ft_free_tab(tab), 0);
 	}
+	tmp->show = true;
 	tmp->value = ft_strjoin_free(tmp->value, tab[1], 1);
 	if (!tmp->value)
 		return (ft_free_tab(tab), 1);

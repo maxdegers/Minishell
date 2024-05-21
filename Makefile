@@ -25,7 +25,7 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror #-g3
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g3
 
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)
