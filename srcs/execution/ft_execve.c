@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/21 12:24:12 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 14:35:47 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 
 	path = get_path(data);
 	if (!path)
+		return (NULL);
+	if (!path[0])
 		return (g_error = 300, NULL);
 	i = -1;
 	while (path[++i])
@@ -52,8 +54,7 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 		{
 			if (access(res, X_OK) == 0)
 				return (ft_free_tab(path), res);
-			g_error = 126;
-			return (ft_free_tab(path), free(res), NULL);
+			return (g_error = 126, ft_free_tab(path), free(res), NULL);
 		}
 		g_error = 127;
 		free(res);
@@ -68,7 +69,7 @@ char	*ft_get_cwd_exec_path(char *cmd)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (g_error = 300, NULL);
+		return (NULL);
 	res = ft_join_path(pwd, cmd);
 	free(pwd);
 	if (!res)
