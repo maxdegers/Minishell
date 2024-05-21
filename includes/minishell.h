@@ -47,10 +47,11 @@
 ///
 
 ///
-# define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
-# define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
-# define EM_ENV "\033[0;31mError:\n\t\033[0menv not found\n"
-# define EM_TTY "\033[0;31mError:\n\t\033[0minput is not a terminal\n"
+# define EM_MALLOC "minishell: malloc failed\n"
+# define EM_ARGS "minishell: too much arguments\n"
+# define EM_ENV "minishell: env not found\n"
+# define EM_ANB "minishell: ambiguous redirect\n"
+# define EM_TTY "minishell: input is not a terminal\n"
 ///
 
 extern int	g_error;
@@ -205,7 +206,7 @@ void		exit_child(t_data *data, int **fds, int *fd);
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
 // parsing_word.c
-void		word_split(t_data *data);
+int			word_split(t_data *data);
 int			word_check(t_data *data);
 // parsing_quote.c
 void		ft_parsing_quote(t_data *data);

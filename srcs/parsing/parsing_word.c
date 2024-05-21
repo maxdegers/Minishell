@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 14:17:02 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	word_check(t_data *data)
 	return (0);
 }
 
-void	word_split(t_data *data)
+int	word_split(t_data *data)
 {
 	t_token	*token;
 	size_t	i;
@@ -79,9 +79,14 @@ void	word_split(t_data *data)
 				d_quote *= -1;
 			if (ft_isblank(token->data[i]) == 1
 				&& (s_quote != 1 && d_quote != 1))
+			{
+				if (token->type > 1 && token->type < 5)
+					return (ft_put_error(1, EM_ANB), 1);
 				do_word_split(data, token);
+			}
 			i++;
 		}
 		token = token->next;
 	}
+	return (0);
 }
