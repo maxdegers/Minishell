@@ -170,7 +170,7 @@ void		ft_put_env_exp(t_data *data);
 // ft_env.c
 void		ft_env(t_data *data);
 // ft_pwd.c
-void		ft_pwd(void);
+void		ft_pwd(t_data *data);
 // ft_unset.c
 int			ft_unset(t_block *block, t_data *data);
 // ft_execve.c

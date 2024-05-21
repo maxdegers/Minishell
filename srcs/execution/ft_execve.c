@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/18 21:16:32 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 18:04:17 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,19 @@ char	*ft_get_cwd_exec_path(char *cmd)
 
 char	*ft_get_path(t_data *data, char *cmd)
 {
+	char	*str;
+
 	if (!cmd)
 		return (NULL);
 	if (cmd[0] == '/')
 		return (ft_get_absolute_path(cmd));
 	if (cmd[0] == '.' && cmd[1] == '/')
 		return (ft_get_cwd_exec_path(cmd));
-	return (ft_get_relative_path(data, cmd));
+	str = ft_get_relative_path(data, cmd);
+	if (!str && errno == ENOMEM)
+		return (NULL);
+	g_error = 300;
+	return (str);
 }
 
 void	ft_execve(t_data *data, t_block *block)
@@ -106,10 +112,10 @@ void	ft_execve(t_data *data, t_block *block)
 	if (!envp)
 		exit_error(ERROR_MALLOC, NULL, data);
 	path = ft_get_path(data, block->cmd);
-	if (!path && g_error == 0)
+	if (!path && errno == ENOMEM)
 		return (ft_free_tab(envp),
 			exit_error(ERROR_MALLOC, NULL, data));
-	else if (!path)
+	if (!path)
 	{
 		ft_print_error_path(block);
 		ft_free_tab(envp);
