@@ -45,6 +45,12 @@ void	ft_print_error_path(t_block *block)
 	else if (g_error == 127 && block->cmd[0] == '/')
 		ft_printf_fd(2, "minishell: %s: No such file or directory\n",
 			block->cmd);
+	else if (g_error == 300)
+	{
+		ft_printf_fd(2, "minishell: %s: No such file or directory\n",
+			block->cmd);
+		g_error = 127;
+	}
 	else if (g_error == 127 || !block->cmd[0])
 		ft_printf_fd(2, "%s: command not found\n", block->cmd);
 	else if (g_error == 126 && (errno == ENOTDIR || errno == EACCES))

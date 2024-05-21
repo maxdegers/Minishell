@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:30 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/17 13:19:17 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 15:47:56 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static int	update_pwd(t_data *data, char *pwd)
 	t_env	*tmp;
 	t_env	*tmp2;
 
+	if (!pwd)
+		pwd = ft_strdup("");
+	if (!pwd)
+		return (1);
 	tmp = ft_envfind(data->env, "PWD");
 	if (!tmp)
 	{
@@ -28,18 +32,22 @@ static int	update_pwd(t_data *data, char *pwd)
 	}
 	free(tmp->value);
 	tmp->value = ft_strdup(pwd);
-	if (!tmp->value)
+	if (!tmp->value && errno == ENOMEM)
 		return (1);
 	return (0);
 }
 
 static int	update_oldpwd(t_data *data, char *oldpwd)
 {
-	t_env	*tmp;
+	t_env	*tmp1;
 	t_env	*tmp2;
 
-	tmp = ft_envfind(data->env, "OLDPWD");
-	if (!tmp)
+	if (!oldpwd)
+		oldpwd = ft_strdup("");
+	if (!oldpwd)
+		return (1);
+	tmp1 = ft_envfind(data->env, "OLDPWD");
+	if (!tmp1)
 	{
 		tmp2 = ft_envnew("OLDPWD", oldpwd);
 		if (!tmp2)
@@ -47,9 +55,10 @@ static int	update_oldpwd(t_data *data, char *oldpwd)
 		ft_envadd_back(&data->env, tmp2);
 		return (0);
 	}
-	free(tmp->value);
-	tmp->value = ft_strdup(oldpwd);
-	if (!tmp->value)
+	free(tmp1->value);
+	tmp1->value = ft_strdup(oldpwd);
+	// ft_printf("%s\n", tmp1->value);
+	if (!tmp1->value && errno == ENOMEM)
 		return (1);
 	return (0);
 }
@@ -59,7 +68,7 @@ static int	update_env(t_data *data, char *oldpwd)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
-	if (!pwd)
+	if (!pwd && errno == ENOMEM)
 		return (1);
 	if (update_pwd(data, pwd))
 		return (1);
@@ -92,7 +101,7 @@ void	ft_cd(t_block *block, t_data *data)
 	char	*oldpwd;
 
 	oldpwd = getcwd(NULL, 0);
-	if (!oldpwd)
+	if (!oldpwd && errno == ENOMEM)
 		exit_error(ERROR_MALLOC, NULL, data);
 	if (ft_check_arg_num(block) > 2)
 		return (free(oldpwd));

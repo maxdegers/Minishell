@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:47:27 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/16 17:43:17 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/20 17:00:39 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ void	ft_exec_under_fork(t_block *block, t_data *data)
 		return (ft_exit(data, block));
 	if (ft_strcmp(block->cmd, "echo") == 0)
 		return (ft_echo(block));
-	if (ft_strcmp(block->cmd, "export") == 0)
-		return (ft_put_env_exp(data));
 	if (ft_strcmp(block->cmd, "pwd") == 0)
-		return (ft_pwd());
+		return (ft_pwd(data));
 	if (ft_strcmp(block->cmd, "env") == 0)
 		return (ft_env(data));
 	ft_execve(data, block);
