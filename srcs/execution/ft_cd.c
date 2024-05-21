@@ -35,11 +35,11 @@ static int	update_pwd(t_data *data, char *pwd)
 
 static int	update_oldpwd(t_data *data, char *oldpwd)
 {
-	t_env	*tmp;
+	t_env	*tmp1;
 	t_env	*tmp2;
 
-	tmp = ft_envfind(data->env, "OLDPWD");
-	if (!tmp)
+	tmp1 = ft_envfind(data->env, "OLDPWD");
+	if (!tmp1)
 	{
 		tmp2 = ft_envnew("OLDPWD", oldpwd);
 		if (!tmp2)
@@ -47,9 +47,9 @@ static int	update_oldpwd(t_data *data, char *oldpwd)
 		ft_envadd_back(&data->env, tmp2);
 		return (0);
 	}
-	free(tmp->value);
-	tmp->value = ft_strdup(oldpwd);
-	if (!tmp->value)
+	free(tmp1->value);
+	tmp1->value = ft_strdup(oldpwd);
+	if (!tmp1->value)
 		return (1);
 	return (0);
 }
