@@ -80,7 +80,7 @@ int	*ft_fork(t_data *data, t_block *block, size_t childs, int **fds)
 	{
 		pid[i] = fork();
 		if (pid[i] == -1)
-			return (NULL);		//TODO free all and kill all childs
+			return (NULL);
 		if (pid[i] == 0)
 		{
 			ft_get_fd(fds, i, child_fd, childs - 1);
