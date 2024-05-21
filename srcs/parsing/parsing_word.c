@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/21 17:00:11 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 14:36:49 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	do_word_split(t_data *data, t_token *token)
 	token->data = tab[i++];
 	while (tab[i])
 	{
-		new = ft_tokennew(tab[i], 0, ft_strlen(tab[i]) + 1, WORD);
+		new = ft_tokennew(tab[i], 0, ft_strlen(tab[i]), WORD);
 		if (!new)
 			exit_error(ERROR_MALLOC, NULL, data);
 		ft_tokenadd_next(token, new);
@@ -68,7 +68,7 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 	while (token)
 	{
 		i = 0;
-		while (token->data[i])
+		while (token->data && token->data[i])
 		{
 			if (token->data[i] == S_QUOTE)
 				s_quote *= -1;
@@ -80,6 +80,7 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 				if (token->type > 1 && token->type < 5)
 					return (ft_put_error(1, EM_ANB), 1);
 				do_word_split(data, token);
+				break ;
 			}
 			i++;
 		}
