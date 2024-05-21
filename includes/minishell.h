@@ -6,7 +6,7 @@
 /*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:18:47 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 18:09:02 by mbrousse         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:33:17 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@
 ///
 
 ///
-# define EM_MALLOC "\033[0;31mError:\n\t\033[0mmalloc failed\n"
-# define EM_ARGS "\033[0;31mError:\n\t\033[0mtoo much arguments\n"
-# define EM_ENV "\033[0;31mError:\n\t\033[0menv not found\n"
+# define EM_MALLOC "minishell: malloc failed\n"
+# define EM_ARGS "minishell: too much arguments\n"
+# define EM_ENV "minishell: env not found\n"
+# define EM_ANB "minishell: ambiguous redirect\n"
 ///
 
 extern int	g_error;
@@ -204,7 +205,7 @@ void		exit_child(t_data *data, int **fds, int *fd);
 // parsing_line.c
 int			ft_parsing_line(t_data *data, char *line);
 // parsing_word.c
-void		word_split(t_data *data);
+int			word_split(t_data *data, bool s_quote, bool d_quote);
 int			word_check(t_data *data);
 // parsing_quote.c
 void		ft_parsing_quote(t_data *data);

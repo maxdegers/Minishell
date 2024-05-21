@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 09:49:51 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 12:34:19 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	parsing_line(t_data *data, size_t *i, size_t *start, size_t *end)
 {
 	char	quote;
 
-	if (data->line[*i] == '\'' || data->line[*i] == '\"')
+	if (data->line[*i] == S_QUOTE || data->line[*i] == D_QUOTE)
 	{
 		quote = data->line[*i];
 		*i += 1;
@@ -76,9 +76,9 @@ static int	checkerreur(char *line)
 	d_quote = false;
 	while (line[i])
 	{
-		if (line[i] == '\'' && d_quote == false)
+		if (line[i] == S_QUOTE && d_quote == false)
 			s_quote = !s_quote;
-		if (line[i] == '\"' && s_quote == false)
+		if (line[i] == D_QUOTE && s_quote == false)
 			d_quote = !d_quote;
 		i++;
 	}
@@ -128,7 +128,8 @@ int	ft_parsing_line(t_data *data, char *line)
 	ft_param_expansion(data);
 	if (word_check(data) == 1)
 		return (1);
-	word_split(data);
+	if (word_split(data, false, false) == 1)
+		return (1);
 	ft_parsing_quote(data);
 	if (ft_check_token(data) == 1)
 		return (1);

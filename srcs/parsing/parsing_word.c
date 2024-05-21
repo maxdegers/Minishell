@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: mbrousse <mbrousse@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:54:21 by mbrousse          #+#    #+#             */
-/*   Updated: 2024/05/20 01:36:13 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 12:26:25 by mbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,31 @@ int	word_check(t_data *data)
 	return (0);
 }
 
-void	word_split(t_data *data)
+int	word_split(t_data *data, bool s_quote, bool d_quote)
 {
 	t_token	*token;
 	size_t	i;
-	int		s_quote;
-	int		d_quote;
 
 	token = data->token;
-	s_quote = -1;
-	d_quote = -1;
 	while (token)
 	{
 		i = 0;
 		while (token->data[i])
 		{
-			if (token->data[i] == S_QUOTE)
-				s_quote *= -1;
-			if (token->data[i] == D_QUOTE)
-				d_quote *= -1;
+			if (token->data[i] == S_QUOTE && d_quote == false)
+				s_quote = !s_quote;
+			if (token->data[i] == D_QUOTE && s_quote == false)
+				d_quote = !d_quote;
 			if (ft_isblank(token->data[i]) == 1
-				&& (s_quote != 1 && d_quote != 1))
+				&& (s_quote == false || d_quote == false))
+			{
+				if (token->type > 1 && token->type < 5)
+					return (ft_put_error(1, EM_ANB), 1);
 				do_word_split(data, token);
+			}
 			i++;
 		}
 		token = token->next;
 	}
+	return (0);
 }
