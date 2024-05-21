@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:44 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/20 18:04:17 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 12:24:12 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_get_relative_path(t_data *data, char *cmd)
 
 	path = get_path(data);
 	if (!path)
-		return (NULL);
+		return (g_error = 300, NULL);
 	i = -1;
 	while (path[++i])
 	{
@@ -68,7 +68,7 @@ char	*ft_get_cwd_exec_path(char *cmd)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (NULL);
+		return (g_error = 300, NULL);
 	res = ft_join_path(pwd, cmd);
 	free(pwd);
 	if (!res)
@@ -99,7 +99,6 @@ char	*ft_get_path(t_data *data, char *cmd)
 	str = ft_get_relative_path(data, cmd);
 	if (!str && errno == ENOMEM)
 		return (NULL);
-	g_error = 300;
 	return (str);
 }
 

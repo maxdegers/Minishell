@@ -106,7 +106,7 @@ void	ft_cd(t_block *block, t_data *data)
 	if (ft_check_arg_num(block) > 2)
 		return (free(oldpwd));
 	env = ft_envfind(data->env, "HOME");
-	if (!env && !block->args)
+	if (!env && !block->args[1])
 		return (ft_put_error(1, "minishell: cd: HOME not set\n"),
 			free(oldpwd));
 	if (!block->args[1])
