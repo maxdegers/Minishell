@@ -57,7 +57,6 @@ static int	update_oldpwd(t_data *data, char *oldpwd)
 	}
 	free(tmp1->value);
 	tmp1->value = ft_strdup(oldpwd);
-	// ft_printf("%s\n", tmp1->value);
 	if (!tmp1->value && errno == ENOMEM)
 		return (1);
 	return (0);
@@ -106,7 +105,7 @@ void	ft_cd(t_block *block, t_data *data)
 	if (ft_check_arg_num(block) > 2)
 		return (free(oldpwd));
 	env = ft_envfind(data->env, "HOME");
-	if (!env && !block->args)
+	if (!env && !block->args[1])
 		return (ft_put_error(1, "minishell: cd: HOME not set\n"),
 			free(oldpwd));
 	if (!block->args[1])

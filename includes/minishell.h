@@ -51,6 +51,7 @@
 # define EM_ARGS "minishell: too much arguments\n"
 # define EM_ENV "minishell: env not found\n"
 # define EM_ANB "minishell: ambiguous redirect\n"
+# define EM_TTY "minishell: input is not a terminal\n"
 ///
 
 extern int	g_error;

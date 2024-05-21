@@ -89,3 +89,14 @@ void	ft_check_env(t_data *data)
 		ft_envadd_back(&data->env, tmp);
 	}
 }
+
+t_env	*ft_envfind_again(t_env *env, char *name)
+{
+	while (env)
+	{
+		if (!ft_strcmp(env->name, name))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
