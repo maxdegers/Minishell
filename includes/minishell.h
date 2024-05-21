@@ -254,6 +254,7 @@ t_env		*ft_envfind(t_env *env, char *name);
 // t_env_utils.c
 char		*ft_envfind_data(t_env *env, char *name);
 char		**ft_env_to_tab(t_env *env);
+t_env		*ft_envfind_again(t_env *env, char *name);
 // t_token.c
 t_token		*ft_tokennew(char *line, size_t start, size_t end, int type);
 void		ft_token_new_add(t_data *data, size_t start, size_t end, int type);

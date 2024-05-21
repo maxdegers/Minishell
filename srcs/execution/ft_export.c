@@ -6,7 +6,7 @@
 /*   By: mpitot <mpitot@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:39:52 by mpitot            #+#    #+#             */
-/*   Updated: 2024/05/20 00:20:48 by mpitot           ###   ########.fr       */
+/*   Updated: 2024/05/21 11:00:31 by mpitot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_add_env_hidden(t_data *data, char *str)
 	tab = ft_export_split(str, "\0");
 	if (!tab)
 		return (1);
-	if (ft_envfind(data->env, tab[0]))
+	if (ft_envfind_again(data->env, tab[0]))
 		return (ft_free_tab(tab), 0);
 	new = ft_envnew(tab[0], tab[1]);
 	if (!new)
@@ -38,7 +38,7 @@ static int	ft_add_env_shown(t_data *data, char *str)
 	tab = ft_export_split(str, "=");
 	if (!tab)
 		return (1);
-	tmp = ft_envfind(data->env, tab[0]);
+	tmp = ft_envfind_again(data->env, tab[0]);
 	if (!tmp)
 	{
 		new = ft_envnew(tab[0], tab[1]);
@@ -48,7 +48,10 @@ static int	ft_add_env_shown(t_data *data, char *str)
 		return (ft_free_tab(tab), 0);
 	}
 	free(tmp->value);
-	tmp->value = ft_strdup(tab[1]);
+	if (!tab[1])
+		tmp->value = ft_strdup("");
+	else
+		tmp->value = ft_strdup(tab[1]);
 	if (!tmp->value)
 		return (ft_free_tab(tab), 1);
 	return (ft_free_tab(tab), 0);
@@ -63,7 +66,7 @@ static int	ft_append_env(t_data *data, char *str)
 	tab = ft_export_split(str, "+=");
 	if (!tab)
 		return (1);
-	tmp = ft_envfind(data->env, tab[0]);
+	tmp = ft_envfind_again(data->env, tab[0]);
 	if (!tmp)
 	{
 		new = ft_envnew(tab[0], tab[1]);
