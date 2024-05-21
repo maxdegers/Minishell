@@ -67,8 +67,8 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 	token = data->token;
 	while (token)
 	{
-		i = 0;
-		while (token->data && token->data[i])
+		i = -1;
+		while (token->data && token->data[++i])
 		{
 			if (token->data[i] == S_QUOTE)
 				s_quote *= -1;
@@ -82,7 +82,6 @@ int	word_split(t_data *data, int s_quote, int d_quote)
 				do_word_split(data, token);
 				break ;
 			}
-			i++;
 		}
 		token = token->next;
 	}

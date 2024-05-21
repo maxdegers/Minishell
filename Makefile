@@ -25,7 +25,7 @@ NAME	=	minishell
 
 CC		=	cc
 
-FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror -g3
+FLAGS	=	-I$(READLINE_DIR)/include -Wall -Wextra -Werror #-g3
 
 ifeq ($(shell uname), Darwin)
 READLINE_DIR	=	$(shell brew --prefix readline)
@@ -75,7 +75,7 @@ fclean	:
 	@rm -f ${NAME}
 	@echo "$(WHITE)[$(RED)$(NAME)$(WHITE)] $(RED)deleted.$(DEFAULT)"
 
-sanitize: fclean libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
+sanitize	: fclean libft .internal_separate2 ${OBJ_D} ${OBJS} libft/libft.a
 	@$(call print_progress,$(NAME))
 	@${CC} ${FLAGS} ${OBJS} -L./libft -lft -I${HEAD} -o ${NAME} -lm ${READLINE_LIB} -fsanitize=address -g3
 	@$(eval CHANGED=1)
